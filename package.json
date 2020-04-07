@@ -1,0 +1,31 @@
+{
+  "name": "com.vantreeseba.gameds",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "haxelib run munit t",
+    "watch": "npm-watch test"
+  },
+  "watch": {
+    "test": {
+      "patterns": [
+        "test",
+        "src"
+      ],
+      "extensions": "hx",
+      "ignore":  [
+        "test/TestMain.hx",
+        "test/TestSuite.hx"
+      ]
+    }
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "npm-watch": "^0.6.0"
+  }
+}
