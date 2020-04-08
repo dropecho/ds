@@ -2,6 +2,7 @@ import massive.munit.TestSuite;
 
 import bsp.BSPNodeTest;
 import bsp.BSPTreeTest;
+import heap.HeapTest;
 import algos.BFSTest;
 import algos.PostOrderTraversalTest;
 import algos.DFSTest;
@@ -22,6 +23,7 @@ class TestSuite extends massive.munit.TestSuite
 
 		add(bsp.BSPNodeTest);
 		add(bsp.BSPTreeTest);
+		add(heap.HeapTest);
 		add(algos.BFSTest);
 		add(algos.PostOrderTraversalTest);
 		add(algos.DFSTest);
