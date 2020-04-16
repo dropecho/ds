@@ -1,5 +1,6 @@
 package vantreeseba.gameds;
 
+@:nativeGen
 class BSPNode extends GraphNode<Dynamic, Dynamic> {
 	public var parent:BSPNode;
 	public var left:BSPNode;

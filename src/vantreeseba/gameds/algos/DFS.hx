@@ -1,5 +1,6 @@
 package vantreeseba.gameds.algos;
 
+@:nativeGen
 class DFS {
 	public var visited:Array<String>;
 

@@ -3,33 +3,44 @@ package vantreeseba.gameds;
 /**
  * A heap implemenation.
  */
+@:nativeGen
 class Heap<T> {
 	public var compare:(T, T) -> Bool;
 	public var elements:Array<T>;
 
 	public function new(?compare:(T, T) -> Bool) {
-		this.compare = compare != null ? compare : (a:Dynamic, b:Dynamic) -> (a < b);
+		this.compare = compare != null ? compare : (a:T, b:T) -> (Reflect.compare(a, b) < 0);
 		this.elements = new Array<T>();
 	}
 
 	/**
 	 * Push an element onto the heap.
-	 *
-	 * @param {*} n The element to push onto the heap.
+	 * @param n The element to push onto the heap.
 	 */
 	public function push(n:T) {
-		var i = this.elements.push(n) - 1;
-		while (i != 0 && this.compare(n, this.elements[this._getParent(i)])) {
-			this._swap(i, this._getParent(i));
-			i = this._getParent(i);
+		this.set_value(this.elements.push(n) - 1, n);
+	}
+
+	public function set_value_obj(oldVal:T, newVal:T) {
+		set_value(elements.indexOf(oldVal), newVal);
+	}
+
+	public function set_value(i:Int, val:T) {
+		elements[i] = val;
+		while (i != 0 && compare(val, elements[_getParent(i)])) {
+			_swap(i, _getParent(i));
+			i = _getParent(i);
 		}
 	}
 
 	/**
 	 * Remove and return the ximum element in the heap.
-	 * @return {*} The ximum element on the heap.
+	 * @return The ximum element on the heap.
 	 */
 	public function pop():T {
+		if (this.elements.length == 0) {
+			return null;
+		}
 		if (this.elements.length == 1) {
 			return this.elements.shift();
 		}
@@ -37,6 +48,14 @@ class Heap<T> {
 		var element = this.elements.shift();
 		this._heapify(0);
 		return element;
+	}
+
+	public function peek():T {
+		return this.elements[0];
+	}
+
+	public function size() {
+		return this.elements.length;
 	}
 
 	private function _heapify(index:Int) {

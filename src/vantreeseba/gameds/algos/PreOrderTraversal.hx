@@ -1,5 +1,6 @@
 package vantreeseba.gameds.algos;
 
+@:nativeGen
 class PreOrderTraversal {
 	public var visited:Array<String>;
 

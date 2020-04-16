@@ -8,6 +8,7 @@ import algos.PostOrderTraversalTest;
 import algos.DFSTest;
 import algos.InOrderTraversalTest;
 import algos.PreOrderTraversalTest;
+import algos.DijkstraTest;
 import graph.GraphTest;
 import graph.GraphNodeTest;
 
@@ -29,6 +30,7 @@ class TestSuite extends massive.munit.TestSuite
 		add(algos.DFSTest);
 		add(algos.InOrderTraversalTest);
 		add(algos.PreOrderTraversalTest);
+		add(algos.DijkstraTest);
 		add(graph.GraphTest);
 		add(graph.GraphNodeTest);
 	}

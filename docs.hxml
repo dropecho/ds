@@ -1,0 +1,9 @@
+## XML
+-cp src
+-D doc-gen
+
+# DEFINES / MACROS
+--macro include('', true, null, ['src'])
+
+# OUTPUT 
+-xml docs/doc.xml 

@@ -63,11 +63,11 @@ class DFSTest {
 		Assert.isNotNull(dfs);
 
 		Assert.areEqual(node1.id, dfs.visited[0]);
-		Assert.areEqual(node4.id, dfs.visited[1]);
-		Assert.areEqual(node6.id, dfs.visited[2]);
+		Assert.areEqual(node2.id, dfs.visited[1]);
+		Assert.areEqual(node3.id, dfs.visited[2]);
 		Assert.areEqual(node5.id, dfs.visited[3]);
-		Assert.areEqual(node2.id, dfs.visited[4]);
-		Assert.areEqual(node3.id, dfs.visited[5]);
+		Assert.areEqual(node6.id, dfs.visited[4]);
+		Assert.areEqual(node4.id, dfs.visited[5]);
 	}
 
 	@Test function traversal() {
@@ -112,10 +112,10 @@ class DFSTest {
 		Assert.isNotNull(dfs);
 
 		Assert.areEqual(node1.id, dfs.visited[0]);
-		Assert.areEqual(node3.id, dfs.visited[1]);
-		Assert.areEqual(node6.id, dfs.visited[2]);
-		Assert.areEqual(node2.id, dfs.visited[3]);
-		Assert.areEqual(node5.id, dfs.visited[4]);
-		Assert.areEqual(node4.id, dfs.visited[5]);
+		Assert.areEqual(node2.id, dfs.visited[1]);
+		Assert.areEqual(node4.id, dfs.visited[2]);
+		Assert.areEqual(node5.id, dfs.visited[3]);
+		Assert.areEqual(node3.id, dfs.visited[4]);
+		Assert.areEqual(node6.id, dfs.visited[5]);
 	}
 }

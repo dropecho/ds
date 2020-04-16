@@ -8,12 +8,13 @@
 # -swf-version 11
 # -swf build/as3_test.swf
 
-## JavaScript
+# JavaScript
 # --next
 # -main TestMain
 # -lib munit
 # -lib hamcrest
 # -cp src
+
 
 # -cp test
 # -js build/js_test.js
@@ -81,7 +82,7 @@
 # -D php7
 # -php build/php_test
 
-# ## JavaScript NodeJS
+## JavaScript NodeJS
 # --next
 # -main TestMain
 # -lib munit

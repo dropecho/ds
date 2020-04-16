@@ -4,56 +4,57 @@ import massive.munit.Assert;
 import vantreeseba.gameds.*;
 
 class GraphNodeTest {
-	@Test
-	public function testExample() {
-		var node = new GraphNode();
-		Assert.isNotNull(node);
-	}
+  @Test
+  public function testExample() {
+    var node = new GraphNode();
+    Assert.isNotNull(node);
+  }
 
-	@Test
-	public function value() {
-		var node = new GraphNode(3);
-		Assert.areEqual(node.value, 3);
-	}
+  @Test
+  public function value() {
+    var value = 3;
+    var node = new GraphNode<Float, Float>(value);
+    Assert.areEqual(value, node.value);
+  }
 
-	@Test
-	public function id_is_unique() {
-		var nodes = [for (_ in 0...50) new GraphNode(3)];
+  @Test
+  public function id_is_unique() {
+    var nodes = [for (_ in 0...50) new GraphNode(3)];
 
-		for (node in nodes) {
-			for (other in nodes) {
-				if (node != other) {
-					Assert.areNotEqual(node.id, other.id);
-				}
-			}
-		}
-	}
+    for (node in nodes) {
+      for (other in nodes) {
+        if (node != other) {
+          Assert.areNotEqual(node.id, other.id);
+        }
+      }
+    }
+  }
 
-	@Test
-	public function neighborIds() {
-		var graph = new Graph<Int, Int>();
-		var node = graph.createNode(3);
-		var node2 = graph.createNode(3);
+  @Test
+  public function neighborIds() {
+    var graph = new Graph<Int, Int>();
+    var node = graph.createNode(3);
+    var node2 = graph.createNode(3);
 
-		graph.addBiEdge(node.id, node2.id);
+    graph.addBiEdge(node.id, node2.id);
 
-		var neighborIds = node.neighborIds();
+    var neighborIds = node.neighborIds();
 
-		Assert.areEqual(node2.id, neighborIds[0]);
-	}
+    Assert.areEqual(node2.id, neighborIds[0]);
+  }
 
-	@Test
-	public function neighbors() {
-		var graph = new Graph<Int, Int>();
-		var node = graph.createNode(3);
-		var node2 = graph.createNode(3);
+  @Test
+  public function neighbors() {
+    var graph = new Graph<Int, Int>();
+    var node = graph.createNode(3);
+    var node2 = graph.createNode(3);
 
-		graph.addBiEdge(node.id, node2.id);
+    graph.addBiEdge(node.id, node2.id);
 
-		var neighbors = node.neighbors();
+    var neighbors = node.neighbors();
 
-		Assert.areEqual(node2, neighbors[0]);
-	}
+    Assert.areEqual(node2, neighbors[0]);
+  }
 
 	@Test
 	public function edgeData() {

@@ -2,7 +2,6 @@ package vantreeseba.gameds;
 
 @:expose
 @:nativeGen
-@:generic
 class Graph<T, U> {
 	public var nodes:Map<String, GraphNode<T, U>>;
 	public var edges:Map<String, Map<String, U>>;
@@ -40,8 +39,8 @@ class Graph<T, U> {
 	}
 
 	public function neighbors(node:GraphNode<T, U>, ?filter:(String, U) -> Bool) {
-		var ids = neighborIds(node, filter);
-		return [for (id in ids) nodes.get(id)];
+		return neighborIds(node, filter)
+      .map(id -> nodes.get(id));
 	}
 
 	public function neighborIds(node:GraphNode<T, U>, ?filter:(String, U) -> Bool) {
@@ -49,7 +48,7 @@ class Graph<T, U> {
 		if (edges == null) {
 			return [];
 		}
-		return [
+		var ids = [
 			for (id => data in edges) {
 				if (filter == null || filter(id, data)) {
 					id;
@@ -58,9 +57,12 @@ class Graph<T, U> {
 				}
 			}
 		];
+
+		haxe.ds.ArraySort.sort(ids, Reflect.compare);
+		return ids;
 	}
 
-	public function edgeData(fromId:String, toId:String) {
+	public function edgeData(fromId:String, toId:String):U {
 		if (edges.exists(fromId)) {
 			return edges.get(fromId).get(toId);
 		}

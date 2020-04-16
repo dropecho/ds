@@ -1,14 +1,16 @@
 package graph;
 
+import vantreeseba.gameds.GraphNode;
+import vantreeseba.gameds.Graph;
 import massive.munit.Assert;
-import vantreeseba.gameds.*;
 
 class GraphTest {
-	var graph:Graph<Int,Int>;
+	var graph:Graph<Int, Int>;
 
 	@Before
 	public function setup() {
 		graph = new Graph();
+    var color = "#FF0000";
 	}
 
 	@Test
@@ -41,7 +43,7 @@ class GraphTest {
 		graph.addUniEdge(node1.id, node2.id, 12);
 
 		Assert.isTrue(graph.edges.exists(node1.id));
-		Assert.areEqual(node2.id, graph.edges.get(node1.id).keys().next());
+		Assert.areEqual(node2, graph.neighbors(node1)[0]);
 		Assert.isFalse(graph.edges.exists(node2.id));
 		Assert.areEqual(12, graph.edges.get(node1.id).get(node2.id));
 	}
@@ -54,11 +56,11 @@ class GraphTest {
 		graph.addBiEdge(node1.id, node2.id, 12);
 
 		Assert.isTrue(graph.edges.exists(node1.id));
-		Assert.areEqual(node2.id, graph.edges.get(node1.id).keys().next());
+		Assert.areEqual(node2, graph.neighbors(node1)[0]);
 		Assert.areEqual(12, graph.edges.get(node1.id).get(node2.id));
 
 		Assert.isTrue(graph.edges.exists(node2.id));
-		Assert.areEqual(node1.id, graph.edges.get(node2.id).keys().next());
+		Assert.areEqual(node1, graph.neighbors(node2)[0]);
 		Assert.areEqual(12, graph.edges.get(node2.id).get(node1.id));
 	}
 
@@ -101,6 +103,15 @@ class GraphTest {
 	}
 
 	@Test
+	public function neighborIds_when_empty() {
+		var node1 = graph.createNode(4);
+
+		var neighborIds = graph.neighborIds(node1);
+
+		Assert.areEqual(0, neighborIds.length);
+	}
+
+	@Test
 	public function edgeData() {
 		var node1 = graph.createNode(4);
 		var node2 = graph.createNode(5);
@@ -114,5 +125,16 @@ class GraphTest {
 
 		Assert.areEqual(12, node1_to_node2_data);
 		Assert.areEqual(14, node1_to_node3_data);
+	}
+
+	@Test
+	public function edgeData_when_empty() {
+		var node1 = graph.createNode(4);
+		var node2 = graph.createNode(5);
+
+		var node1_to_node2_data = graph.edgeData(node1.id, node2.id);
+		var nul:Null<Int> = null;
+
+		Assert.areEqual(nul, node1_to_node2_data);
 	}
 }

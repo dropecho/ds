@@ -4,51 +4,47 @@ import massive.munit.client.HTTPClient;
 import massive.munit.client.JUnitReportClient;
 import massive.munit.client.SummaryReportClient;
 import massive.munit.TestRunner;
-
 import mcover.coverage.munit.client.MCoverPrintClient;
 import mcover.coverage.client.LcovPrintClient;
 import mcover.coverage.client.CodecovJsonPrintClient;
 import mcover.coverage.MCoverage;
-
 import IstanbulCoverageJsonReporter;
 
 /**
  * Auto generated Test Application.
  * Refer to munit command line tool for more information (haxelib run munit)
  */
-class TestMain
-{
-	static function main(){	new TestMain(); }
+class TestMain {
+	static function main() {
+		new TestMain();
+	}
 
-	public function new()
-	{
+	public function new() {
 		var suites = new Array<Class<massive.munit.TestSuite>>();
 		suites.push(TestSuite);
 
 		#if MCOVER
-      var client = new MCoverPrintClient();
-      var lcov = new LcovPrintClient("Turd", "Turd.lcov");
-      // var json = new IstanbulCoverageJsonReporter("coverage/coverage.json", "src/");
-      MCoverage.getLogger().addClient(lcov);
+		var client = new mcover.coverage.munit.client.MCoverPrintClient();
+    client.includeClassAndPackageBreakdowns = true;
+    var httpClient = new HTTPClient(new mcover.coverage.munit.client.MCoverSummaryReportClient());
 		#else
-			var client = new RichPrintClient();
+		var client = new RichPrintClient();
+    var httpClient = new HTTPClient(new SummaryReportClient());
 		#end
 
 		var runner:TestRunner = new TestRunner(client);
+    runner.addResultClient(httpClient);
 
 		runner.completionHandler = completionHandler;
 
 		#if (js && !nodejs)
 		var seconds = 0; // edit here to add some startup delay
-		function delayStartup()
-		{
+		function delayStartup() {
 			if (seconds > 0) {
 				seconds--;
-				js.Browser.document.getElementById("munit").innerHTML =
-					"Tests will start in " + seconds + "s...";
+				js.Browser.document.getElementById("munit").innerHTML = "Tests will start in " + seconds + "s...";
 				haxe.Timer.delay(delayStartup, 1000);
-			}
-			else {
+			} else {
 				js.Browser.document.getElementById("munit").innerHTML = "";
 				runner.run(suites);
 			}
@@ -63,17 +59,14 @@ class TestMain
 	 * updates the background color and closes the current browser
 	 * for flash and html targets (useful for continous integration servers)
 	 */
-	function completionHandler(successful:Bool)
-	{
-    trace("doing it");
-		try
-		{
+	function completionHandler(successful:Bool) {
+		try {
 			#if flash
-				flash.external.ExternalInterface.call("testResult", successful);
+			flash.external.ExternalInterface.call("testResult", successful);
 			#elseif js
-				js.Lib.eval("testResult(" + successful + ");");
+			js.Lib.eval("testResult(" + successful + ");");
 			#elseif (neko || cpp || java || cs || python || php || hl || eval)
-				Sys.exit(0);
+			Sys.exit(0);
 			#end
 		}
 		// if run from outside browser can get error which we can ignore

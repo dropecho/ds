@@ -1,5 +1,6 @@
 package vantreeseba.gameds.algos;
 
+@:nativeGen
 class BFS<T, U> {
 	public var visited:Array<String>;
 	public var toVisit:Array<GraphNode<T, U>>;

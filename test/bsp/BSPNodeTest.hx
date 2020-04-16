@@ -55,4 +55,20 @@ class BSPNodeTest {
 		Assert.areEqual(right, node.right);
 		Assert.isTrue(node.neighbors().indexOf(right) != -1);
 	}
+
+	@Test
+	public function isLeaf() {
+		var right = node.setRight(new BSPNode(2));
+
+		Assert.isFalse(node.isLeaf());
+		Assert.isTrue(right.isLeaf());
+	}
+
+	@Test
+	public function isRoot() {
+		var right = node.setRight(new BSPNode(2));
+
+		Assert.isTrue(node.isRoot());
+		Assert.isFalse(right.isRoot());
+	}
 }

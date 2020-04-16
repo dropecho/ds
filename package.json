@@ -8,7 +8,9 @@
   },
   "scripts": {
     "test": "haxelib run munit t",
-    "watch": "npm-watch test"
+    "coverage": "haxelib run munit t -coverage",
+    "watch": "npm-watch test",
+    "watch-coverage": "npm-watch coverage"
   },
   "watch": {
     "test": {
@@ -17,7 +19,18 @@
         "src"
       ],
       "extensions": "hx",
-      "ignore":  [
+      "ignore": [
+        "test/TestMain.hx",
+        "test/TestSuite.hx"
+      ]
+    },
+    "coverage": {
+      "patterns": [
+        "test",
+        "src"
+      ],
+      "extensions": "hx",
+      "ignore": [
         "test/TestMain.hx",
         "test/TestSuite.hx"
       ]

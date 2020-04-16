@@ -1,5 +1,6 @@
 package vantreeseba.gameds.algos;
 
+@:nativeGen
 class InOrderTraversal {
 	public var visited:Array<String>;
 

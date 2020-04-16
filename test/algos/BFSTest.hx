@@ -63,11 +63,11 @@ class BFSTest {
 		Assert.isNotNull(bfs);
 
 		Assert.areEqual(node1.id, bfs.visited[0]);
-		Assert.areEqual(node4.id, bfs.visited[1]);
-		Assert.areEqual(node2.id, bfs.visited[2]);
-		Assert.areEqual(node6.id, bfs.visited[3]);
+		Assert.areEqual(node2.id, bfs.visited[1]);
+		Assert.areEqual(node4.id, bfs.visited[2]);
+		Assert.areEqual(node3.id, bfs.visited[3]);
 		Assert.areEqual(node5.id, bfs.visited[4]);
-		Assert.areEqual(node3.id, bfs.visited[5]);
+		Assert.areEqual(node6.id, bfs.visited[5]);
 	}
 
 	@Test function traversal() {
@@ -112,10 +112,10 @@ class BFSTest {
 		Assert.isNotNull(bfs);
 
 		Assert.areEqual(node1.id, bfs.visited[0]);
-		Assert.areEqual(node3.id, bfs.visited[1]);
-		Assert.areEqual(node2.id, bfs.visited[2]);
-		Assert.areEqual(node6.id, bfs.visited[3]);
+		Assert.areEqual(node2.id, bfs.visited[1]);
+		Assert.areEqual(node3.id, bfs.visited[2]);
+		Assert.areEqual(node4.id, bfs.visited[3]);
 		Assert.areEqual(node5.id, bfs.visited[4]);
-		Assert.areEqual(node4.id, bfs.visited[5]);
+		Assert.areEqual(node6.id, bfs.visited[5]);
 	}
 }
