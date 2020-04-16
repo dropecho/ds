@@ -1,7 +1,7 @@
 package graph;
 
-import vantreeseba.gameds.GraphNode;
 import vantreeseba.gameds.Graph;
+import vantreeseba.gameds.GraphNode;
 import massive.munit.Assert;
 
 class GraphTest {
@@ -10,7 +10,6 @@ class GraphTest {
 	@Before
 	public function setup() {
 		graph = new Graph();
-    var color = "#FF0000";
 	}
 
 	@Test

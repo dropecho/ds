@@ -1,31 +1,18 @@
-## JS
+-lib munit
+-lib hamcrest
+-lib mcover
+
 -cp src
+--macro include('', true, null, ['src'])
+
+--each
+
+## JS
+--next
 -D dce=full
 -D js-es=6
-
--lib munit
--lib hamcrest
--lib mcover
-# DEFINES / MACROS
---macro include('', true, null, ['src'])
-
-# OUTPUT 
 -js dist/js/index.js 
 
---next 
-
 ## CS
--cp src
-# -D dce=full
-# -D js-es=6
-
--lib munit
--lib hamcrest
--lib mcover
-# DEFINES / MACROS
---macro include('', true, null, ['src'])
-
-# OUTPUT 
+--next 
 -cs dist/cs/
-
-
