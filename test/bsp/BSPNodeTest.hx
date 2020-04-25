@@ -1,7 +1,7 @@
 package bsp;
 
 import massive.munit.Assert;
-import vantreeseba.gameds.*;
+import dropecho.ds.*;
 
 class BSPNodeTest {
 	var node:BSPNode;

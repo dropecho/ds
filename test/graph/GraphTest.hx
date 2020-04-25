@@ -1,7 +1,7 @@
 package graph;
 
-import vantreeseba.gameds.Graph;
-import vantreeseba.gameds.GraphNode;
+import dropecho.ds.Graph;
+import dropecho.ds.GraphNode;
 import massive.munit.Assert;
 
 class GraphTest {

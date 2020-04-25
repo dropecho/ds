@@ -21,13 +21,16 @@
 
 ## Neko
 --next
--main TestMain
 -lib munit
 -lib hamcrest
 -lib mcover
--cp src
 
+-cp src
 -cp test
+
+-main TestMain
+
+
 -neko build/neko_test.n
 
 ## CPP

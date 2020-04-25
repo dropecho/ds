@@ -1,8 +1,8 @@
 package algos;
 
 import massive.munit.Assert;
-import vantreeseba.gameds.*;
-import vantreeseba.gameds.algos.*;
+import dropecho.ds.*;
+import dropecho.ds.algos.*;
 
 class InOrderTraversalTest {
 	var tree:BSPTree;

@@ -1,7 +1,7 @@
 package heap;
 
 import massive.munit.Assert;
-import vantreeseba.gameds.*;
+import dropecho.ds.*;
 
 typedef Foo = {
 	var id:Int;
