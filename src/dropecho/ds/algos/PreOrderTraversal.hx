@@ -9,8 +9,16 @@ class PreOrderTraversal {
 		visited = new Array<String>();
 	}
 
-	public function run(node:BSPNode) {
-		visited.push(node.id);
+	public function run(node:BSPNode, ?visitor:BSPNode->Bool) {
+		if (visitor != null) {
+			if (visitor(node)) {
+				visited.push(node.id);
+			} else {
+				return visited;
+			}
+		} else {
+			visited.push(node.id);
+		}
 
 		if (node.left != null) {
 			run(node.left);
@@ -18,7 +26,6 @@ class PreOrderTraversal {
 		if (node.right != null) {
 			run(node.right);
 		}
-
 		return visited;
 	}
 

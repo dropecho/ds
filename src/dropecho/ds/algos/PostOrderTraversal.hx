@@ -9,7 +9,7 @@ class PostOrderTraversal {
 		visited = new Array<String>();
 	}
 
-	public function run(node:BSPNode) {
+	public function run(node:BSPNode, ?visitor:BSPNode->Bool) {
 		if (node.left != null) {
 			run(node.left);
 		}
@@ -17,7 +17,16 @@ class PostOrderTraversal {
 			run(node.right);
 		}
 
-		visited.push(node.id);
+		if (visitor != null) {
+			if (visitor(node)) {
+				visited.push(node.id);
+			} else {
+				return visited;
+			}
+		} else {
+			visited.push(node.id);
+		}
+
 		return visited;
 	}
 

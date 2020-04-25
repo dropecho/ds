@@ -9,18 +9,26 @@ class InOrderTraversal {
 		visited = new Array<String>();
 	}
 
-	public function run(node:BSPNode) {
+	public function run(node:BSPNode, ?visitor:BSPNode->Bool) {
 		if (node.left != null) {
 			run(node.left);
 		}
 
-		visited.push(node.id);
+		if (visitor != null) {
+			if (visitor(node)) {
+				visited.push(node.id);
+			} else {
+				return visited;
+			}
+		} else {
+			visited.push(node.id);
+		}
 
 		if (node.right != null) {
 			run(node.right);
 		}
 
-    return visited;
+		return visited;
 	}
 
 	// Algorithm Inorder(tree)
