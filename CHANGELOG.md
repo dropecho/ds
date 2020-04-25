@@ -1,6 +1,14 @@
+## <small>0.3.1 (2020-04-25)</small>
+
+* Fix issue with traversal ([a328f97](https://github.com/dropecho/ds/commit/a328f97))
+
+
+
 ## 0.3.0 (2020-04-25)
 
 * Add visitor function to bsp traversals ([d619187](https://github.com/dropecho/ds/commit/d619187))
+* Release 0.3.0 ([ffeb7aa](https://github.com/dropecho/ds/commit/ffeb7aa))
+* version ([ea968f2](https://github.com/dropecho/ds/commit/ea968f2))
 
 
 
