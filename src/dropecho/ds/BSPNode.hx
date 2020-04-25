@@ -22,7 +22,7 @@ class BSPNode extends GraphNode<Dynamic, Dynamic> {
 	public function setLeft(node:BSPNode):BSPNode {
 		this.left = node;
 		node.parent = this;
-    graph.addNode(node);
+		graph.addNode(node);
 		graph.addUniEdge(this.id, node.id, "left");
 		graph.addUniEdge(node.id, this.id, "parent");
 
@@ -32,7 +32,7 @@ class BSPNode extends GraphNode<Dynamic, Dynamic> {
 	public function setRight(node:BSPNode):BSPNode {
 		this.right = node;
 		node.parent = this;
-    graph.addNode(node);
+		graph.addNode(node);
 		graph.addUniEdge(this.id, node.id, "right");
 		graph.addUniEdge(node.id, this.id, "parent");
 
@@ -47,11 +47,11 @@ class BSPNode extends GraphNode<Dynamic, Dynamic> {
 		return this.parent == null;
 	}
 
-  public function hasLeft() {
-    return this.left != null;
-  }
+	public function hasLeft() {
+		return this.left != null;
+	}
 
-  public function hasRight() {
-    return this.right != null;
-  }
+	public function hasRight() {
+		return this.right != null;
+	}
 }

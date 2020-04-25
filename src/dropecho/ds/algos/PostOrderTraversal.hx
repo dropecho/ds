@@ -11,10 +11,10 @@ class PostOrderTraversal {
 
 	public function run(node:BSPNode, ?visitor:BSPNode->Bool) {
 		if (node.left != null) {
-			run(node.left);
+			run(node.left, visitor);
 		}
 		if (node.right != null) {
-			run(node.right);
+			run(node.right, visitor);
 		}
 
 		if (visitor != null) {
