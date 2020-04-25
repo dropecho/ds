@@ -1,6 +1,14 @@
+## 0.3.0 (2020-04-25)
+
+* Add visitor function to bsp traversals ([d619187](https://github.com/dropecho/ds/commit/d619187))
+
+
+
 ## 0.2.0 (2020-04-25)
 
 * add hasleft && hasright to bspnode ([e89194a](https://github.com/dropecho/ds/commit/e89194a))
+* Release 0.2.0 ([aff7688](https://github.com/dropecho/ds/commit/aff7688))
+* version ([5ac5d00](https://github.com/dropecho/ds/commit/5ac5d00))
 
 
 
