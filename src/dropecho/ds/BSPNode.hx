@@ -46,4 +46,12 @@ class BSPNode extends GraphNode<Dynamic, Dynamic> {
 	public function isRoot() {
 		return this.parent == null;
 	}
+
+  public function hasLeft() {
+    return this.left != null;
+  }
+
+  public function hasRight() {
+    return this.right != null;
+  }
 }
