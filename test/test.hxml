@@ -1,0 +1,112 @@
+## CSharp
+--next
+-main TestMain
+-lib munit
+-lib hamcrest
+-cp src
+
+-cp test
+-cs artifacts/cs_test
+
+## Neko
+--next
+-main TestMain
+-lib munit
+-lib hamcrest
+-cp src
+
+-cp test
+-neko artifacts/neko_test.n
+
+## JavaScript NodeJS
+--next
+-main TestMain
+-lib munit
+-lib hamcrest
+-lib hxnodejs
+-cp src
+
+-cp test
+-js artifacts/js_test.js
+
+# ## Flash 9+
+# -main TestMain
+# -lib munit
+# -lib hamcrest
+# -cp src
+#
+# -cp test
+# -swf-version 11
+# -swf artifacts/as3_test.swf
+
+# ## JavaScript
+# --next
+# -main TestMain
+# -lib munit
+# -lib hamcrest
+# -cp src
+#
+# -cp test
+# -js artifacts/js_test.js
+
+## CPP
+# --next
+# -main TestMain
+# -lib munit
+# -lib hamcrest
+# -cp src
+#
+# -cp test
+# #-D HXCPP_M64
+# -cpp artifacts/cpp_test
+
+# ## Java
+# --next
+# -main TestMain
+# -lib munit
+# -lib hamcrest
+# -cp src
+#
+# -cp test
+# -java artifacts/java_test
+
+## Python
+# --next
+# -main TestMain
+# -lib munit
+# -lib hamcrest
+# -cp src
+#
+# -cp test
+# -python artifacts/python_test.py
+
+# ## PHP 7
+# --next
+# -main TestMain
+# -lib munit
+# -lib hamcrest
+# -cp src
+#
+# -cp test
+# -D php7
+# -php artifacts/php_test
+
+## HashLink
+# --next
+# -main TestMain
+# -lib munit
+# -lib hamcrest
+# -cp src
+#
+# -cp test
+# -hl artifacts/hl_test.hl
+
+# ## LUA
+# --next
+# -main TestMain
+# -lib munit
+# -lib hamcrest
+# -cp src
+#
+# -cp test
+# -lua artifacts/lua_test.lua

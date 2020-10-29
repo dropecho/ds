@@ -1,6 +1,6 @@
-version=2.3.3
+version=2.3.5
 src=test
-bin=build
-report=report
-hxml=test.hxml
+bin=artifacts
+report=artifacts/reports
+hxml=test/test.hxml
 classPaths=src

@@ -1,18 +1,11 @@
--lib munit
--lib hamcrest
--lib mcover
-
 -cp src
 --macro include('', true, null, ['src'])
+-D analyzer-optimize
+-D dce=full
 
 --each
 
-## JS
+targets/js.hxml
 --next
--D dce=full
--D js-es=6
--js dist/js/index.js 
+targets/cs.hxml
 
-## CS
---next 
--cs dist/cs/

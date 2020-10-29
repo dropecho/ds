@@ -1,5 +1,87 @@
 <!-- This file can be parsed by haxe.rtti.XmlParser -->
 <haxe>
+	<abstract path="Any" params="" file="/usr/share/haxe/std/Any.hx">
+		<from><icast field="__cast"><c path="__cast.T"/></icast></from>
+		<this><d/></this>
+		<to><icast field="__promote"><c path="__promote.T"/></icast></to>
+		<haxe_doc>`Any` is a type that is compatible with any other in both ways.
+
+	This means that a value of any type can be assigned to `Any`, and
+	vice-versa, a value of `Any` type can be assigned to any other type.
+
+	It's a more type-safe alternative to `Dynamic`, because it doesn't
+	support field access or operators and it's bound to monomorphs. So,
+	to work with the actual value, it needs to be explicitly promoted
+	to another type.</haxe_doc>
+		<impl><class path="_Any.Any_Impl_" params="" file="/usr/share/haxe/std/Any.hx" private="1" module="Any" final="1">
+	<__promote params="T" get="inline" set="null" line="35" static="1">
+		<f a="this">
+			<d/>
+			<c path="__promote.T"/>
+		</f>
+		<meta>
+			<m n=":impl"/>
+			<m n=":noCompletion"/>
+			<m n=":to"/>
+		</meta>
+	</__promote>
+	<__cast params="T" get="inline" set="null" line="38" static="1">
+		<f a="value">
+			<c path="__cast.T"/>
+			<x path="Any"/>
+		</f>
+		<meta>
+			<m n=":noCompletion"/>
+			<m n=":from"/>
+		</meta>
+	</__cast>
+	<toString get="inline" set="null" line="41" static="1">
+		<f a="this">
+			<d/>
+			<c path="String"/>
+		</f>
+		<meta>
+			<m n=":impl"/>
+			<m n=":noCompletion"/>
+		</meta>
+	</toString>
+	<meta><m n=":keep"/></meta>
+</class></impl>
+	</abstract>
+	<class path="_Any.Any_Impl_" params="" file="/usr/share/haxe/std/Any.hx" private="1" module="Any" final="1">
+		<__promote params="T" get="inline" set="null" line="35" static="1">
+			<f a="this">
+				<d/>
+				<c path="__promote.T"/>
+			</f>
+			<meta>
+				<m n=":impl"/>
+				<m n=":noCompletion"/>
+				<m n=":to"/>
+			</meta>
+		</__promote>
+		<__cast params="T" get="inline" set="null" line="38" static="1">
+			<f a="value">
+				<c path="__cast.T"/>
+				<x path="Any"/>
+			</f>
+			<meta>
+				<m n=":noCompletion"/>
+				<m n=":from"/>
+			</meta>
+		</__cast>
+		<toString get="inline" set="null" line="41" static="1">
+			<f a="this">
+				<d/>
+				<c path="String"/>
+			</f>
+			<meta>
+				<m n=":impl"/>
+				<m n=":noCompletion"/>
+			</meta>
+		</toString>
+		<meta><m n=":keep"/></meta>
+	</class>
 	<class path="Array" params="T" file="/usr/share/haxe/std/Array.hx" extern="1">
 		<length public="1" set="null">
 			<x path="Int"/>
@@ -211,6 +293,16 @@
 		If `x` is not found, `this` Array is not changed and the function
 		returns false.</haxe_doc>
 		</remove>
+		<contains public="1" set="method">
+			<f a="x">
+				<c path="Array.T"/>
+				<x path="Bool"/>
+			</f>
+			<haxe_doc>Returns whether `this` Array contains `x`.
+
+		If `x` is found by checking standard equality, the function returns `true`, otherwise
+		the function returns `false`.</haxe_doc>
+		</contains>
 		<indexOf public="1" set="method">
 			<f a="x:?fromIndex">
 				<c path="Array.T"/>
@@ -255,11 +347,17 @@
 		`a[i] == a.copy()[i]` is true for any valid `i`. However,
 		`a == a.copy()` is always false.</haxe_doc>
 		</copy>
-		<iterator public="1" set="method">
-			<f a=""><t path="Iterator"><c path="Array.T"/></t></f>
+		<iterator public="1" get="inline" set="null" line="280">
+			<f a=""><c path="haxe.iterators.ArrayIterator"><c path="Array.T"/></c></f>
+			<meta><m n=":runtime"/></meta>
 			<haxe_doc>Returns an iterator of the Array values.</haxe_doc>
 		</iterator>
-		<map public="1" params="S" get="inline" set="null" line="277">
+		<keyValueIterator public="1" get="inline" set="null" line="287">
+			<f a=""><c path="haxe.iterators.ArrayKeyValueIterator"><c path="Array.T"/></c></f>
+			<meta><m n=":runtime"/></meta>
+			<haxe_doc>Returns an iterator of the Array indices and values.</haxe_doc>
+		</keyValueIterator>
+		<map public="1" params="S" get="inline" set="null" line="298">
 			<f a="f">
 				<f a="">
 					<c path="Array.T"/>
@@ -274,7 +372,7 @@
 
 		If `f` is null, the result is unspecified.</haxe_doc>
 		</map>
-		<filter public="1" get="inline" set="null" line="295">
+		<filter public="1" get="inline" set="null" line="316">
 			<f a="f">
 				<f a="">
 					<c path="Array.T"/>
@@ -310,11 +408,6 @@
 			<f a=""><x path="Void"/></f>
 			<haxe_doc>Creates a new Array.</haxe_doc>
 		</new>
-		<haxe_doc>An Array is a storage for values. You can access it using indexes or
-	with its API.
-
-	@see https://haxe.org/manual/std-Array.html
-	@see https://haxe.org/manual/lf-array-comprehension.html</haxe_doc>
 		<meta><m n=":directlyUsed"/></meta>
 	</class>
 	<abstract path="Class" params="T" file="/usr/share/haxe/std/Class.hx">
@@ -350,10 +443,10 @@
 
 	@see https://haxe.org/manual/types-enum-instance.html</haxe_doc>
 		<meta><m n=":coreType"/></meta>
-		<impl><class path="_EnumValue.EnumValue_Impl_" params="" file="/usr/share/haxe/std/EnumValue.hx" private="1" module="EnumValue"><meta><m n=":keep"/></meta></class></impl>
+		<impl><class path="_EnumValue.EnumValue_Impl_" params="" file="/usr/share/haxe/std/EnumValue.hx" private="1" module="EnumValue" final="1"><meta><m n=":keep"/></meta></class></impl>
 	</abstract>
 	<class path="Lambda" params="" file="/usr/share/haxe/std/Lambda.hx">
-		<find public="1" params="T" set="method" line="241" static="1">
+		<find public="1" params="T" set="method" line="255" static="1">
 			<f a="it:f">
 				<t path="Iterable"><c path="find.T"/></t>
 				<f a="item">
@@ -406,13 +499,13 @@
 		<PI public="1" set="null" static="1">
 			<x path="Float"/>
 			<haxe_doc>Represents the ratio of the circumference of a circle to its diameter,
-		specified by the constant, π. `PI` is approximately 3.141592653589793.</haxe_doc>
+		specified by the constant, π. `PI` is approximately `3.141592653589793`.</haxe_doc>
 		</PI>
 		<NEGATIVE_INFINITY public="1" set="null" static="1">
 			<x path="Float"/>
 			<haxe_doc>A special `Float` constant which denotes negative infinity.
 
-		For example, this is the result of -1.0 / 0.0.
+		For example, this is the result of `-1.0 / 0.0`.
 
 		Operations with `NEGATIVE_INFINITY` as an operand may result in
 		`NEGATIVE_INFINITY`, `POSITIVE_INFINITY` or `NaN`.
@@ -424,7 +517,7 @@
 			<x path="Float"/>
 			<haxe_doc>A special `Float` constant which denotes positive infinity.
 
-		For example, this is the result of 1.0 / 0.0.
+		For example, this is the result of `1.0 / 0.0`.
 
 		Operations with `POSITIVE_INFINITY` as an operand may result in
 		`NEGATIVE_INFINITY`, `POSITIVE_INFINITY` or `NaN`.
@@ -436,9 +529,9 @@
 			<x path="Float"/>
 			<haxe_doc>A special `Float` constant which denotes an invalid number.
 
-		NaN stands for "Not a Number". It occurs when a mathematically incorrect
+		`NaN` stands for "Not a Number". It occurs when a mathematically incorrect
 		operation is executed, such as taking the square root of a negative
-		number: Math.sqrt(-1).
+		number: `Math.sqrt(-1)`.
 
 		All further operations with `NaN` as an operand will result in `NaN`.
 
@@ -454,13 +547,9 @@
 			</f>
 			<haxe_doc>Returns the absolute value of `v`.
 
-		If `v` is positive or 0, the result is unchanged. Otherwise the result
-		is -`v`.
-
-		If `v` is `NEGATIVE_INFINITY` or `POSITIVE_INFINITY`, the result is
-		`POSITIVE_INFINITY`.
-
-		If `v` is `NaN`, the result is `NaN`.</haxe_doc>
+		- If `v` is positive or `0`, the result is unchanged. Otherwise the result is `-v`.
+		- If `v` is `NEGATIVE_INFINITY` or `POSITIVE_INFINITY`, the result is `POSITIVE_INFINITY`.
+		- If `v` is `NaN`, the result is `NaN`.</haxe_doc>
 		</abs>
 		<min public="1" set="method" static="1">
 			<f a="a:b">
@@ -470,9 +559,9 @@
 			</f>
 			<haxe_doc>Returns the smaller of values `a` and `b`.
 
-		If `a` or `b` are `NaN`, the result is `NaN`.
-		If `a` or `b` are `NEGATIVE_INFINITY`, the result is `NEGATIVE_INFINITY`.
-		If `a` and `b` are `POSITIVE_INFINITY`, the result is `POSITIVE_INFINITY`.</haxe_doc>
+		- If `a` or `b` are `NaN`, the result is `NaN`.
+		- If `a` or `b` are `NEGATIVE_INFINITY`, the result is `NEGATIVE_INFINITY`.
+		- If `a` and `b` are `POSITIVE_INFINITY`, the result is `POSITIVE_INFINITY`.</haxe_doc>
 		</min>
 		<max public="1" set="method" static="1">
 			<f a="a:b">
@@ -482,9 +571,9 @@
 			</f>
 			<haxe_doc>Returns the greater of values `a` and `b`.
 
-		If `a` or `b` are `NaN`, the result is `NaN`.
-		If `a` or `b` are `POSITIVE_INFINITY`, the result is `POSITIVE_INFINITY`.
-		If `a` and `b` are `NEGATIVE_INFINITY`, the result is `NEGATIVE_INFINITY`.</haxe_doc>
+		- If `a` or `b` are `NaN`, the result is `NaN`.
+		- If `a` or `b` are `POSITIVE_INFINITY`, the result is `POSITIVE_INFINITY`.
+		- If `a` and `b` are `NEGATIVE_INFINITY`, the result is `NEGATIVE_INFINITY`.</haxe_doc>
 		</max>
 		<sin public="1" set="method" static="1">
 			<f a="v">
@@ -561,11 +650,11 @@
 			</f>
 			<haxe_doc>Returns Euler's number, raised to the power of `v`.
 
-		exp(1.0) is approximately 2.718281828459.
+		`exp(1.0)` is approximately `2.718281828459`.
 
-		If `v` is `POSITIVE_INFINITY`, the result is `POSITIVE_INFINITY`.
-		If `v` is `NEGATIVE_INFINITY`, the result is `0.0`.
-		If `v` is `NaN`, the result is `NaN`.</haxe_doc>
+		- If `v` is `POSITIVE_INFINITY`, the result is `POSITIVE_INFINITY`.
+		- If `v` is `NEGATIVE_INFINITY`, the result is `0.0`.
+		- If `v` is `NaN`, the result is `NaN`.</haxe_doc>
 		</exp>
 		<log public="1" set="method" static="1">
 			<f a="v">
@@ -577,10 +666,9 @@
 		This is the mathematical inverse operation of exp,
 		i.e. `log(exp(v)) == v` always holds.
 
-		If `v` is negative (including `NEGATIVE_INFINITY`) or `NaN`, the result
-		is `NaN`.
-		If `v` is `POSITIVE_INFINITY`, the result is `POSITIVE_INFINITY`.
-		If `v` is `0.0`, the result is `NEGATIVE_INFINITY`.</haxe_doc>
+		- If `v` is negative (including `NEGATIVE_INFINITY`) or `NaN`, the result is `NaN`.
+		- If `v` is `POSITIVE_INFINITY`, the result is `POSITIVE_INFINITY`.
+		- If `v` is `0.0`, the result is `NEGATIVE_INFINITY`.</haxe_doc>
 		</log>
 		<pow public="1" set="method" static="1">
 			<f a="v:exp">
@@ -597,10 +685,9 @@
 			</f>
 			<haxe_doc>Returns the square root of `v`.
 
-		If `v` is negative (including `NEGATIVE_INFINITY`) or `NaN`, the result
-		is `NaN`.
-		If `v` is `POSITIVE_INFINITY`, the result is `POSITIVE_INFINITY`.
-		If `v` is `0.0`, the result is `0.0`.</haxe_doc>
+		- If `v` is negative (including `NEGATIVE_INFINITY`) or `NaN`, the result is `NaN`.
+		- If `v` is `POSITIVE_INFINITY`, the result is `POSITIVE_INFINITY`.
+		- If `v` is `0.0`, the result is `0.0`.</haxe_doc>
 		</sqrt>
 		<round public="1" set="method" static="1">
 			<f a="v">
@@ -636,18 +723,18 @@
 		</ceil>
 		<random public="1" set="method" static="1">
 			<f a=""><x path="Float"/></f>
-			<haxe_doc>Returns a pseudo-random number which is greater than or equal to 0.0,
-		and less than 1.0.</haxe_doc>
+			<haxe_doc>Returns a pseudo-random number which is greater than or equal to `0.0`,
+		and less than `1.0`.</haxe_doc>
 		</random>
-		<ffloor public="1" get="inline" set="null" line="263" static="1"><f a="v">
+		<ffloor public="1" get="inline" set="null" line="257" static="1"><f a="v">
 	<x path="Float"/>
 	<x path="Float"/>
 </f></ffloor>
-		<fceil public="1" get="inline" set="null" line="267" static="1"><f a="v">
+		<fceil public="1" get="inline" set="null" line="261" static="1"><f a="v">
 	<x path="Float"/>
 	<x path="Float"/>
 </f></fceil>
-		<fround public="1" get="inline" set="null" line="271" static="1"><f a="v">
+		<fround public="1" get="inline" set="null" line="265" static="1"><f a="v">
 	<x path="Float"/>
 	<x path="Float"/>
 </f></fround>
@@ -705,10 +792,7 @@
 		If the field is defined as a property, its accessors are ignored. Refer
 		to `Reflect.getProperty` for a function supporting property accessors.
 
-		If `field` is null, the result is unspecified.
-
-		(As3) If used on a property field, the getter will be invoked. It is
-		not possible to obtain the value directly.</haxe_doc>
+		If `field` is null, the result is unspecified.</haxe_doc>
 		</field>
 		<setField public="1" set="method" static="1">
 			<f a="o:field:value">
@@ -722,10 +806,7 @@
 		If `o` has no field named `field`, this function is only guaranteed to
 		work for anonymous structures.
 
-		If `o` or `field` are null, the result is unspecified.
-
-		(As3) If used on a property field, the setter will be invoked. It is
-		not possible to set the value directly.</haxe_doc>
+		If `o` or `field` are null, the result is unspecified.</haxe_doc>
 		</setField>
 		<getProperty public="1" set="method" static="1">
 			<f a="o:field">
@@ -925,10 +1006,22 @@
 				<d/>
 				<x path="Bool"/>
 			</f>
-			<haxe_doc>Tells if a value `v` is of the type `t`. Returns `false` if `v` or `t` are null.
+			<haxe_doc>DEPRECATED. Use `Std.isOfType(v, t)` instead.
+
+		Tells if a value `v` is of the type `t`. Returns `false` if `v` or `t` are null.
 
 		If `t` is a class or interface with `@:generic` meta, the result is `false`.</haxe_doc>
 		</is>
+		<isOfType public="1" set="method" static="1">
+			<f a="v:t">
+				<d/>
+				<d/>
+				<x path="Bool"/>
+			</f>
+			<haxe_doc>Tells if a value `v` is of the type `t`. Returns `false` if `v` or `t` are null.
+
+		If `t` is a class or interface with `@:generic` meta, the result is `false`.</haxe_doc>
+		</isOfType>
 		<downcast public="1" params="T:S" set="method" static="1">
 			<f a="value:c">
 				<c path="downcast.T"/>
@@ -1246,10 +1339,11 @@
 		String.
 
 		If `startIndex` is given, the search is performed within the substring
-		of `this` String starting from `startIndex` (if `startIndex` is posivite
-		or 0) or `max(this.length + startIndex, 0)` (if `startIndex` is negative).
+		of `this` String starting from `startIndex`.
 
 		If `startIndex` exceeds `this.length`, -1 is returned.
+
+		If `startIndex` is negative, the result is unspecifed.
 
 		Otherwise the search is performed within `this` String. In either case,
 		the returned position is relative to the beginning of `this` String.
@@ -1269,6 +1363,8 @@
 		of `this` String from 0 to `startIndex + str.length`. Otherwise the search
 		is performed within `this` String. In either case, the returned position
 		is relative to the beginning of `this` String.
+
+		If `startIndex` is negative, the result is unspecifed.
 
 		If `str` cannot be found, -1 is returned.</haxe_doc>
 		</lastIndexOf>
@@ -1547,9 +1643,7 @@
 
 		The order of the fields in the returned Array is unspecified.
 
-		If `c` is null, the result is unspecified.
-
-		(As3) This method only returns instance fields that are public.</haxe_doc>
+		If `c` is null, the result is unspecified.</haxe_doc>
 		</getInstanceFields>
 		<getClassFields public="1" set="method" static="1">
 			<f a="c">
@@ -1562,9 +1656,7 @@
 
 		The order of the fields in the returned Array is unspecified.
 
-		If `c` is null, the result is unspecified.
-
-		(As3) This method only returns class fields that are public.</haxe_doc>
+		If `c` is null, the result is unspecified.</haxe_doc>
 		</getClassFields>
 		<getEnumConstructs public="1" set="method" static="1">
 			<f a="e">
@@ -1664,6 +1756,524 @@
 	@see https://haxe.org/manual/types.html
 	@see https://haxe.org/manual/std-reflection.html</haxe_doc>
 	</class>
+	<class path="dropecho.ds.GraphNode" params="T:U" file="src/dropecho/ds/GraphNode.hx">
+		<id public="1"><c path="String"/></id>
+		<value public="1"><c path="dropecho.ds.GraphNode.T"/></value>
+		<graph public="1"><c path="dropecho.ds.Graph">
+	<c path="dropecho.ds.GraphNode.T"/>
+	<c path="dropecho.ds.GraphNode.U"/>
+</c></graph>
+		<neighborIds public="1" set="method" line="15"><f a=""><c path="Array"><c path="String"/></c></f></neighborIds>
+		<neighbors public="1" set="method" line="19"><f a="?filter">
+	<f a=":">
+		<c path="String"/>
+		<c path="dropecho.ds.GraphNode.U"/>
+		<x path="Bool"/>
+	</f>
+	<c path="Array"><c path="dropecho.ds.GraphNode">
+	<c path="dropecho.ds.GraphNode.T"/>
+	<c path="dropecho.ds.GraphNode.U"/>
+</c></c>
+</f></neighbors>
+		<edgeData public="1" set="method" line="24"><f a="toId">
+	<c path="String"/>
+	<c path="dropecho.ds.GraphNode.U"/>
+</f></edgeData>
+		<new public="1" set="method" line="10"><f a="?value:?id">
+	<c path="dropecho.ds.GraphNode.T"/>
+	<c path="String"/>
+	<x path="Void"/>
+</f></new>
+		<meta>
+			<m n=":directlyUsed"/>
+			<m n=":expose"><e>"GraphNode"</e></m>
+			<m n=":nativeGen"/>
+		</meta>
+	</class>
+	<class path="dropecho.ds.BSPNode" params="" file="src/dropecho/ds/BSPNode.hx">
+		<extends path="dropecho.ds.GraphNode">
+			<d/>
+			<d/>
+		</extends>
+		<parent public="1"><c path="dropecho.ds.BSPNode"/></parent>
+		<left public="1"><c path="dropecho.ds.BSPNode"/></left>
+		<right public="1"><c path="dropecho.ds.BSPNode"/></right>
+		<createLeft public="1" set="method" line="14"><f a="?value">
+	<d/>
+	<c path="dropecho.ds.BSPNode"/>
+</f></createLeft>
+		<createRight public="1" set="method" line="18"><f a="?value">
+	<d/>
+	<c path="dropecho.ds.BSPNode"/>
+</f></createRight>
+		<setLeft public="1" set="method" line="22"><f a="node">
+	<c path="dropecho.ds.BSPNode"/>
+	<c path="dropecho.ds.BSPNode"/>
+</f></setLeft>
+		<setRight public="1" set="method" line="32"><f a="node">
+	<c path="dropecho.ds.BSPNode"/>
+	<c path="dropecho.ds.BSPNode"/>
+</f></setRight>
+		<isLeaf public="1" set="method" line="42"><f a=""><x path="Bool"/></f></isLeaf>
+		<isRoot public="1" set="method" line="46"><f a=""><x path="Bool"/></f></isRoot>
+		<hasLeft public="1" set="method" line="50"><f a=""><x path="Bool"/></f></hasLeft>
+		<hasRight public="1" set="method" line="54"><f a=""><x path="Bool"/></f></hasRight>
+		<new public="1" set="method" line="10"><f a="?value">
+	<d/>
+	<x path="Void"/>
+</f></new>
+		<meta>
+			<m n=":directlyUsed"/>
+			<m n=":nativeGen"/>
+			<m n=":expose"><e>"BSPNode"</e></m>
+		</meta>
+	</class>
+	<class path="dropecho.ds.Graph" params="T:U" file="src/dropecho/ds/Graph.hx">
+		<nodes public="1"><t path="Map">
+	<c path="String"/>
+	<c path="dropecho.ds.GraphNode">
+		<c path="dropecho.ds.Graph.T"/>
+		<c path="dropecho.ds.Graph.U"/>
+	</c>
+</t></nodes>
+		<edges public="1"><t path="Map">
+	<c path="String"/>
+	<t path="Map">
+		<c path="String"/>
+		<c path="dropecho.ds.Graph.U"/>
+	</t>
+</t></edges>
+		<createNode public="1" set="method" line="20">
+			<f a="value">
+				<c path="dropecho.ds.Graph.T"/>
+				<c path="dropecho.ds.GraphNode">
+					<c path="dropecho.ds.Graph.T"/>
+					<c path="dropecho.ds.Graph.U"/>
+				</c>
+			</f>
+			<haxe_doc><![CDATA[* Creates a new node from a given value
+	 *
+	 * @param {T} value - The value to assign to the new node.
+	 * @return {GraphNode<T,U>} The new node.]]></haxe_doc>
+		</createNode>
+		<addNode public="1" set="method" line="31">
+			<f a="node">
+				<c path="dropecho.ds.GraphNode">
+					<c path="dropecho.ds.Graph.T"/>
+					<c path="dropecho.ds.Graph.U"/>
+				</c>
+				<c path="dropecho.ds.GraphNode">
+					<c path="dropecho.ds.Graph.T"/>
+					<c path="dropecho.ds.Graph.U"/>
+				</c>
+			</f>
+			<haxe_doc><![CDATA[* Add an existing node to this graph.
+	 * This will set the internal graph property on the node to this.
+	 *
+	 * @param {GraphNode<T,U>} node - The Node to add.
+	 * @return {GraphNode<T,U>} The added graph node.]]></haxe_doc>
+		</addNode>
+		<addUniEdge public="1" set="method" line="45">
+			<f a="nodeId:otherId:?data">
+				<c path="String"/>
+				<c path="String"/>
+				<c path="dropecho.ds.Graph.U"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Add a unidirectional edge from node to another.
+	 *
+	 * @param {String} nodeId - The start node of the edge.
+	 * @param {String} otherId - The end node of the edge.
+	 * @param {U} data - The data to assign to the edge.
+	 * @return {Void}</haxe_doc>
+		</addUniEdge>
+		<addBiEdge public="1" set="method" line="61">
+			<f a="nodeId:otherId:?data">
+				<c path="String"/>
+				<c path="String"/>
+				<c path="dropecho.ds.Graph.U"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Add a bidirectional edge from node to another.
+	 *
+	 * @param {String} nodeId - One node of the edge.
+	 * @param {String} otherId - The other node of the edge.
+	 * @param {U} data - The data to assign to the edge.
+	 * @return {Void}</haxe_doc>
+		</addBiEdge>
+		<remove public="1" set="method" line="72">
+			<f a="id">
+				<c path="String"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Remove a node from the graph by id.
+	 *
+	 * @param {String} id - The nodes id.
+	 * @return {Void}</haxe_doc>
+		</remove>
+		<neighbors public="1" set="method" line="83">
+			<f a="node:?filter">
+				<c path="dropecho.ds.GraphNode">
+					<c path="dropecho.ds.Graph.T"/>
+					<c path="dropecho.ds.Graph.U"/>
+				</c>
+				<f a=":">
+					<c path="String"/>
+					<c path="dropecho.ds.Graph.U"/>
+					<x path="Bool"/>
+				</f>
+				<c path="Array"><c path="dropecho.ds.GraphNode">
+	<c path="dropecho.ds.Graph.T"/>
+	<c path="dropecho.ds.Graph.U"/>
+</c></c>
+			</f>
+			<haxe_doc><![CDATA[* Get the neighbors of the node.
+	 *
+	 * @param {GraphNode<T,U>} node - The node to get neighbors of.
+	 * @param {Graph~filterFunction(string, U) -> Bool} filter - A filter that sorts by either id or edge data.
+	 * @return {Array<GraphNode<T, U>>} The list of neighbor nodes.]]></haxe_doc>
+		</neighbors>
+		<neighborIds public="1" set="method" line="94">
+			<f a="node:?filter">
+				<c path="dropecho.ds.GraphNode">
+					<c path="dropecho.ds.Graph.T"/>
+					<c path="dropecho.ds.Graph.U"/>
+				</c>
+				<f a=":">
+					<c path="String"/>
+					<c path="dropecho.ds.Graph.U"/>
+					<x path="Bool"/>
+				</f>
+				<c path="Array"><c path="String"/></c>
+			</f>
+			<haxe_doc><![CDATA[* Get the neighbors ids of the node.
+	 *
+	 * @param {GraphNode} node - The node to get neighbors of.
+	 * @param {Graph~filterFunction} filter - A filter that sorts by either id or edge data.
+	 * @return {Array<String>} The list of neighbor node ids.]]></haxe_doc>
+		</neighborIds>
+		<edgeData public="1" set="method" line="120">
+			<f a="fromId:toId">
+				<c path="String"/>
+				<c path="String"/>
+				<c path="dropecho.ds.Graph.U"/>
+			</f>
+			<haxe_doc>* Get the data from the edge between From and To.
+	 *
+	 * @param {String} fromId - The start node of the edge.
+	 * @param {String} toId - The end node of the edge.
+	 * @return {Any} The edge data.</haxe_doc>
+		</edgeData>
+		<new public="1" set="method" line="9"><f a=""><x path="Void"/></f></new>
+		<meta>
+			<m n=":nativeGen"/>
+			<m n=":expose"><e>"Graph"</e></m>
+		</meta>
+	</class>
+	<class path="dropecho.ds.BSPTree" params="" file="src/dropecho/ds/BSPTree.hx">
+		<extends path="dropecho.ds.Graph">
+			<d/>
+			<d/>
+		</extends>
+		<root public="1"><c path="dropecho.ds.BSPNode"/></root>
+		<getParent public="1" set="method" line="15"><f a="node">
+	<c path="dropecho.ds.BSPNode"/>
+	<c path="dropecho.ds.GraphNode">
+		<d/>
+		<d/>
+	</c>
+</f></getParent>
+		<getChildren public="1" set="method" line="19"><f a="node">
+	<c path="dropecho.ds.BSPNode"/>
+	<c path="Array"><c path="dropecho.ds.GraphNode">
+	<d/>
+	<d/>
+</c></c>
+</f></getChildren>
+		<getRoot public="1" set="method" line="23"><f a=""><c path="dropecho.ds.BSPNode"/></f></getRoot>
+		<getLeafs public="1" set="method" line="27"><f a=""><c path="Array"><c path="dropecho.ds.GraphNode">
+	<d/>
+	<d/>
+</c></c></f></getLeafs>
+		<new public="1" set="method" line="8"><f a="?rootValue">
+	<d/>
+	<x path="Void"/>
+</f></new>
+		<meta>
+			<m n=":nativeGen"/>
+			<m n=":expose"><e>"BSPTree"</e></m>
+		</meta>
+	</class>
+	<class path="dropecho.ds.Heap" params="T" file="src/dropecho/ds/Heap.hx">
+		<compare public="1"><f a=":">
+	<c path="dropecho.ds.Heap.T"/>
+	<c path="dropecho.ds.Heap.T"/>
+	<x path="Bool"/>
+</f></compare>
+		<elements public="1"><c path="Array"><c path="dropecho.ds.Heap.T"/></c></elements>
+		<push public="1" set="method" line="20">
+			<f a="n">
+				<c path="dropecho.ds.Heap.T"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Push an element onto the heap.
+	 * @param n The element to push onto the heap.</haxe_doc>
+		</push>
+		<set_value_obj public="1" set="method" line="24"><f a="oldVal:newVal">
+	<c path="dropecho.ds.Heap.T"/>
+	<c path="dropecho.ds.Heap.T"/>
+	<x path="Void"/>
+</f></set_value_obj>
+		<set_value public="1" set="method" line="28"><f a="i:val">
+	<x path="Int"/>
+	<c path="dropecho.ds.Heap.T"/>
+	<x path="Void"/>
+</f></set_value>
+		<pop public="1" set="method" line="40">
+			<f a=""><c path="dropecho.ds.Heap.T"/></f>
+			<haxe_doc>* Remove and return the ximum element in the heap.
+	 * @return The ximum element on the heap.</haxe_doc>
+		</pop>
+		<peek public="1" set="method" line="53"><f a=""><c path="dropecho.ds.Heap.T"/></f></peek>
+		<size public="1" set="method" line="57"><f a=""><x path="Int"/></f></size>
+		<_heapify set="method" line="61"><f a="index">
+	<x path="Int"/>
+	<x path="Void"/>
+</f></_heapify>
+		<_swap set="method" line="89">
+			<f a="a:b">
+				<x path="Int"/>
+				<x path="Int"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Swap two elements of an array.
+	 *
+	 * @private
+	 * @param {Number} a The first element to swap.
+	 * @param {Number} b The second element to swap.</haxe_doc>
+		</_swap>
+		<_getParent set="method" line="102">
+			<f a="index">
+				<x path="Int"/>
+				<x path="Int"/>
+			</f>
+			<haxe_doc>* Get the parent index of an index in the binary heap.
+	 *
+	 * @private
+	 * @param {Number} index The index to get the parent for.
+	 * @return {Number} The parent index.</haxe_doc>
+		</_getParent>
+		<_getLeft set="method" line="113">
+			<f a="index">
+				<x path="Int"/>
+				<x path="Int"/>
+			</f>
+			<haxe_doc>* Get the left child index of the given index.
+	 *
+	 * @private
+	 * @param {Number} index The index.
+	 * @return {Number} The left childs index.</haxe_doc>
+		</_getLeft>
+		<_getRight set="method" line="124">
+			<f a="index">
+				<x path="Int"/>
+				<x path="Int"/>
+			</f>
+			<haxe_doc>* Get the right child index of the given index.
+	 *
+	 * @private
+	 * @param {Number} index The index.
+	 * @return {Number} The right childs index.</haxe_doc>
+		</_getRight>
+		<new public="1" set="method" line="11"><f a="?compare">
+	<f a=":">
+		<c path="dropecho.ds.Heap.T"/>
+		<c path="dropecho.ds.Heap.T"/>
+		<x path="Bool"/>
+	</f>
+	<x path="Void"/>
+</f></new>
+		<haxe_doc>* A heap implemenation.</haxe_doc>
+		<meta>
+			<m n=":directlyUsed"/>
+			<m n=":nativeGen"/>
+			<m n=":expose"><e>"Heap"</e></m>
+		</meta>
+	</class>
+	<class path="dropecho.ds.algos.BFS" params="T:U" file="src/dropecho/ds/algos/BFS.hx">
+		<visited public="1"><c path="Array"><c path="String"/></c></visited>
+		<toVisit public="1"><c path="Array"><c path="dropecho.ds.GraphNode">
+	<c path="dropecho.ds.algos.BFS.T"/>
+	<c path="dropecho.ds.algos.BFS.U"/>
+</c></c></toVisit>
+		<run public="1" set="method" line="14"><f a="node">
+	<c path="dropecho.ds.GraphNode">
+		<c path="dropecho.ds.algos.BFS.T"/>
+		<c path="dropecho.ds.algos.BFS.U"/>
+	</c>
+	<c path="Array"><c path="String"/></c>
+</f></run>
+		<new public="1" set="method" line="9"><f a=""><x path="Void"/></f></new>
+		<meta>
+			<m n=":nativeGen"/>
+			<m n=":expose"><e>"algos.BFS"</e></m>
+		</meta>
+	</class>
+	<class path="dropecho.ds.algos.DFS" params="" file="src/dropecho/ds/algos/DFS.hx">
+		<visited public="1"><c path="Array"><c path="String"/></c></visited>
+		<run public="1" params="T:U" set="method" line="12"><f a="node">
+	<c path="dropecho.ds.GraphNode">
+		<c path="run.T"/>
+		<c path="run.U"/>
+	</c>
+	<c path="Array"><c path="String"/></c>
+</f></run>
+		<new public="1" set="method" line="8"><f a=""><x path="Void"/></f></new>
+		<meta>
+			<m n=":nativeGen"/>
+			<m n=":expose"><e>"algos.DFS"</e></m>
+		</meta>
+	</class>
+	<typedef path="dropecho.ds.algos.NodeDist" params="T:U" file="src/dropecho/ds/algos/Dijkstra.hx" module="dropecho.ds.algos.Dijkstra">
+		<a>
+			<node><c path="dropecho.ds.GraphNode">
+	<c path="dropecho.ds.algos.NodeDist.T"/>
+	<c path="dropecho.ds.algos.NodeDist.U"/>
+</c></node>
+			<dist><x path="Float"/></dist>
+		</a>
+		<meta><m n=":nativeGen"/></meta>
+	</typedef>
+	<class path="dropecho.ds.algos.Dijkstra" params="T:U" file="src/dropecho/ds/algos/Dijkstra.hx">
+		<dist public="1"><t path="Map">
+	<c path="dropecho.ds.GraphNode">
+		<c path="dropecho.ds.algos.Dijkstra.T"/>
+		<c path="dropecho.ds.algos.Dijkstra.U"/>
+	</c>
+	<x path="Float"/>
+</t></dist>
+		<prev public="1"><t path="Map">
+	<c path="dropecho.ds.GraphNode">
+		<c path="dropecho.ds.algos.Dijkstra.T"/>
+		<c path="dropecho.ds.algos.Dijkstra.U"/>
+	</c>
+	<c path="String"/>
+</t></prev>
+		<queue><c path="dropecho.ds.Heap"><t path="dropecho.ds.algos.NodeDist">
+	<c path="dropecho.ds.algos.Dijkstra.T"/>
+	<c path="dropecho.ds.algos.Dijkstra.U"/>
+</t></c></queue>
+		<distCalc><f a="a:b">
+	<c path="dropecho.ds.GraphNode">
+		<c path="dropecho.ds.algos.Dijkstra.T"/>
+		<c path="dropecho.ds.algos.Dijkstra.U"/>
+	</c>
+	<c path="dropecho.ds.GraphNode">
+		<c path="dropecho.ds.algos.Dijkstra.T"/>
+		<c path="dropecho.ds.algos.Dijkstra.U"/>
+	</c>
+	<x path="Float"/>
+</f></distCalc>
+		<run public="1" set="method" line="38">
+			<f a="graph:node">
+				<c path="dropecho.ds.Graph">
+					<c path="dropecho.ds.algos.Dijkstra.T"/>
+					<c path="dropecho.ds.algos.Dijkstra.U"/>
+				</c>
+				<c path="dropecho.ds.GraphNode">
+					<c path="dropecho.ds.algos.Dijkstra.T"/>
+					<c path="dropecho.ds.algos.Dijkstra.U"/>
+				</c>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>* Runs a dijkstra search over the whole graph.
+	 *
+	 * @param graph The graph to search over.
+	 * @param node The node to create subgraph with dist to.</haxe_doc>
+		</run>
+		<new public="1" set="method" line="24"><f a="?distCalc">
+	<f a="a:b">
+		<c path="dropecho.ds.GraphNode">
+			<c path="dropecho.ds.algos.Dijkstra.T"/>
+			<c path="dropecho.ds.algos.Dijkstra.U"/>
+		</c>
+		<c path="dropecho.ds.GraphNode">
+			<c path="dropecho.ds.algos.Dijkstra.T"/>
+			<c path="dropecho.ds.algos.Dijkstra.U"/>
+		</c>
+		<x path="Float"/>
+	</f>
+	<x path="Void"/>
+</f></new>
+		<haxe_doc>* This class is an implementation of dijkstra search over a graph.
+ * @see https://en.wikipedia.org/wiki/Dijkstra's_algorithm#Using_a_priority_queue</haxe_doc>
+		<meta>
+			<m n=":nativeGen"/>
+			<m n=":expose"><e>"algos.Dijkstra"</e></m>
+		</meta>
+	</class>
+	<class path="dropecho.ds.algos.InOrderTraversal" params="" file="src/dropecho/ds/algos/InOrderTraversal.hx">
+		<visited public="1"><c path="Array"><c path="String"/></c></visited>
+		<run public="1" set="method" line="12"><f a="node:?visitor">
+	<c path="dropecho.ds.BSPNode"/>
+	<f a="">
+		<c path="dropecho.ds.BSPNode"/>
+		<x path="Bool"/>
+	</f>
+	<c path="Array"><c path="String"/></c>
+</f></run>
+		<new public="1" set="method" line="8"><f a=""><x path="Void"/></f></new>
+		<meta>
+			<m n=":nativeGen"/>
+			<m n=":expose"><e>"algos.InOrderTraversal"</e></m>
+		</meta>
+	</class>
+	<class path="dropecho.ds.algos.PostOrderTraversal" params="" file="src/dropecho/ds/algos/PostOrderTraversal.hx">
+		<visited public="1"><c path="Array"><c path="String"/></c></visited>
+		<run public="1" set="method" line="12"><f a="node:?visitor">
+	<c path="dropecho.ds.BSPNode"/>
+	<f a="">
+		<c path="dropecho.ds.BSPNode"/>
+		<x path="Bool"/>
+	</f>
+	<c path="Array"><c path="String"/></c>
+</f></run>
+		<new public="1" set="method" line="8"><f a=""><x path="Void"/></f></new>
+		<meta>
+			<m n=":nativeGen"/>
+			<m n=":expose"><e>"algos.PostOrderTraversal"</e></m>
+		</meta>
+	</class>
+	<class path="dropecho.ds.algos.PreOrderTraversal" params="" file="src/dropecho/ds/algos/PreOrderTraversal.hx">
+		<visited public="1"><c path="Array"><c path="String"/></c></visited>
+		<run public="1" set="method" line="12"><f a="node:?visitor">
+	<c path="dropecho.ds.BSPNode"/>
+	<f a="">
+		<c path="dropecho.ds.BSPNode"/>
+		<x path="Bool"/>
+	</f>
+	<c path="Array"><c path="String"/></c>
+</f></run>
+		<new public="1" set="method" line="8"><f a=""><x path="Void"/></f></new>
+		<meta>
+			<m n=":nativeGen"/>
+			<m n=":expose"><e>"algos.PreOrderTraversal"</e></m>
+		</meta>
+	</class>
+	<abstract path="haxe.CallStack" params="" file="/usr/share/haxe/std/haxe/CallStack.hx">
+		<from><icast><c path="Array"><e path="haxe.StackItem"/></c></icast></from>
+		<this><c path="Array"><e path="haxe.StackItem"/></c></this>
+		<haxe_doc>Get information about the call stack.</haxe_doc>
+		<meta>
+			<m n=":allow"><e>haxe.Exception</e></m>
+			<m n=":using"><e>haxe.CallStack</e></m>
+		</meta>
+		<impl><class path="haxe._CallStack.CallStack_Impl_" params="" file="/usr/share/haxe/std/haxe/CallStack.hx" private="1" module="haxe.CallStack" final="1"><meta>
+	<m n=":keep"/>
+	<m n=":using"><e>haxe.CallStack</e></m>
+	<m n=":allow"><e>haxe.Exception</e></m>
+</meta></class></impl>
+	</abstract>
 	<abstract path="haxe.Function" params="" file="/usr/share/haxe/std/haxe/Constraints.hx" module="haxe.Constraints">
 		<this><d/></this>
 		<haxe_doc>This type unifies with any function type.
@@ -1671,7 +2281,7 @@
 	It is intended to be used as a type parameter constraint. If used as a real
 	type, the underlying type will be `Dynamic`.</haxe_doc>
 		<meta><m n=":callable"/></meta>
-		<impl><class path="haxe._Constraints.Function_Impl_" params="" file="/usr/share/haxe/std/haxe/Constraints.hx" private="1" module="haxe.Constraints"><meta><m n=":keep"/></meta></class></impl>
+		<impl><class path="haxe._Constraints.Function_Impl_" params="" file="/usr/share/haxe/std/haxe/Constraints.hx" private="1" module="haxe.Constraints" final="1"><meta><m n=":keep"/></meta></class></impl>
 	</abstract>
 	<abstract path="haxe.FlatEnum" params="" file="/usr/share/haxe/std/haxe/Constraints.hx" module="haxe.Constraints">
 		<this><d/></this>
@@ -1680,7 +2290,15 @@
 
 	It is intended to be used as a type parameter constraint. If used as a real
 	type, the underlying type will be `Dynamic`.</haxe_doc>
-		<impl><class path="haxe._Constraints.FlatEnum_Impl_" params="" file="/usr/share/haxe/std/haxe/Constraints.hx" private="1" module="haxe.Constraints"><meta><m n=":keep"/></meta></class></impl>
+		<impl><class path="haxe._Constraints.FlatEnum_Impl_" params="" file="/usr/share/haxe/std/haxe/Constraints.hx" private="1" module="haxe.Constraints" final="1"><meta><m n=":keep"/></meta></class></impl>
+	</abstract>
+	<abstract path="haxe.NotVoid" params="" file="/usr/share/haxe/std/haxe/Constraints.hx" module="haxe.Constraints">
+		<this><d/></this>
+		<haxe_doc>This type unifies with anything but `Void`.
+
+	It is intended to be used as a type parameter constraint. If used as a real
+	type, the underlying type will be `Dynamic`.</haxe_doc>
+		<impl><class path="haxe._Constraints.NotVoid_Impl_" params="" file="/usr/share/haxe/std/haxe/Constraints.hx" private="1" module="haxe.Constraints" final="1"><meta><m n=":keep"/></meta></class></impl>
 	</abstract>
 	<abstract path="haxe.Constructible" params="T" file="/usr/share/haxe/std/haxe/Constraints.hx" module="haxe.Constraints">
 		<this><d/></this>
@@ -1696,7 +2314,7 @@
 
 	It is intended to be used as a type parameter constraint. If used as a real
 	type, the underlying type will be `Dynamic`.]]></haxe_doc>
-		<impl><class path="haxe._Constraints.Constructible_Impl_" params="" file="/usr/share/haxe/std/haxe/Constraints.hx" private="1" module="haxe.Constraints"><meta><m n=":keep"/></meta></class></impl>
+		<impl><class path="haxe._Constraints.Constructible_Impl_" params="" file="/usr/share/haxe/std/haxe/Constraints.hx" private="1" module="haxe.Constraints" final="1"><meta><m n=":keep"/></meta></class></impl>
 	</abstract>
 	<class path="haxe.IMap" params="K:V" file="/usr/share/haxe/std/haxe/Constraints.hx" module="haxe.Constraints" interface="1"><meta><m n=":keep"/></meta></class>
 	<class path="haxe.EnumTools" params="" file="/usr/share/haxe/std/haxe/EnumTools.hx" extern="1">
@@ -1850,6 +2468,134 @@
 	If the first argument to any of the methods is `null`, the result is
 	unspecified.</haxe_doc>
 	</class>
+	<class path="haxe.Exception" params="" file="/usr/share/haxe/std/haxe/Exception.hx" extern="1">
+		<caught set="method" static="1">
+			<f a="value">
+				<x path="Any"/>
+				<c path="haxe.Exception"/>
+			</f>
+			<haxe_doc>Used internally for wildcard catches like `catch(e:Exception)`.</haxe_doc>
+		</caught>
+		<thrown set="method" static="1">
+			<f a="value">
+				<x path="Any"/>
+				<x path="Any"/>
+			</f>
+			<haxe_doc>Used internally for wrapping non-throwable values for `throw` expressions.</haxe_doc>
+		</thrown>
+		<message public="1" get="accessor" set="null">
+			<c path="String"/>
+			<haxe_doc>Exception message.</haxe_doc>
+		</message>
+		<get_message set="method"><f a=""><c path="String"/></f></get_message>
+		<stack public="1" get="accessor" set="null">
+			<x path="haxe.CallStack"/>
+			<haxe_doc>The call stack at the moment of the exception creation.</haxe_doc>
+		</stack>
+		<get_stack set="method"><f a=""><x path="haxe.CallStack"/></f></get_stack>
+		<previous public="1" get="accessor" set="null">
+			<x path="Null"><c path="haxe.Exception"/></x>
+			<haxe_doc>Contains an exception, which was passed to `previous` constructor argument.</haxe_doc>
+		</previous>
+		<get_previous set="method"><f a=""><x path="Null"><c path="haxe.Exception"/></x></f></get_previous>
+		<native public="1" get="accessor" set="null">
+			<x path="Any"/>
+			<haxe_doc>Native exception, which caused this exception.</haxe_doc>
+		</native>
+		<get_native final="1" set="method"><f a=""><x path="Any"/></f></get_native>
+		<unwrap set="method">
+			<f a=""><x path="Any"/></f>
+			<haxe_doc>Extract an originally thrown value.
+
+		Used internally for catching non-native exceptions.
+		Do _not_ override unless you know what you are doing.</haxe_doc>
+		</unwrap>
+		<toString public="1" set="method">
+			<f a=""><c path="String"/></f>
+			<haxe_doc>Returns exception message.</haxe_doc>
+		</toString>
+		<details public="1" set="method">
+			<f a=""><c path="String"/></f>
+			<haxe_doc>Detailed exception description.
+
+		Includes message, stack and the chain of previous exceptions (if set).</haxe_doc>
+		</details>
+		<new public="1" set="method">
+			<f a="message:?previous:?native">
+				<c path="String"/>
+				<c path="haxe.Exception"/>
+				<x path="Any"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>Create a new Exception instance.
+
+		The `previous` argument could be used for exception chaining.
+
+		The `native` argument is for internal usage only.
+		There is no need to provide `native` argument manually and no need to keep it
+		upon extending `haxe.Exception` unless you know what you're doing.</haxe_doc>
+		</new>
+		<haxe_doc><![CDATA[Base class for exceptions.
+
+	If this class (or derivatives) is used to catch an exception, then
+	`haxe.CallStack.exceptionStack()` will not return a stack for the exception
+	caught. Use `haxe.Exception.stack` property instead:
+	```haxe
+	try {
+		throwSomething();
+	} catch(e:Exception) {
+		trace(e.stack);
+	}
+	```
+
+	Custom exceptions should extend this class:
+	```haxe
+	class MyException extends haxe.Exception {}
+	//...
+	throw new MyException('terrible exception');
+	```
+
+	`haxe.Exception` is also a wildcard type to catch any exception:
+	```haxe
+	try {
+		throw 'Catch me!';
+	} catch(e:haxe.Exception) {
+		trace(e.message); // Output: Catch me!
+	}
+	```
+
+	To rethrow an exception just throw it again.
+	Haxe will try to rethrow an original native exception whenever possible.
+	```haxe
+	try {
+		var a:Array<Int> = null;
+		a.push(1); // generates target-specific null-pointer exception
+	} catch(e:haxe.Exception) {
+		throw e; // rethrows native exception instead of haxe.Exception
+	}
+	```]]></haxe_doc>
+	</class>
+	<class path="haxe.NativeStackTrace" params="" file="/usr/share/haxe/std/haxe/NativeStackTrace.hx" extern="1">
+		<saveStack public="1" set="method" static="1"><f a="exception">
+	<x path="Any"/>
+	<x path="Void"/>
+</f></saveStack>
+		<callStack public="1" set="method" static="1"><f a=""><x path="Any"/></f></callStack>
+		<exceptionStack public="1" set="method" static="1"><f a=""><x path="Any"/></f></exceptionStack>
+		<toHaxe public="1" set="method" static="1">
+			<f a="nativeStackTrace:?skip" v=":0">
+				<x path="Any"/>
+				<x path="Int"/>
+				<c path="Array"><e path="haxe.StackItem"/></c>
+			</f>
+			<meta><m n=":value"><e>{ skip : 0 }</e></m></meta>
+		</toHaxe>
+		<haxe_doc>Do not use manually.</haxe_doc>
+		<meta>
+			<m n=":dox"><e>hide</e></m>
+			<m n=":noCompletion"/>
+		</meta>
+	</class>
 	<class path="haxe.ds.ArraySort" params="" file="/usr/share/haxe/std/haxe/ds/ArraySort.hx">
 		<sort public="1" params="T" set="method" line="42" static="1">
 			<f a="a:cmp">
@@ -1951,6 +2697,39 @@
 			<m n=":directlyUsed"/>
 		</meta>
 	</class>
+	<class path="haxe.ds.TreeNode" params="K:V" file="/usr/share/haxe/std/haxe/ds/BalancedTree.hx" module="haxe.ds.BalancedTree">
+		<left public="1"><c path="haxe.ds.TreeNode">
+	<c path="haxe.ds.TreeNode.K"/>
+	<c path="haxe.ds.TreeNode.V"/>
+</c></left>
+		<right public="1"><c path="haxe.ds.TreeNode">
+	<c path="haxe.ds.TreeNode.K"/>
+	<c path="haxe.ds.TreeNode.V"/>
+</c></right>
+		<key public="1"><c path="haxe.ds.TreeNode.K"/></key>
+		<value public="1"><c path="haxe.ds.TreeNode.V"/></value>
+		<_height><x path="Int"/></_height>
+		<get_height public="1" get="inline" set="null" line="263"><f a=""><x path="Int"/></f></get_height>
+		<new public="1" set="method" line="252">
+			<f a="l:k:v:r:?h" v="::::-1">
+				<c path="haxe.ds.TreeNode">
+					<c path="haxe.ds.TreeNode.K"/>
+					<c path="haxe.ds.TreeNode.V"/>
+				</c>
+				<c path="haxe.ds.TreeNode.K"/>
+				<c path="haxe.ds.TreeNode.V"/>
+				<c path="haxe.ds.TreeNode">
+					<c path="haxe.ds.TreeNode.K"/>
+					<c path="haxe.ds.TreeNode.V"/>
+				</c>
+				<x path="Int"/>
+				<x path="Void"/>
+			</f>
+			<meta><m n=":value"><e>{ h : -1 }</e></m></meta>
+		</new>
+		<haxe_doc>A tree node of `haxe.ds.BalancedTree`.</haxe_doc>
+		<meta><m n=":keep"/></meta>
+	</class>
 	<abstract path="haxe.ds.HashMap" params="K:V" file="/usr/share/haxe/std/haxe/ds/HashMap.hx">
 		<this><c path="haxe.ds._HashMap.HashMapData">
 	<c path="haxe.ds.HashMap.K"/>
@@ -1961,7 +2740,7 @@
 	See `Map` for documentation details.
 
 	@see https://haxe.org/manual/std-Map.html</haxe_doc>
-		<impl><class path="haxe.ds._HashMap.HashMap_Impl_" params="" file="/usr/share/haxe/std/haxe/ds/HashMap.hx" private="1" module="haxe.ds.HashMap"><meta><m n=":keep"/></meta></class></impl>
+		<impl><class path="haxe.ds._HashMap.HashMap_Impl_" params="" file="/usr/share/haxe/std/haxe/ds/HashMap.hx" private="1" module="haxe.ds.HashMap" final="1"><meta><m n=":keep"/></meta></class></impl>
 	</abstract>
 	<class path="haxe.ds.IntMap" params="T" file="/usr/share/haxe/std/haxe/ds/IntMap.hx" extern="1">
 		<implements path="haxe.IMap">
@@ -2040,6 +2819,21 @@
 
 	@see https://haxe.org/manual/std-Map.html</haxe_doc>
 	</class>
+	<class path="haxe.ds._List.ListNode" params="T" file="/usr/share/haxe/std/haxe/ds/List.hx" private="1" module="haxe.ds.List">
+		<create public="1" params="T" get="inline" set="null" line="271" static="1"><f a="item:next">
+	<c path="create.T"/>
+	<c path="haxe.ds._List.ListNode"><c path="create.T"/></c>
+	<c path="haxe.ds._List.ListNode"><c path="create.T"/></c>
+</f></create>
+		<item public="1"><c path="haxe.ds._List.ListNode.T"/></item>
+		<next public="1"><c path="haxe.ds._List.ListNode"><c path="haxe.ds._List.ListNode.T"/></c></next>
+		<new public="1" set="method" line="266"><f a="item:next">
+	<c path="haxe.ds._List.ListNode.T"/>
+	<c path="haxe.ds._List.ListNode"><c path="haxe.ds._List.ListNode.T"/></c>
+	<x path="Void"/>
+</f></new>
+		<meta><m n=":keep"/></meta>
+	</class>
 	<abstract path="haxe.ds.Map" params="K:V" file="/usr/share/haxe/std/haxe/ds/Map.hx">
 		<from>
 			<icast field="fromStringMap"><c path="haxe.ds.StringMap"><c path="fromStringMap.V"/></c></icast>
@@ -2080,8 +2874,57 @@
 
 	@see https://haxe.org/manual/std-Map.html]]></haxe_doc>
 		<meta><m n=":multiType"><e>@:followWithAbstracts K</e></m></meta>
-		<impl><class path="haxe.ds._Map.Map_Impl_" params="" file="/usr/share/haxe/std/haxe/ds/Map.hx" private="1" module="haxe.ds.Map"><meta><m n=":keep"/></meta></class></impl>
+		<impl><class path="haxe.ds._Map.Map_Impl_" params="" file="/usr/share/haxe/std/haxe/ds/Map.hx" private="1" module="haxe.ds.Map" final="1">
+	<_new public="1" set="method" static="1">
+		<f a=""><x path="haxe.ds.Map">
+	<c path="haxe.ds.Map.K"/>
+	<c path="haxe.ds.Map.V"/>
+</x></f>
+		<meta>
+			<m n=":impl"/>
+			<m n=":noCompletion"/>
+		</meta>
+		<haxe_doc>Creates a new Map.
+
+		This becomes a constructor call to one of the specialization types in
+		the output. The rules for that are as follows:
+
+		1. if `K` is a `String`, `haxe.ds.StringMap` is used
+		2. if `K` is an `Int`, `haxe.ds.IntMap` is used
+		3. if `K` is an `EnumValue`, `haxe.ds.EnumValueMap` is used
+		4. if `K` is any other class or structure, `haxe.ds.ObjectMap` is used
+		5. if `K` is any other type, it causes a compile-time error
+
+		(Cpp) Map does not use weak keys on `ObjectMap` by default.</haxe_doc>
+	</_new>
+	<meta><m n=":keep"/></meta>
+</class></impl>
 	</abstract>
+	<class path="haxe.ds._Map.Map_Impl_" params="" file="/usr/share/haxe/std/haxe/ds/Map.hx" private="1" module="haxe.ds.Map" final="1">
+		<_new public="1" set="method" static="1">
+			<f a=""><x path="haxe.ds.Map">
+	<c path="haxe.ds.Map.K"/>
+	<c path="haxe.ds.Map.V"/>
+</x></f>
+			<meta>
+				<m n=":impl"/>
+				<m n=":noCompletion"/>
+			</meta>
+			<haxe_doc>Creates a new Map.
+
+		This becomes a constructor call to one of the specialization types in
+		the output. The rules for that are as follows:
+
+		1. if `K` is a `String`, `haxe.ds.StringMap` is used
+		2. if `K` is an `Int`, `haxe.ds.IntMap` is used
+		3. if `K` is an `EnumValue`, `haxe.ds.EnumValueMap` is used
+		4. if `K` is any other class or structure, `haxe.ds.ObjectMap` is used
+		5. if `K` is any other type, it causes a compile-time error
+
+		(Cpp) Map does not use weak keys on `ObjectMap` by default.</haxe_doc>
+		</_new>
+		<meta><m n=":keep"/></meta>
+	</class>
 	<class path="haxe.ds.ObjectMap" params="K:V" file="/usr/share/haxe/std/haxe/ds/ObjectMap.hx" extern="1">
 		<implements path="haxe.IMap">
 			<c path="haxe.ds.ObjectMap.K"/>
@@ -2244,471 +3087,31 @@
 	@see https://haxe.org/manual/std-Map.html</haxe_doc>
 		<meta><m n=":directlyUsed"/></meta>
 	</class>
-	<class path="vantreeseba.gameds.GraphNode" params="T:U" file="src/vantreeseba/gameds/GraphNode.hx">
-		<id public="1"><c path="String"/></id>
-		<value public="1"><c path="vantreeseba.gameds.GraphNode.T"/></value>
-		<graph public="1"><c path="vantreeseba.gameds.Graph">
-	<c path="vantreeseba.gameds.GraphNode.T"/>
-	<c path="vantreeseba.gameds.GraphNode.U"/>
-</c></graph>
-		<neighborIds public="1" set="method" line="15"><f a=""><c path="Array"><c path="String"/></c></f></neighborIds>
-		<neighbors public="1" set="method" line="19"><f a="?filter">
-	<f a=":">
-		<c path="String"/>
-		<c path="vantreeseba.gameds.GraphNode.U"/>
-		<x path="Bool"/>
-	</f>
-	<c path="Array"><c path="vantreeseba.gameds.GraphNode">
-	<c path="vantreeseba.gameds.GraphNode.T"/>
-	<c path="vantreeseba.gameds.GraphNode.U"/>
-</c></c>
-</f></neighbors>
-		<edgeData public="1" set="method" line="24"><f a="toId">
-	<c path="String"/>
-	<c path="vantreeseba.gameds.GraphNode.U"/>
-</f></edgeData>
-		<new public="1" set="method" line="10"><f a="?value:?id">
-	<c path="vantreeseba.gameds.GraphNode.T"/>
-	<c path="String"/>
-	<x path="Void"/>
-</f></new>
+	<class path="haxe.iterators.ArrayIterator" params="T" file="/usr/share/haxe/std/haxe/iterators/ArrayIterator.hx">
+		<array final="1"><c path="Array"><c path="haxe.iterators.ArrayIterator.T"/></c></array>
+		<current expr="0">
+			<x path="Int"/>
+			<meta><m n=":value"><e>0</e></m></meta>
+		</current>
+		<hasNext public="1" get="inline" set="null" line="43">
+			<f a=""><x path="Bool"/></f>
+			<haxe_doc>See `Iterator.hasNext`</haxe_doc>
+		</hasNext>
+		<next public="1" get="inline" set="null" line="51">
+			<f a=""><c path="haxe.iterators.ArrayIterator.T"/></f>
+			<haxe_doc>See `Iterator.next`</haxe_doc>
+		</next>
+		<new public="1" get="inline" set="null" line="35">
+			<f a="array">
+				<c path="Array"><c path="haxe.iterators.ArrayIterator.T"/></c>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>Create a new `ArrayIterator`.</haxe_doc>
+		</new>
+		<haxe_doc><![CDATA[This iterator is used only when `Array<T>` is passed to `Iterable<T>`]]></haxe_doc>
 		<meta>
+			<m n=":keep"/>
 			<m n=":directlyUsed"/>
-			<m n=":expose"/>
-			<m n=":nativeGen"/>
 		</meta>
-	</class>
-	<class path="vantreeseba.gameds.BSPNode" params="" file="src/vantreeseba/gameds/BSPNode.hx">
-		<extends path="vantreeseba.gameds.GraphNode">
-			<d/>
-			<d/>
-		</extends>
-		<parent public="1"><c path="vantreeseba.gameds.BSPNode"/></parent>
-		<left public="1"><c path="vantreeseba.gameds.BSPNode"/></left>
-		<right public="1"><c path="vantreeseba.gameds.BSPNode"/></right>
-		<createLeft public="1" set="method" line="13"><f a="?value">
-	<d/>
-	<c path="vantreeseba.gameds.BSPNode"/>
-</f></createLeft>
-		<createRight public="1" set="method" line="17"><f a="?value">
-	<d/>
-	<c path="vantreeseba.gameds.BSPNode"/>
-</f></createRight>
-		<setLeft public="1" set="method" line="21"><f a="node">
-	<c path="vantreeseba.gameds.BSPNode"/>
-	<c path="vantreeseba.gameds.BSPNode"/>
-</f></setLeft>
-		<setRight public="1" set="method" line="31"><f a="node">
-	<c path="vantreeseba.gameds.BSPNode"/>
-	<c path="vantreeseba.gameds.BSPNode"/>
-</f></setRight>
-		<isLeaf public="1" set="method" line="41"><f a=""><x path="Bool"/></f></isLeaf>
-		<isRoot public="1" set="method" line="45"><f a=""><x path="Bool"/></f></isRoot>
-		<new public="1" set="method" line="9"><f a="?value">
-	<d/>
-	<x path="Void"/>
-</f></new>
-		<meta>
-			<m n=":directlyUsed"/>
-			<m n=":nativeGen"/>
-		</meta>
-	</class>
-	<class path="vantreeseba.gameds.Graph" params="T:U" file="src/vantreeseba/gameds/Graph.hx">
-		<nodes public="1"><t path="Map">
-	<c path="String"/>
-	<c path="vantreeseba.gameds.GraphNode">
-		<c path="vantreeseba.gameds.Graph.T"/>
-		<c path="vantreeseba.gameds.Graph.U"/>
-	</c>
-</t></nodes>
-		<edges public="1"><t path="Map">
-	<c path="String"/>
-	<t path="Map">
-		<c path="String"/>
-		<c path="vantreeseba.gameds.Graph.U"/>
-	</t>
-</t></edges>
-		<createNode public="1" set="method" line="20">
-			<f a="value">
-				<c path="vantreeseba.gameds.Graph.T"/>
-				<c path="vantreeseba.gameds.GraphNode">
-					<c path="vantreeseba.gameds.Graph.T"/>
-					<c path="vantreeseba.gameds.Graph.U"/>
-				</c>
-			</f>
-			<haxe_doc><![CDATA[* Creates a new node from a given value
-	 *
-	 * @param {T} value - The value to assign to the new node.
-	 * @return {GraphNode<T,U>} The new node.]]></haxe_doc>
-		</createNode>
-		<addNode public="1" set="method" line="31">
-			<f a="node">
-				<c path="vantreeseba.gameds.GraphNode">
-					<c path="vantreeseba.gameds.Graph.T"/>
-					<c path="vantreeseba.gameds.Graph.U"/>
-				</c>
-				<c path="vantreeseba.gameds.GraphNode">
-					<c path="vantreeseba.gameds.Graph.T"/>
-					<c path="vantreeseba.gameds.Graph.U"/>
-				</c>
-			</f>
-			<haxe_doc><![CDATA[* Add an existing node to this graph.
-	 * This will set the internal graph property on the node to this.
-	 *
-	 * @param {GraphNode} node - The Node to add.
-	 * @return {GraphNode<T,U>} The added graph node.]]></haxe_doc>
-		</addNode>
-		<addUniEdge public="1" set="method" line="45">
-			<f a="nodeId:otherId:?data">
-				<c path="String"/>
-				<c path="String"/>
-				<c path="vantreeseba.gameds.Graph.U"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* Add a unidirectional edge from node to another.
-	 *
-	 * @param {String} nodeId - The start node of the edge.
-	 * @param {String} otherId - The end node of the edge.
-	 * @param {Any} data - The data to assign to the edge.
-	 * @return {Void}</haxe_doc>
-		</addUniEdge>
-		<addBiEdge public="1" set="method" line="61">
-			<f a="nodeId:otherId:?data">
-				<c path="String"/>
-				<c path="String"/>
-				<c path="vantreeseba.gameds.Graph.U"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* Add a bidirectional edge from node to another.
-	 *
-	 * @param {String} nodeId - One node of the edge.
-	 * @param {String} otherId - The other node of the edge.
-	 * @param {Any} data - The data to assign to the edge.
-	 * @return {Void}</haxe_doc>
-		</addBiEdge>
-		<remove public="1" set="method" line="72">
-			<f a="id">
-				<c path="String"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* Remove a node from the graph by id.
-	 *
-	 * @param {String} id - The nodes id.
-	 * @return {Void}</haxe_doc>
-		</remove>
-		<neighbors public="1" set="method" line="83">
-			<f a="node:?filter">
-				<c path="vantreeseba.gameds.GraphNode">
-					<c path="vantreeseba.gameds.Graph.T"/>
-					<c path="vantreeseba.gameds.Graph.U"/>
-				</c>
-				<f a=":">
-					<c path="String"/>
-					<c path="vantreeseba.gameds.Graph.U"/>
-					<x path="Bool"/>
-				</f>
-				<c path="Array"><c path="vantreeseba.gameds.GraphNode">
-	<c path="vantreeseba.gameds.Graph.T"/>
-	<c path="vantreeseba.gameds.Graph.U"/>
-</c></c>
-			</f>
-			<haxe_doc><![CDATA[* Get the neighbors of the node.
-	 *
-	 * @param {GraphNode} node - The node to get neighbors of.
-	 * @param {Graph~filterFunction} filter - A filter that sorts by either id or edge data.
-	 * @return {Array<GraphNode<T, U>>} The list of neighbor nodes.]]></haxe_doc>
-		</neighbors>
-		<neighborIds public="1" set="method" line="94">
-			<f a="node:?filter">
-				<c path="vantreeseba.gameds.GraphNode">
-					<c path="vantreeseba.gameds.Graph.T"/>
-					<c path="vantreeseba.gameds.Graph.U"/>
-				</c>
-				<f a=":">
-					<c path="String"/>
-					<c path="vantreeseba.gameds.Graph.U"/>
-					<x path="Bool"/>
-				</f>
-				<c path="Array"><c path="String"/></c>
-			</f>
-			<haxe_doc><![CDATA[* Get the neighbors ids of the node.
-	 *
-	 * @param {GraphNode} node - The node to get neighbors of.
-	 * @param {Graph~filterFunction} filter - A filter that sorts by either id or edge data.
-	 * @return {Array<String>} The list of neighbor node ids.]]></haxe_doc>
-		</neighborIds>
-		<edgeData public="1" set="method" line="120">
-			<f a="fromId:toId">
-				<c path="String"/>
-				<c path="String"/>
-				<c path="vantreeseba.gameds.Graph.U"/>
-			</f>
-			<haxe_doc>* Get the data from the edge between From and To.
-	 *
-	 * @param {String} fromId - The start node of the edge.
-	 * @param {String} toId - The end node of the edge.
-	 * @return {Any} The edge data.</haxe_doc>
-		</edgeData>
-		<new public="1" set="method" line="9"><f a=""><x path="Void"/></f></new>
-		<meta>
-			<m n=":expose"/>
-			<m n=":nativeGen"/>
-		</meta>
-	</class>
-	<class path="vantreeseba.gameds.BSPTree" params="" file="src/vantreeseba/gameds/BSPTree.hx">
-		<extends path="vantreeseba.gameds.Graph">
-			<d/>
-			<d/>
-		</extends>
-		<root public="1"><c path="vantreeseba.gameds.BSPNode"/></root>
-		<getParent public="1" set="method" line="14"><f a="node">
-	<c path="vantreeseba.gameds.BSPNode"/>
-	<c path="vantreeseba.gameds.GraphNode">
-		<d/>
-		<d/>
-	</c>
-</f></getParent>
-		<getChildren public="1" set="method" line="18"><f a="node">
-	<c path="vantreeseba.gameds.BSPNode"/>
-	<c path="Array"><c path="vantreeseba.gameds.GraphNode">
-	<d/>
-	<d/>
-</c></c>
-</f></getChildren>
-		<getRoot public="1" set="method" line="22"><f a=""><c path="vantreeseba.gameds.BSPNode"/></f></getRoot>
-		<getLeafs public="1" set="method" line="26"><f a=""><c path="Array"><c path="vantreeseba.gameds.GraphNode">
-	<d/>
-	<d/>
-</c></c></f></getLeafs>
-		<new public="1" set="method" line="7"><f a="?rootValue">
-	<d/>
-	<x path="Void"/>
-</f></new>
-		<meta><m n=":nativeGen"/></meta>
-	</class>
-	<class path="vantreeseba.gameds.Heap" params="T" file="src/vantreeseba/gameds/Heap.hx">
-		<compare public="1"><f a=":">
-	<c path="vantreeseba.gameds.Heap.T"/>
-	<c path="vantreeseba.gameds.Heap.T"/>
-	<x path="Bool"/>
-</f></compare>
-		<elements public="1"><c path="Array"><c path="vantreeseba.gameds.Heap.T"/></c></elements>
-		<push public="1" set="method" line="20">
-			<f a="n">
-				<c path="vantreeseba.gameds.Heap.T"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* Push an element onto the heap.
-	 * @param n The element to push onto the heap.</haxe_doc>
-		</push>
-		<set_value_obj public="1" set="method" line="24"><f a="oldVal:newVal">
-	<c path="vantreeseba.gameds.Heap.T"/>
-	<c path="vantreeseba.gameds.Heap.T"/>
-	<x path="Void"/>
-</f></set_value_obj>
-		<set_value public="1" set="method" line="28"><f a="i:val">
-	<x path="Int"/>
-	<c path="vantreeseba.gameds.Heap.T"/>
-	<x path="Void"/>
-</f></set_value>
-		<pop public="1" set="method" line="40">
-			<f a=""><c path="vantreeseba.gameds.Heap.T"/></f>
-			<haxe_doc>* Remove and return the ximum element in the heap.
-	 * @return The ximum element on the heap.</haxe_doc>
-		</pop>
-		<peek public="1" set="method" line="53"><f a=""><c path="vantreeseba.gameds.Heap.T"/></f></peek>
-		<size public="1" set="method" line="57"><f a=""><x path="Int"/></f></size>
-		<_heapify set="method" line="61"><f a="index">
-	<x path="Int"/>
-	<x path="Void"/>
-</f></_heapify>
-		<_swap set="method" line="89">
-			<f a="a:b">
-				<x path="Int"/>
-				<x path="Int"/>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* Swap two elements of an array.
-	 *
-	 * @private
-	 * @param {Number} a The first element to swap.
-	 * @param {Number} b The second element to swap.</haxe_doc>
-		</_swap>
-		<_getParent set="method" line="102">
-			<f a="index">
-				<x path="Int"/>
-				<x path="Int"/>
-			</f>
-			<haxe_doc>* Get the parent index of an index in the binary heap.
-	 *
-	 * @private
-	 * @param {Number} index The index to get the parent for.
-	 * @return {Number} The parent index.</haxe_doc>
-		</_getParent>
-		<_getLeft set="method" line="113">
-			<f a="index">
-				<x path="Int"/>
-				<x path="Int"/>
-			</f>
-			<haxe_doc>* Get the left child index of the given index.
-	 *
-	 * @private
-	 * @param {Number} index The index.
-	 * @return {Number} The left childs index.</haxe_doc>
-		</_getLeft>
-		<_getRight set="method" line="124">
-			<f a="index">
-				<x path="Int"/>
-				<x path="Int"/>
-			</f>
-			<haxe_doc>* Get the right child index of the given index.
-	 *
-	 * @private
-	 * @param {Number} index The index.
-	 * @return {Number} The right childs index.</haxe_doc>
-		</_getRight>
-		<new public="1" set="method" line="11"><f a="?compare">
-	<f a=":">
-		<c path="vantreeseba.gameds.Heap.T"/>
-		<c path="vantreeseba.gameds.Heap.T"/>
-		<x path="Bool"/>
-	</f>
-	<x path="Void"/>
-</f></new>
-		<haxe_doc>* A heap implemenation.</haxe_doc>
-		<meta>
-			<m n=":directlyUsed"/>
-			<m n=":nativeGen"/>
-		</meta>
-	</class>
-	<class path="vantreeseba.gameds.algos.BFS" params="T:U" file="src/vantreeseba/gameds/algos/BFS.hx">
-		<visited public="1"><c path="Array"><c path="String"/></c></visited>
-		<toVisit public="1"><c path="Array"><c path="vantreeseba.gameds.GraphNode">
-	<c path="vantreeseba.gameds.algos.BFS.T"/>
-	<c path="vantreeseba.gameds.algos.BFS.U"/>
-</c></c></toVisit>
-		<run public="1" set="method" line="13"><f a="node">
-	<c path="vantreeseba.gameds.GraphNode">
-		<c path="vantreeseba.gameds.algos.BFS.T"/>
-		<c path="vantreeseba.gameds.algos.BFS.U"/>
-	</c>
-	<c path="Array"><c path="String"/></c>
-</f></run>
-		<new public="1" set="method" line="8"><f a=""><x path="Void"/></f></new>
-		<meta><m n=":nativeGen"/></meta>
-	</class>
-	<class path="vantreeseba.gameds.algos.DFS" params="" file="src/vantreeseba/gameds/algos/DFS.hx">
-		<visited public="1"><c path="Array"><c path="String"/></c></visited>
-		<run public="1" params="T:U" set="method" line="11"><f a="node">
-	<c path="vantreeseba.gameds.GraphNode">
-		<c path="run.T"/>
-		<c path="run.U"/>
-	</c>
-	<c path="Array"><c path="String"/></c>
-</f></run>
-		<new public="1" set="method" line="7"><f a=""><x path="Void"/></f></new>
-		<meta><m n=":nativeGen"/></meta>
-	</class>
-	<typedef path="vantreeseba.gameds.algos.NodeDist" params="T:U" file="src/vantreeseba/gameds/algos/Dijkstra.hx" module="vantreeseba.gameds.algos.Dijkstra">
-		<a>
-			<node><c path="vantreeseba.gameds.GraphNode">
-	<c path="vantreeseba.gameds.algos.NodeDist.T"/>
-	<c path="vantreeseba.gameds.algos.NodeDist.U"/>
-</c></node>
-			<dist><x path="Float"/></dist>
-		</a>
-		<meta><m n=":nativeGen"/></meta>
-	</typedef>
-	<class path="vantreeseba.gameds.algos.Dijkstra" params="T:U" file="src/vantreeseba/gameds/algos/Dijkstra.hx">
-		<dist public="1"><t path="Map">
-	<c path="vantreeseba.gameds.GraphNode">
-		<c path="vantreeseba.gameds.algos.Dijkstra.T"/>
-		<c path="vantreeseba.gameds.algos.Dijkstra.U"/>
-	</c>
-	<x path="Float"/>
-</t></dist>
-		<prev public="1"><t path="Map">
-	<c path="vantreeseba.gameds.GraphNode">
-		<c path="vantreeseba.gameds.algos.Dijkstra.T"/>
-		<c path="vantreeseba.gameds.algos.Dijkstra.U"/>
-	</c>
-	<c path="String"/>
-</t></prev>
-		<queue><c path="vantreeseba.gameds.Heap"><t path="vantreeseba.gameds.algos.NodeDist">
-	<c path="vantreeseba.gameds.algos.Dijkstra.T"/>
-	<c path="vantreeseba.gameds.algos.Dijkstra.U"/>
-</t></c></queue>
-		<distCalc><f a="a:b">
-	<c path="vantreeseba.gameds.GraphNode">
-		<c path="vantreeseba.gameds.algos.Dijkstra.T"/>
-		<c path="vantreeseba.gameds.algos.Dijkstra.U"/>
-	</c>
-	<c path="vantreeseba.gameds.GraphNode">
-		<c path="vantreeseba.gameds.algos.Dijkstra.T"/>
-		<c path="vantreeseba.gameds.algos.Dijkstra.U"/>
-	</c>
-	<x path="Float"/>
-</f></distCalc>
-		<run public="1" set="method" line="37">
-			<f a="graph:node">
-				<c path="vantreeseba.gameds.Graph">
-					<c path="vantreeseba.gameds.algos.Dijkstra.T"/>
-					<c path="vantreeseba.gameds.algos.Dijkstra.U"/>
-				</c>
-				<c path="vantreeseba.gameds.GraphNode">
-					<c path="vantreeseba.gameds.algos.Dijkstra.T"/>
-					<c path="vantreeseba.gameds.algos.Dijkstra.U"/>
-				</c>
-				<x path="Void"/>
-			</f>
-			<haxe_doc>* Runs a dijkstra search over the whole graph.
-	 *
-	 * @param graph The graph to search over.
-	 * @param node The node to create subgraph with dist to.</haxe_doc>
-		</run>
-		<new public="1" set="method" line="23"><f a="?distCalc">
-	<f a="a:b">
-		<c path="vantreeseba.gameds.GraphNode">
-			<c path="vantreeseba.gameds.algos.Dijkstra.T"/>
-			<c path="vantreeseba.gameds.algos.Dijkstra.U"/>
-		</c>
-		<c path="vantreeseba.gameds.GraphNode">
-			<c path="vantreeseba.gameds.algos.Dijkstra.T"/>
-			<c path="vantreeseba.gameds.algos.Dijkstra.U"/>
-		</c>
-		<x path="Float"/>
-	</f>
-	<x path="Void"/>
-</f></new>
-		<haxe_doc>* This class is an implementation of dijkstra search over a graph.
- * @see https://en.wikipedia.org/wiki/Dijkstra's_algorithm#Using_a_priority_queue</haxe_doc>
-		<meta><m n=":nativeGen"/></meta>
-	</class>
-	<class path="vantreeseba.gameds.algos.InOrderTraversal" params="" file="src/vantreeseba/gameds/algos/InOrderTraversal.hx">
-		<visited public="1"><c path="Array"><c path="String"/></c></visited>
-		<run public="1" set="method" line="11"><f a="node">
-	<c path="vantreeseba.gameds.BSPNode"/>
-	<c path="Array"><c path="String"/></c>
-</f></run>
-		<new public="1" set="method" line="7"><f a=""><x path="Void"/></f></new>
-		<meta><m n=":nativeGen"/></meta>
-	</class>
-	<class path="vantreeseba.gameds.algos.PostOrderTraversal" params="" file="src/vantreeseba/gameds/algos/PostOrderTraversal.hx">
-		<visited public="1"><c path="Array"><c path="String"/></c></visited>
-		<run public="1" set="method" line="11"><f a="node">
-	<c path="vantreeseba.gameds.BSPNode"/>
-	<c path="Array"><c path="String"/></c>
-</f></run>
-		<new public="1" set="method" line="7"><f a=""><x path="Void"/></f></new>
-		<meta><m n=":nativeGen"/></meta>
-	</class>
-	<class path="vantreeseba.gameds.algos.PreOrderTraversal" params="" file="src/vantreeseba/gameds/algos/PreOrderTraversal.hx">
-		<visited public="1"><c path="Array"><c path="String"/></c></visited>
-		<run public="1" set="method" line="11"><f a="node">
-	<c path="vantreeseba.gameds.BSPNode"/>
-	<c path="Array"><c path="String"/></c>
-</f></run>
-		<new public="1" set="method" line="7"><f a=""><x path="Void"/></f></new>
-		<meta><m n=":nativeGen"/></meta>
 	</class>
 </haxe>

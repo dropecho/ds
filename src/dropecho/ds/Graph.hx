@@ -25,7 +25,7 @@ class Graph<T, U> {
 	 * Add an existing node to this graph.
 	 * This will set the internal graph property on the node to this.
 	 *
-	 * @param {GraphNode} node - The Node to add.
+	 * @param {GraphNode<T,U>} node - The Node to add.
 	 * @return {GraphNode<T,U>} The added graph node.
 	 */
 	public function addNode(node:GraphNode<T, U>):GraphNode<T, U> {
@@ -39,7 +39,7 @@ class Graph<T, U> {
 	 *
 	 * @param {String} nodeId - The start node of the edge.
 	 * @param {String} otherId - The end node of the edge.
-	 * @param {Any} data - The data to assign to the edge.
+	 * @param {U} data - The data to assign to the edge.
 	 * @return {Void}
 	 */
 	public function addUniEdge(nodeId:String, otherId:String, ?data:U):Void {
@@ -55,7 +55,7 @@ class Graph<T, U> {
 	 *
 	 * @param {String} nodeId - One node of the edge.
 	 * @param {String} otherId - The other node of the edge.
-	 * @param {Any} data - The data to assign to the edge.
+	 * @param {U} data - The data to assign to the edge.
 	 * @return {Void}
 	 */
 	public function addBiEdge(nodeId:String, otherId:String, ?data:U):Void {
@@ -76,8 +76,8 @@ class Graph<T, U> {
 	/**
 	 * Get the neighbors of the node.
 	 *
-	 * @param {GraphNode} node - The node to get neighbors of.
-	 * @param {Graph~filterFunction} filter - A filter that sorts by either id or edge data.
+	 * @param {GraphNode<T,U>} node - The node to get neighbors of.
+	 * @param {Graph~filterFunction(string, U) -> Bool} filter - A filter that sorts by either id or edge data.
 	 * @return {Array<GraphNode<T, U>>} The list of neighbor nodes.
 	 */
 	public function neighbors(node:GraphNode<T, U>, ?filter:(String, U) -> Bool):Array<GraphNode<T, U>> {
@@ -124,11 +124,4 @@ class Graph<T, U> {
 
 		return null;
 	}
-
-	/**
-	 * This callback is displayed as part of the Requester class.
-	 * @callback Graph~filterFunction
-	 * @param {number} responseCode
-	 * @param {string} responseMessage
-	 */
 }
