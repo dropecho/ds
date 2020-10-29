@@ -21,7 +21,7 @@ jobs:
         with:
           haxe-version: ${{ matrix.haxe }}
       - run: haxe -version
-      - run: haxelib install test/test.hxml --always
+      - run: haxelib install test.hxml --always
       - name: Compile test code
         run: haxelib run munit t
   semantic_release:
