@@ -117,7 +117,7 @@ class Graph<T, U> {
 	 * @param {String} toId - The end node of the edge.
 	 * @return {Any} The edge data.
 	 */
-	public function edgeData(fromId:String, toId:String):U {
+	public function edgeData(fromId:String, toId:String):Null<U> {
 		if (edges.exists(fromId)) {
 			return edges.get(fromId).get(toId);
 		}

@@ -1,22 +1,15 @@
-package algos;
+package graph;
 
 import massive.munit.Assert;
 import dropecho.ds.*;
-import dropecho.ds.algos.*;
+import dropecho.ds.graph.Traversal;
 
-class DFSTest {
+class BFSTest {
 	var graph:Graph<Int, Int>;
-	var dfs:DFS;
 
 	@Before
 	public function setup() {
 		graph = new Graph();
-		dfs = new DFS();
-	}
-
-	@Test
-	public function canInstantiate() {
-		Assert.isNotNull(dfs);
 	}
 
 	@Test
@@ -58,21 +51,19 @@ class DFSTest {
 		graph.addBiEdge(node4.id, node6.id);
 		graph.addBiEdge(node6.id, node5.id);
 
-		dfs.run(node1);
+		var visited = Traversal.breadthFirst(node1);
 
-		Assert.isNotNull(dfs);
-
-		Assert.areEqual(node1.id, dfs.visited[0]);
-		Assert.areEqual(node2.id, dfs.visited[1]);
-		Assert.areEqual(node3.id, dfs.visited[2]);
-		Assert.areEqual(node5.id, dfs.visited[3]);
-		Assert.areEqual(node6.id, dfs.visited[4]);
-		Assert.areEqual(node4.id, dfs.visited[5]);
+		Assert.areEqual(node1.id, visited[0]);
+		Assert.areEqual(node2.id, visited[1]);
+		Assert.areEqual(node4.id, visited[2]);
+		Assert.areEqual(node3.id, visited[3]);
+		Assert.areEqual(node5.id, visited[4]);
+		Assert.areEqual(node6.id, visited[5]);
 	}
 
 	@Test function traversal() {
 		/*
-			GRAPH
+				GRAPH
 
 				  1
 			   / \
@@ -105,17 +96,15 @@ class DFSTest {
 		graph.addBiEdge(node1.id, node2.id);
 		graph.addBiEdge(node2.id, node5.id);
 		graph.addBiEdge(node2.id, node4.id);
-    graph.addBiEdge(node3.id, node6.id);
+		graph.addBiEdge(node3.id, node6.id);
 
-		dfs.run(node1);
+		var visited = Traversal.breadthFirst(node1);
 
-		Assert.isNotNull(dfs);
-
-		Assert.areEqual(node1.id, dfs.visited[0]);
-		Assert.areEqual(node2.id, dfs.visited[1]);
-		Assert.areEqual(node4.id, dfs.visited[2]);
-		Assert.areEqual(node5.id, dfs.visited[3]);
-		Assert.areEqual(node3.id, dfs.visited[4]);
-		Assert.areEqual(node6.id, dfs.visited[5]);
+		Assert.areEqual(node1.id, visited[0]);
+		Assert.areEqual(node2.id, visited[1]);
+		Assert.areEqual(node3.id, visited[2]);
+		Assert.areEqual(node4.id, visited[3]);
+		Assert.areEqual(node5.id, visited[4]);
+		Assert.areEqual(node6.id, visited[5]);
 	}
 }

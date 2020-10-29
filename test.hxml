@@ -1,32 +1,35 @@
 ## CSharp
 --next
--main TestMain
 -lib munit
 -lib hamcrest
--cp src
 
+-cp src
 -cp test
+
+-main TestMain
 -cs artifacts/cs_test
 
 ## Neko
 --next
--main TestMain
 -lib munit
 -lib hamcrest
--cp src
 
+-cp src
 -cp test
+
+-main TestMain
 -neko artifacts/neko_test.n
 
 ## JavaScript NodeJS
 --next
--main TestMain
 -lib munit
 -lib hamcrest
 -lib hxnodejs
--cp src
 
+-cp src
 -cp test
+
+-main TestMain
 -js artifacts/js_test.js
 
 # ## Flash 9+

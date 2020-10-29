@@ -3,14 +3,14 @@ import massive.munit.TestSuite;
 import bsp.BSPNodeTest;
 import bsp.BSPTreeTest;
 import heap.HeapTest;
-import algos.BFSTest;
 import algos.PostOrderTraversalTest;
-import algos.DFSTest;
 import algos.InOrderTraversalTest;
 import algos.PreOrderTraversalTest;
-import algos.DijkstraTest;
+import graph.BFSTest;
 import graph.GraphTest;
+import graph.DFSTest;
 import graph.GraphNodeTest;
+import graph.DijkstraTest;
 
 /**
  * Auto generated Test Suite for MassiveUnit.
@@ -25,13 +25,13 @@ class TestSuite extends massive.munit.TestSuite
 		add(bsp.BSPNodeTest);
 		add(bsp.BSPTreeTest);
 		add(heap.HeapTest);
-		add(algos.BFSTest);
 		add(algos.PostOrderTraversalTest);
-		add(algos.DFSTest);
 		add(algos.InOrderTraversalTest);
 		add(algos.PreOrderTraversalTest);
-		add(algos.DijkstraTest);
+		add(graph.BFSTest);
 		add(graph.GraphTest);
+		add(graph.DFSTest);
 		add(graph.GraphNodeTest);
+		add(graph.DijkstraTest);
 	}
 }
