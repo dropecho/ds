@@ -10,6 +10,7 @@ import graph.BFSTest;
 import graph.GraphTest;
 import graph.DFSTest;
 import graph.GraphNodeTest;
+import graph.GrammarTest;
 import graph.DijkstraTest;
 
 /**
@@ -32,6 +33,7 @@ class TestSuite extends massive.munit.TestSuite
 		add(graph.GraphTest);
 		add(graph.DFSTest);
 		add(graph.GraphNodeTest);
+		add(graph.GrammarTest);
 		add(graph.DijkstraTest);
 	}
 }

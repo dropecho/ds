@@ -1,25 +1,3 @@
-## CSharp
---next
--lib munit
--lib hamcrest
-
--cp src
--cp test
-
--main TestMain
--cs artifacts/cs_test
-
-## Neko
---next
--lib munit
--lib hamcrest
-
--cp src
--cp test
-
--main TestMain
--neko artifacts/neko_test.n
-
 ## JavaScript NodeJS
 --next
 -lib munit
@@ -31,6 +9,29 @@
 
 -main TestMain
 -js artifacts/js_test.js
+
+## CSharp
+--next
+-lib munit
+-lib hamcrest
+
+-cp src
+-cp test
+
+-main TestMain
+-cs artifacts/cs_test
+
+### Uncomment these to run them.
+## Neko
+# --next
+# -lib munit
+# -lib hamcrest
+#
+# -cp src
+# -cp test
+#
+# -main TestMain
+# -neko artifacts/neko_test.n
 
 # ## Flash 9+
 # -main TestMain

@@ -12,13 +12,30 @@ class GraphNode<T, U> {
 		this.value = value;
 	}
 
+	public function outNeighborIds(?filter:(String, U) -> Bool):Array<String> {
+		return graph.outNeighborIds(this, filter);
+	}
+
+	public function outNeighbors(?filter:(String, U) -> Bool):Array<GraphNode<T, U>> {
+		return graph.outNeighbors(this, filter);
+	}
+
+	public function inNeighbors():Array<GraphNode<T, U>> {
+		// TODO
+		return [];
+	}
+
+	public function inNeighborIds():Array<String> {
+		// TODO
+		return [];
+	}
+
 	public function neighborIds():Array<String> {
-		return graph.neighborIds(this);
+		return outNeighborIds().concat(inNeighborIds());
 	}
 
 	public function neighbors(?filter:(String, U) -> Bool):Array<GraphNode<T, U>> {
-		var n = graph.neighbors(this, filter);
-		return n;
+		return outNeighbors().concat(inNeighbors());
 	}
 
 	public function edgeData(toId:String):U {

@@ -42,7 +42,7 @@ class GraphTest {
 		graph.addUniEdge(node1.id, node2.id, 12);
 
 		Assert.isTrue(graph.edges.exists(node1.id));
-		Assert.areEqual(node2, graph.neighbors(node1)[0]);
+		Assert.areEqual(node2, graph.outNeighbors(node1)[0]);
 		Assert.isFalse(graph.edges.exists(node2.id));
 		Assert.areEqual(12, graph.edges.get(node1.id).get(node2.id));
 	}
@@ -55,11 +55,11 @@ class GraphTest {
 		graph.addBiEdge(node1.id, node2.id, 12);
 
 		Assert.isTrue(graph.edges.exists(node1.id));
-		Assert.areEqual(node2, graph.neighbors(node1)[0]);
+		Assert.areEqual(node2, graph.outNeighbors(node1)[0]);
 		Assert.areEqual(12, graph.edges.get(node1.id).get(node2.id));
 
 		Assert.isTrue(graph.edges.exists(node2.id));
-		Assert.areEqual(node1, graph.neighbors(node2)[0]);
+		Assert.areEqual(node1, graph.outNeighbors(node2)[0]);
 		Assert.areEqual(12, graph.edges.get(node2.id).get(node1.id));
 	}
 
@@ -72,7 +72,7 @@ class GraphTest {
 	}
 
 	@Test
-	public function neighbors() {
+	public function outNeighbors() {
 		var node1 = graph.createNode(4);
 		var node2 = graph.createNode(5);
 		var node3 = graph.createNode(5);
@@ -80,14 +80,14 @@ class GraphTest {
 		graph.addUniEdge(node1.id, node2.id, 12);
 		graph.addUniEdge(node1.id, node3.id, 14);
 
-		var neighbors = graph.neighbors(node1);
+		var outNeighbors = graph.outNeighbors(node1);
 
-		Assert.areNotEqual(-1, neighbors.indexOf(node2));
-		Assert.areNotEqual(-1, neighbors.indexOf(node3));
+		Assert.areNotEqual(-1, outNeighbors.indexOf(node2));
+		Assert.areNotEqual(-1, outNeighbors.indexOf(node3));
 	}
 
 	@Test
-	public function neighborIds() {
+	public function outNeighborIds() {
 		var node1 = graph.createNode(4);
 		var node2 = graph.createNode(5);
 		var node3 = graph.createNode(6);
@@ -95,19 +95,19 @@ class GraphTest {
 		graph.addUniEdge(node1.id, node2.id, 12);
 		graph.addUniEdge(node1.id, node3.id, 14);
 
-		var neighborIds = graph.neighborIds(node1);
+		var outNeighborIds = graph.outNeighborIds(node1);
 
-		Assert.areNotEqual(-1, neighborIds.indexOf(node2.id));
-		Assert.areNotEqual(-1, neighborIds.indexOf(node3.id));
+		Assert.areNotEqual(-1, outNeighborIds.indexOf(node2.id));
+		Assert.areNotEqual(-1, outNeighborIds.indexOf(node3.id));
 	}
 
 	@Test
-	public function neighborIds_when_empty() {
+	public function outNeighborIds_when_empty() {
 		var node1 = graph.createNode(4);
 
-		var neighborIds = graph.neighborIds(node1);
+		var outNeighborIds = graph.outNeighborIds(node1);
 
-		Assert.areEqual(0, neighborIds.length);
+		Assert.areEqual(0, outNeighborIds.length);
 	}
 
 	@Test

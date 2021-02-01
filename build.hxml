@@ -9,3 +9,7 @@ targets/js.hxml
 --next
 targets/cs.hxml
 
+## BUILD DOCS
+--next
+-D doc-gen
+-xml artifacts/docs.xml

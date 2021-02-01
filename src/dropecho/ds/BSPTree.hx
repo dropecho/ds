@@ -13,11 +13,11 @@ class BSPTree extends Graph<Dynamic, Dynamic> {
 	}
 
 	public function getParent(node:BSPNode) {
-		return neighbors(node, (id, data) -> data == "parent")[0];
+		return outNeighbors(node, (id, data) -> data == "parent")[0];
 	}
 
 	public function getChildren(node:BSPNode) {
-		return neighbors(node, (id, data) -> data == "left" || data == "right");
+		return outNeighbors(node, (id, data) -> data == "left" || data == "right");
 	}
 
 	public function getRoot() {
