@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/dropecho/ds/compare/v1.0.0...1.1.0) (2020-10-29)
+
+
+### Features
+
+* Change traversals and search to static funcs. ([88bfd0e](https://github.com/dropecho/ds/commit/88bfd0ebf3790635448249b58455f1b02f40143d))
+
 ## <small>0.3.1 (2020-04-25)</small>
 
 * Fix issue with traversal ([a328f97](https://github.com/dropecho/ds/commit/a328f97))
@@ -31,6 +38,3 @@
 * version ([bd3a8ac](https://github.com/dropecho/ds/commit/bd3a8ac))
 * version ([398b8f8](https://github.com/dropecho/ds/commit/398b8f8))
 * Working on lots of algos + dijkstra ([7839930](https://github.com/dropecho/ds/commit/7839930))
-
-
-
