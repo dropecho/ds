@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/dropecho/ds/compare/1.1.0...1.2.0) (2021-02-01)
+
+
+### Features
+
+* cleanup, add in/out neighbors to graph, start on grammar based transforms. ([0285f20](https://github.com/dropecho/ds/commit/0285f200952278c05568a351790f6c366e7c149b))
+
 # [1.1.0](https://github.com/dropecho/ds/compare/v1.0.0...1.1.0) (2020-10-29)
 
 
