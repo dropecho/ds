@@ -26,7 +26,7 @@ class BSPNodeTest {
 
 		Assert.areEqual(2, left.value);
 		Assert.areEqual(left, node.left);
-		Assert.isTrue(node.neighbors().indexOf(left) != -1);
+		Assert.isTrue(node.graph.neighbors(node).indexOf(left) != -1);
 	}
 
 	@Test
@@ -35,7 +35,7 @@ class BSPNodeTest {
 
 		Assert.areEqual(2, right.value);
 		Assert.areEqual(right, node.right);
-		Assert.isTrue(node.neighbors().indexOf(right) != -1);
+		Assert.isTrue(node.graph.neighbors(node).indexOf(right) != -1);
 	}
 
 	@Test
@@ -44,7 +44,7 @@ class BSPNodeTest {
 
 		Assert.areEqual(2, left.value);
 		Assert.areEqual(left, node.left);
-		Assert.isTrue(node.neighbors().indexOf(left) != -1);
+		Assert.isTrue(node.graph.neighbors(node).indexOf(left) != -1);
 	}
 
 	@Test
@@ -53,7 +53,7 @@ class BSPNodeTest {
 
 		Assert.areEqual(2, right.value);
 		Assert.areEqual(right, node.right);
-		Assert.isTrue(node.neighbors().indexOf(right) != -1);
+		Assert.isTrue(node.graph.neighbors(node).indexOf(right) != -1);
 	}
 
 	@Test

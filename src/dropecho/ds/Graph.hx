@@ -2,6 +2,11 @@ package dropecho.ds;
 
 import haxe.ds.StringMap;
 
+/**
+ * A graph data structure. 
+ * @param T - The node data type (stored within nodes).
+ * @param U - The edge data type (stored within edges).
+ */
 @:nativeGen
 @:expose("Graph")
 class Graph<T, U> {
@@ -61,11 +66,14 @@ class Graph<T, U> {
 	}
 
 	/**
-	 * Removes the node and its edges from the graph.
-	 * @param id - The id of the node to remove. 
+	 * Removes a node (and it's edges) from the graph.
+	 *
+	 * @param id - [TODO:description]
 	 */
 	public function remove(id:String):Void {
-		// TODO: Remove inNeighborLinks to node.
+		for (n in inNeighborIds(nodes.get(id))) {
+			edges.get(n).remove(id);
+		}
 		edges.remove(id);
 		nodes.remove(id);
 	}
@@ -128,6 +136,26 @@ class Graph<T, U> {
 
 		haxe.ds.ArraySort.sort(ids, Reflect.compare);
 		return ids;
+	}
+
+	/**
+	 * Get the in and out neighbor ids of the node.
+	 * @param node - The node to get neighbors of.
+	 * @param filter - A filter that sorts by either id or edge data.
+	 * @return The list of neighbor node ids.
+	 */
+	public function neighborIds(node:GraphNode<T, U>, ?filter:(String, U) -> Bool):Array<String> {
+		return outNeighborIds(node, filter).concat(inNeighborIds(node, filter));
+	}
+
+	/**
+	 * Get the in and out neighbor nodes of the node.
+	 * @param node - The node to get neighbors of.
+	 * @param filter - A filter that sorts by either id or edge data.
+	 * @return The list of neighbor nodes.
+	 */
+	public function neighbors(node:GraphNode<T, U>, ?filter:(String, U) -> Bool):Array<GraphNode<T, U>> {
+		return outNeighbors(node, filter).concat(inNeighbors(node, filter));
 	}
 
 	/**

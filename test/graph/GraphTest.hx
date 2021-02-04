@@ -65,10 +65,22 @@ class GraphTest {
 
 	@Test
 	public function remove() {
-		var node1 = graph.createNode(4);
+		var node1 = graph.createNode(0);
+		var node2 = graph.createNode(0);
+		var node3 = graph.createNode(0);
+		var node4 = graph.createNode(0);
+
+		graph.addUniEdge(node1.id, node2.id);
+		graph.addUniEdge(node3.id, node1.id);
+		graph.addBiEdge(node4.id, node1.id);
+
 		graph.remove(node1.id);
 
 		Assert.isFalse(graph.nodes.exists(node1.id));
+		Assert.isFalse(graph.edges.exists(node1.id));
+		Assert.isFalse(graph.neighbors(node2).contains(node1));
+		Assert.isFalse(graph.neighbors(node3).contains(node1));
+		Assert.isFalse(graph.neighbors(node4).contains(node1));
 	}
 
 	@Test

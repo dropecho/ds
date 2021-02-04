@@ -19,6 +19,7 @@ class Traversal {
 				Q.enqueue(w)
 	 */
 	public static function breadthFirst<T, U>(node:GraphNode<T, U>) {
+		var graph = node.graph;
 		var visited = new Array<String>();
 		var toVisit = new Array<GraphNode<T, U>>();
 
@@ -28,7 +29,7 @@ class Traversal {
 			var next = toVisit.shift();
 			if (visited.indexOf(next.id) == -1) {
 				visited.push(next.id);
-				for (n in next.neighbors()) {
+				for (n in graph.neighbors(next)) {
 					toVisit.push(n);
 				}
 			}
@@ -39,12 +40,13 @@ class Traversal {
 
 	/*
 		procedure DFS(G, v) is
-      label v as discovered
-      for all directed edges from v to w that are in G.adjacentEdges(v) do
-        if vertex w is not labeled as discovered then
-        recursively call DFS(G, w)
+			  label v as discovered
+			  for all directed edges from v to w that are in G.adjacentEdges(v) do
+		if vertex w is not labeled as discovered then
+		recursively call DFS(G, w)
 	 */
 	public static function depthFirst<T, U>(node:GraphNode<T, U>) {
+		var graph = node.graph;
 		var visited = new Array<String>();
 
 		if (visited.indexOf(node.id) == -1) {
@@ -52,7 +54,7 @@ class Traversal {
 		} else {
 			return null;
 		}
-		for (n in node.neighbors()) {
+		for (n in graph.neighbors(node)) {
 			depthFirst(n);
 		}
 

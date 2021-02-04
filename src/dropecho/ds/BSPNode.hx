@@ -14,8 +14,8 @@ class BSPNode extends GraphNode<Dynamic, Dynamic> {
   /**
    * Create a left child node with the given value.
    *
-   * @param {Dynamic} value - The value to assign to the node.
-   * @return {BSPNode} The created node.
+   * @param value - The value to assign to the node.
+   * @return The created node.
    */
 	public function createLeft(?value:Dynamic):BSPNode {
 		return this.setLeft(new BSPNode(value));
@@ -24,8 +24,8 @@ class BSPNode extends GraphNode<Dynamic, Dynamic> {
   /**
    * Create a right child node with the given value.
    *
-   * @param {Dynamic} value - The value to assign to the created node.
-   * @return {BSPNode} The created node.
+   * @param value - The value to assign to the created node.
+   * @return The created node.
    */
 	public function createRight(?value:Dynamic):BSPNode {
 		return this.setRight(new BSPNode(value));
@@ -34,8 +34,8 @@ class BSPNode extends GraphNode<Dynamic, Dynamic> {
   /**
    * Sets the left child of this node.
    *
-   * @param {BSPNode} node - The node to set as left child.
-   * @return {BSPNode} this node.
+   * @param node - The node to set as left child.
+   * @return this node.
    */
 	public function setLeft(node:BSPNode):BSPNode {
 		this.left = node;
@@ -50,8 +50,8 @@ class BSPNode extends GraphNode<Dynamic, Dynamic> {
   /**
    * Sets the right child of this node.
    *
-   * @param {BSPNode} node - The node to set as the right child.
-   * @return {BSPNode} This node.
+   * @param node - The node to set as the right child.
+   * @return This node.
    */
 	public function setRight(node:BSPNode):BSPNode {
 		this.right = node;
@@ -64,32 +64,28 @@ class BSPNode extends GraphNode<Dynamic, Dynamic> {
 	}
 
   /**
-   * Returns true if this node has no children.
-   * @return {Bool} 
+   * @return true if this node has no children.
    */
   public function isLeaf():Bool {
 		return this.right == null && this.left == null;
 	}
 
   /**
-   * Returns true if this node has no parent. 
-   * @return {Bool}
+   * @return true if this node has no parent.
    */
 	public function isRoot():Bool {
 		return this.parent == null;
 	}
 
   /**
-   * Returns true if this node has a left child.
-   * @return {Bool} 
+   * @return true if this node has a left child.
    */
 	public function hasLeft():Bool {
 		return this.left != null;
 	}
 
   /**
-   * Returns true if this node has a right child.
-   * @return {Bool} 
+   * @return true if this node has a right child.
    */
 	public function hasRight():Bool {
 		return this.right != null;
