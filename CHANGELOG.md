@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/dropecho/ds/compare/1.2.0...1.3.0) (2021-02-04)
+
+
+### Features
+
+* More cleanup, remove dist from git. ([3103909](https://github.com/dropecho/ds/commit/310390988d1a779690a3a6696fde286267959489))
+
 # [1.2.0](https://github.com/dropecho/ds/compare/1.1.0...1.2.0) (2021-02-01)
 
 
