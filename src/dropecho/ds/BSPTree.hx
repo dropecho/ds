@@ -2,20 +2,19 @@ package dropecho.ds;
 
 @:nativeGen
 @:expose("BSPTree")
-class BSPTree extends Graph<Dynamic, Dynamic> {
-	public var root:BSPNode;
+class BSPTree<T> extends Graph<T, String> {
+	public var root:BSPNode<T>;
 
 	/**
 	 * @param rootValue - The value to create the root node with. 
 	 */
-	public function new(?rootValue:Dynamic) {
+	public function new(?rootValue:T) {
 		super();
-		root = new BSPNode();
-		root.value = rootValue;
+		root = new BSPNode(rootValue);
 		this.addNode(root);
 	}
 
-	public function getParent(node):BSPNode {
+	public function getParent(node):BSPNode<T> {
 		return cast(outNeighbors(node, (id, data) -> data == "parent")[0]);
 	}
 
@@ -23,7 +22,7 @@ class BSPTree extends Graph<Dynamic, Dynamic> {
 	 * Get the direct children of a given node.
 	 * @param node - The node to get the children of.
 	 */
-	public function getChildren(node:BSPNode):Array<BSPNode> {
+	public function getChildren(node:BSPNode<T>):Array<BSPNode<T>> {
 		return cast(outNeighbors(node, (id, data) -> data == "left" || data == "right"));
 	}
 

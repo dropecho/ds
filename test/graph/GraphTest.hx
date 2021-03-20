@@ -124,9 +124,9 @@ class GraphTest {
 
 	@Test
 	public function edgeData() {
-		var node1 = graph.createNode(4);
-		var node2 = graph.createNode(5);
-		var node3 = graph.createNode(6);
+		var node1 = graph.createNode(4, "edge_data_test_node_1");
+		var node2 = graph.createNode(5, "edge_data_test_node_2");
+		var node3 = graph.createNode(6, "edge_data_test_node_3");
 
 		graph.addUniEdge(node1.id, node2.id, 12);
 		graph.addUniEdge(node1.id, node3.id, 14);

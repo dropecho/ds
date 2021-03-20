@@ -5,12 +5,12 @@ import dropecho.ds.*;
 import dropecho.ds.algos.*;
 
 class PreOrderTraversalTest {
-	var tree:BSPTree;
+	var tree:BSPTree<Int>;
 	var trav:PreOrderTraversal;
 
 	@Before
 	public function setup() {
-		tree = new BSPTree();
+		tree = new BSPTree<Int>();
 		trav = new PreOrderTraversal();
 	}
 
@@ -21,21 +21,22 @@ class PreOrderTraversalTest {
 
 	@Test
 	public function run() {
-		/*
+		/************************
 			GRAPH
 
-				  1
-			   / \
-			  2   3
+					1
+				 / \
+				2   3
 			 / \
 			4   5
 		 */
 
 		var node1 = tree.getRoot();
-    var node2 = node1.createLeft(2);
-    var node3 = node1.createRight(3);
-    var node4 = node2.createLeft(4);
-    var node5 = node2.createRight(5);
+
+		var node2 = node1.createLeft(2);
+		var node3 = node1.createRight(3);
+		var node4 = node2.createLeft(4);
+		var node5 = node2.createRight(5);
 
 		var visited = trav.run(node1);
 

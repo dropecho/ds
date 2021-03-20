@@ -1,7 +1,8 @@
 package graph;
 
 import massive.munit.Assert;
-import dropecho.ds.*;
+import dropecho.ds.Graph;
+import dropecho.ds.GraphNode;
 import dropecho.ds.graph.*;
 
 class DijkstraTest {
@@ -14,32 +15,24 @@ class DijkstraTest {
 
 	@Test
 	public function run() {
-		/*
-		 *     1
-		 *    / \
-		 *   2   4
-		 *  / \   \
-		 * 3   5 - 6
-		 */
-		var node1 = new GraphNode(1);
-		node1.id = '1';
-		var node2 = new GraphNode(1);
-		node2.id = '2';
-		var node3 = new GraphNode(1);
-		node3.id = '3';
-		var node4 = new GraphNode(1);
-		node4.id = '4';
-		var node5 = new GraphNode(1);
-		node5.id = '5';
-		var node6 = new GraphNode(1);
-		node6.id = '6';
+		/******************
+				GRAPH
 
-		graph.addNode(node1);
-		graph.addNode(node2);
-		graph.addNode(node3);
-		graph.addNode(node4);
-		graph.addNode(node5);
-		graph.addNode(node6);
+				  1
+				 / \
+				2   4
+			 / \   \
+			3   5 - 6
+
+		******************/
+
+		var node1 = graph.createNode(1);
+
+		var node2 = graph.createNode(1);
+		var node3 = graph.createNode(1);
+		var node4 = graph.createNode(1);
+		var node5 = graph.createNode(1);
+		var node6 = graph.createNode(1);
 
 		graph.addBiEdge(node1.id, node4.id);
 		graph.addBiEdge(node1.id, node2.id);
@@ -48,10 +41,10 @@ class DijkstraTest {
 		graph.addBiEdge(node4.id, node6.id);
 		graph.addBiEdge(node6.id, node5.id);
 
-		var results = Search.dijkstra(node1.graph, node1);
+		var results = Search.dijkstra(node1);
 		var path = results.path;
 
-		Assert.isTrue(null == path[node1]);
+		Assert.isFalse(path.exists(node1));
 		Assert.areEqual(node1.id, path[node4]);
 		Assert.areEqual(node1.id, path[node2]);
 		Assert.areEqual(node4.id, path[node6]);
@@ -68,14 +61,14 @@ class DijkstraTest {
 		 *	  | | |
 		 *	  7-8-9
 		 */
-		var node1 = graph.addNode(new GraphNode(1, "1"));
-		var node2 = graph.addNode(new GraphNode(2, "2"));
-		var node3 = graph.addNode(new GraphNode(3, "3"));
-		var node4 = graph.addNode(new GraphNode(4, "4"));
-		var node5 = graph.addNode(new GraphNode(5, "5"));
-		var node6 = graph.addNode(new GraphNode(6, "6"));
-		var node7 = graph.addNode(new GraphNode(7, "7"));
-		var node8 = graph.addNode(new GraphNode(8, "8"));
+		var node1 = graph.createNode(1);
+		var node2 = graph.createNode(1);
+		var node3 = graph.createNode(1);
+		var node4 = graph.createNode(1);
+		var node5 = graph.createNode(1);
+		var node6 = graph.createNode(1);
+		var node7 = graph.createNode(1);
+		var node8 = graph.createNode(1);
 
 		graph.addBiEdge(node1.id, node2.id);
 		graph.addBiEdge(node1.id, node4.id);
@@ -105,7 +98,7 @@ class DijkstraTest {
 		graph.addBiEdge(node8.id, node7.id);
 		graph.addBiEdge(node8.id, node5.id);
 
-		var results = Search.dijkstra(node1.graph, node1);
+		var results = Search.dijkstra(node1);
 		var dist = results.distances;
 
 		Assert.areEqual(0, dist[node1]);

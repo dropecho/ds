@@ -1,39 +1,52 @@
 package dropecho.ds.graph;
 
+import dropecho.interop.AbstractMap;
+
 using Lambda;
 
-@:nativeGen
-typedef NodeDist<T, U> = {
-	var node:GraphNode<T, U>;
-	var dist:Float;
-};
+@:struct
+class NodeDist<T, U> {
+	public var node:GraphNode<T, U>;
+	public var dist:Float;
 
-typedef SearchResult<T, U> = {
-	var path:Map<GraphNode<T, U>, String>;
-	var distances:Map<GraphNode<T, U>, Float>;
+	public function new(node, dist) {
+		this.node = node;
+		this.dist = dist;
+	}
 }
 
-@:nativeGen
+@:struct
+class SearchResult<T, U> {
+	public var path:AbstractMap<GraphNode<T, U>, String>;
+	public var distances:AbstractMap<GraphNode<T, U>, Float>;
+
+	public function new(path, distances) {
+		this.path = path;
+		this.distances = distances;
+	}
+}
+
 @:expose("graph.Search")
 class Search {
 	/**
 	 * An implementation of dijkstra search over a graph.
 	 * @see https://en.wikipedia.org/wiki/Dijkstra's_algorithm
 	 *
-	 * @param graph - The graph to search over.
 	 * @param node - The graph node to start the search at.
+	 * @param [distCalc] - A distance calculation function. (optional)
 	 * @return An object with the path and distances to every node.
 	 */
-	public static function dijkstra<T, U>(graph:Graph<T, U>, node:GraphNode<T, U>,
-			?distCalc:(a:GraphNode<T, U>, b:GraphNode<T, U>) -> Float):SearchResult<T, U> {
+	public static function dijkstra<T, U>(node:GraphNode<T, U>, ?distCalc:(a:GraphNode<T, U>, b:GraphNode<T, U>) -> Float):SearchResult<T, U> {
 		var compare = (a, b) -> (Reflect.compare(a.dist, b.dist) < 0);
 		var queue = new Heap<NodeDist<T, U>>(compare);
-		var dist = new Map<GraphNode<T, U>, Float>();
-		var prev = new Map<GraphNode<T, U>, String>();
+		var dist = new AbstractMap<GraphNode<T, U>, Float>();
+		var prev = new AbstractMap<GraphNode<T, U>, String>();
+
+		var graph = node.graph;
 
 		distCalc = distCalc != null ? distCalc : (a, b) -> 1;
 
-		dist[node] = 0;
+		dist[node] = 0.0;
 
 		// Setup all nodes to start at distance of infinity.
 		// Set their "previous in path back to source" to null.
@@ -44,7 +57,8 @@ class Search {
 			}
 
 			// Add source to processing queue with distance;
-			queue.push({node: n, dist: dist[n]});
+			// queue.push({node: n, dist: dist[n]});
+			queue.push(new NodeDist(n, dist[n]));
 		}
 
 		while (queue.size() > 0) {
@@ -61,13 +75,15 @@ class Search {
 					prev[neighbor] = minDistNode.id;
 
 					var existing = queue.elements.find(x -> x.node == neighbor);
-					queue.set_value_obj(existing, {node: neighbor, dist: dist[neighbor]});
+					// queue.set_value_obj(existing, {node: neighbor, dist: dist[neighbor]});
+					queue.set_value_obj(existing, new NodeDist(neighbor, dist[neighbor]));
 				}
 			}
 		}
-		return {
-			distances: dist,
-			path: prev
-		};
+		return new SearchResult(prev, dist);
+		// return {
+		//   distances: dist,
+		//   path: prev
+		// };
 	}
 }

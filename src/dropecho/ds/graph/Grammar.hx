@@ -1,6 +1,5 @@
 package dropecho.ds.graph;
 
-@:nativeGen
 @:expose("graph.grammar")
 class Grammar {
 	// public static function Rewrite(node:GraphNode<T, U>) {}

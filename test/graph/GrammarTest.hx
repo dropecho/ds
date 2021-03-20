@@ -38,9 +38,7 @@ class GrammarTest {
 
 		// Grammar.replace(node, new GraphNode());
 
-		trace(graph);
-
 		// Assert.areEqual(4, node.value);
 		// Assert.isTrue(graph.nodes.exists(node.id));
-	} 
+	}
 }

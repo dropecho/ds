@@ -1,21 +1,25 @@
 package dropecho.ds;
 
-import haxe.ds.StringMap;
+import dropecho.interop.AbstractMap;
 
 /**
- * A graph data structure. 
+ * A graph data structure.
+ *
+ * Depending on methods used, can represent both a directed and non-directed graph.
  * @param T - The node data type (stored within nodes).
  * @param U - The edge data type (stored within edges).
  */
 @:nativeGen
 @:expose("Graph")
 class Graph<T, U> {
-	public var nodes:StringMap<GraphNode<T, U>>;
-	public var edges:StringMap<StringMap<U>>;
+	/** The nodes or vertices of the graph. */
+	public var nodes:AbstractMap<String, GraphNode<T, U>>;
+	/** The edges of the graph. */
+	public var edges:AbstractMap<String, AbstractMap<String, U>>;
 
 	public function new() {
-		nodes = new StringMap<GraphNode<T, U>>();
-		edges = new StringMap<StringMap<U>>();
+		nodes = new AbstractMap<String, GraphNode<T, U>>();
+		edges = new AbstractMap<String, AbstractMap<String, U>>();
 	}
 
 	/**
@@ -23,8 +27,8 @@ class Graph<T, U> {
 	 * @param value - The value to assign to the new node.
 	 * @return The new node.
 	 */
-	public function createNode(value:T):GraphNode<T, U> {
-		return addNode(new GraphNode<T, U>(value));
+	public function createNode(value:T, ?id:String):GraphNode<T, U> {
+		return addNode(new GraphNode<T, U>(value, id));
 	}
 
 	/**
@@ -46,12 +50,12 @@ class Graph<T, U> {
 	 * @param otherId - The end node of the edge.
 	 * @param data - The data to assign to the edge.
 	 */
-	public function addUniEdge(nodeId:String, otherId:String, ?data:U):Void {
-		if (edges.exists(nodeId)) {
-			edges.get(nodeId).set(otherId, data);
-		} else {
-			edges.set(nodeId, [otherId => data]);
+	public function addUniEdge(fromId:String, toId:String, ?data:U):Void {
+		if (!edges.exists(fromId)) {
+			edges.set(fromId, new AbstractMap<String, U>());
 		}
+
+		edges.get(fromId).set(toId, data);
 	}
 
 	/**
@@ -68,7 +72,7 @@ class Graph<T, U> {
 	/**
 	 * Removes a node (and it's edges) from the graph.
 	 *
-	 * @param id - [TODO:description]
+	 * @param id - The id of the node to remove from the graph. 
 	 */
 	public function remove(id:String):Void {
 		for (n in inNeighborIds(nodes.get(id))) {
@@ -166,12 +170,18 @@ class Graph<T, U> {
 	 */
 	public function edgeData(fromId:String, toId:String):Null<U> {
 		if (edges.exists(fromId)) {
-			return edges.get(fromId).get(toId);
+			var edgefrom = edges.get(fromId);
+			if (edgefrom.exists(toId)) {
+				return edgefrom.get(toId);
+			}
 		}
 
 		return null;
 	}
 
+	/**
+	 * Outputs the graph as a string, represented by an adjacency list.
+	 */
 	public function toString() {
 		var adjList = "\nGraph:\n";
 		adjList += "out-Neighbors:\n";

@@ -9,7 +9,7 @@ class PreOrderTraversal {
 		visited = new Array<String>();
 	}
 
-	public function run(node:BSPNode, ?visitor:BSPNode->Bool) {
+	public function run<T>(node:BSPNode<T>, ?visitor:BSPNode<T>->Bool) {
 		if (visitor != null) {
 			if (visitor(node)) {
 				visited.push(node.id);

@@ -9,7 +9,7 @@ class InOrderTraversal {
 		visited = new Array<String>();
 	}
 
-	public function run(node:BSPNode, ?visitor:BSPNode->Bool) {
+	public function run<T>(node:BSPNode<T>, ?visitor:BSPNode<T>->Bool) {
 		if (node.left != null) {
 			run(node.left, visitor);
 		}

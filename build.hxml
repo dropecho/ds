@@ -1,7 +1,11 @@
 -cp src
 --macro include('', true, null, ['src'])
 -D analyzer-optimize
--D dce=full
+## -D dce=full
+
+-D dce=no
+
+-lib dropecho.interop
 
 --each
 
