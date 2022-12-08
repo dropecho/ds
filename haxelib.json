@@ -2,7 +2,9 @@
   "name": "dropecho.ds",
   "description": "A set of data structures for games.",
   "classPath": "src/",
-  "dependencies": {},
+  "dependencies": {
+    "dropecho.interop":""
+  },
   "url": "https://github.com/dropecho/ds",
   "contributors": [
     "vantreeseba"

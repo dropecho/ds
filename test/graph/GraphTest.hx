@@ -148,4 +148,16 @@ class GraphTest {
 
 		Assert.areEqual(nul, node1_to_node2_data);
 	}
+
+	@Test
+	public function dotOutput() {
+		var expected = "digraph {\n\ta\n\tb\n\ta -> b\n}";
+
+		var node1 = graph.createNode(4, "a");
+		var node2 = graph.createNode(5, "b");
+
+		graph.addUniEdge(node1.id, node2.id);
+
+		Assert.areEqual(expected, graph.toDot());
+	}
 }

@@ -14,6 +14,7 @@ import dropecho.interop.AbstractMap;
 class Graph<T, U> {
 	/** The nodes or vertices of the graph. */
 	public var nodes:AbstractMap<String, GraphNode<T, U>>;
+
 	/** The edges of the graph. */
 	public var edges:AbstractMap<String, AbstractMap<String, U>>;
 
@@ -99,13 +100,18 @@ class Graph<T, U> {
 	 * @return The list of in neighbor node ids.
 	 */
 	public function inNeighborIds(node:GraphNode<T, U>, ?filter:(String, U) -> Bool):Array<String> {
-		var ids = [
-			for (id => edge in edges) {
-				if (edge.exists(node.id) && (filter == null || filter(id, edge.get(node.id)))) {
-					id;
-				}
+		var ids = [];
+
+		// Get all edges as id, nodeEdges pairs
+		for (id => nodeEdges in edges) {
+			// If an edge exists from some other node to this node, add it to list.
+			if (nodeEdges.exists(node.id)) {
+				ids.push(id);
 			}
-		];
+		}
+
+		// TODO: Add back in filter.
+		// if (edges.exists(node.id) && (filter == null || filter(id, edge.get(node.id)))) {
 		return ids;
 	}
 
@@ -213,5 +219,26 @@ class Graph<T, U> {
 		}
 
 		return adjList;
+	}
+
+	/**
+	 * Outputs the graph as a string in graph-viz dot format.
+	 */
+	public function toDot() {
+		var dot = "digraph {\n";
+
+		for (node in nodes) {
+			dot += '\t${node.id}\n';
+		}
+
+		for (node in nodes) {
+			var neighbors = outNeighbors(node);
+			for (n in neighbors) {
+				dot += '\t${node.id} -> ${n.id}\n';
+			}
+		}
+
+		dot += "}";
+		return dot;
 	}
 }

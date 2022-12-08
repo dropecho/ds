@@ -1,19 +1,16 @@
 -cp src
 --macro include('', true, null, ['src'])
--D analyzer-optimize
-## -D dce=full
 
+-D analyzer-optimize
 -D dce=no
 
 -lib dropecho.interop
 
 --each
-
 targets/js.hxml
 --next
-targets/cs.hxml
-
-## BUILD DOCS
+targets/js-esm.hxml
 --next
--D doc-gen
--xml artifacts/docs.xml
+targets/cs.hxml
+# --next
+# targets/docs.hxml

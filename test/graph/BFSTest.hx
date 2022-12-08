@@ -26,6 +26,7 @@ class BFSTest {
 		*******************/
 
 		var node1 = new GraphNode(1);
+
 		node1.id = '1';
 		var node2 = new GraphNode(1);
 		node2.id = '2';
@@ -65,15 +66,15 @@ class BFSTest {
 	// @Test function traversal() {
 	//   [>******************
 	//       GRAPH
-  //
+	//
 	//         1
 	//        / \
 	//       2   3
 	//      / \   \
 	//     4   5   6
-  //
+	//
 	//   *******************/
-  //
+	//
 	//   var node1 = new GraphNode(1);
 	//   node1.id = '1';
 	//   var node2 = new GraphNode(1);
@@ -86,24 +87,24 @@ class BFSTest {
 	//   node5.id = '5';
 	//   var node6 = new GraphNode(1);
 	//   node6.id = '6';
-  //
+	//
 	//   graph.addNode(node1);
 	//   graph.addNode(node2);
 	//   graph.addNode(node3);
 	//   graph.addNode(node4);
 	//   graph.addNode(node5);
 	//   graph.addNode(node6);
-  //
+	//
 	//   graph.addBiEdge(node1.id, node3.id);
 	//   graph.addBiEdge(node1.id, node2.id);
 	//   graph.addBiEdge(node2.id, node5.id);
 	//   graph.addBiEdge(node2.id, node4.id);
 	//   graph.addBiEdge(node3.id, node6.id);
-  //
+	//
 	//   var visited = Traversal.breadthFirst(node1);
-  //
+	//
 	//   trace("visited bfs: " + visited);
-  //
+	//
 	//   Assert.isTrue(node1.id == visited[0]);
 	//   Assert.isTrue(node2.id == visited[1]);
 	//   Assert.isTrue(node3.id == visited[2]);

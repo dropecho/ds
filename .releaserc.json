@@ -1,6 +1,6 @@
 {
   "branches": [
-    "master"
+    "main"
   ],
   "tagFormat": "${version}",
   "plugins": [
@@ -45,12 +45,22 @@
         "additionalFiles": []
       }
     ],
-    "@semantic-release/github",
+    [
+      "@semantic-release/github",
+      {
+        "assets": [
+          {
+            "path": "dist/cs/dropecho.langgen/bin/dropecho.langgen.dll",
+            "name": "dropecho.langgen-${nextRelease.gitTag}.dll",
+            "label": "C# DLL"
+          }
+        ]
+      }
+    ],
     [
       "@semantic-release/git",
       {
         "assets": [
-          "dist/**/*.{js,css}",
           "*.md",
           "package.json",
           "haxelib.json"
