@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/dropecho/ds/compare/1.4.0...1.4.1) (2022-12-08)
+
+
+### Bug Fixes
+
+* Update to new build system, misc cleanup. ([0898924](https://github.com/dropecho/ds/commit/08989243a677c080e240d271e543f42228cb954a))
+
 # [1.4.0](https://github.com/dropecho/ds/compare/1.3.0...1.4.0) (2021-03-20)
 
 

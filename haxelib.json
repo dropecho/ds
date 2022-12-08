@@ -3,14 +3,14 @@
   "description": "A set of data structures for games.",
   "classPath": "src/",
   "dependencies": {
-    "dropecho.interop":""
+    "dropecho.interop": ""
   },
   "url": "https://github.com/dropecho/ds",
   "contributors": [
     "vantreeseba"
   ],
-  "version": "1.4.0",
-  "releasenote": "Release version 1.4.0. See CHANGELOG.md for details.",
+  "version": "1.4.1",
+  "releasenote": "Release version 1.4.1. See CHANGELOG.md for details.",
   "tags": [
     "example"
   ],
