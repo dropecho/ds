@@ -12,7 +12,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "build": "npm run build:code && npm run build:docs",
+    "build": "npm run build:code",
     "build:code": "haxe build.hxml",
     "build:docs": "haxelib run dox -o docs/docs -i artifacts/docs.xml --toplevel-package dropecho.ds",
     "test": "haxelib run munit t"
