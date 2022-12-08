@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/dropecho/ds/compare/1.3.0...1.4.0) (2021-03-20)
+
+
+### Features
+
+* Update all DS to use new interop, clean up tests, random fixes for real use in dungen and other libs. ([4466789](https://github.com/dropecho/ds/commit/44667894c6c5880f8a6cfecde22ab4f64f4e2a96))
+
 # [1.3.0](https://github.com/dropecho/ds/compare/1.2.0...1.3.0) (2021-02-04)
 
 
