@@ -1,6 +1,6 @@
 package dropecho.ds.graph;
 
-@:expose("graph.traversal")
+@:expose
 class Traversal {
 	/*
 		procedure BFS(G, start_v) is

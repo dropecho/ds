@@ -1,6 +1,6 @@
 package dropecho.ds.graph;
 
-@:expose("graph.grammar")
+@:expose
 class Grammar {
 	// public static function Rewrite(node:GraphNode<T, U>) {}
 

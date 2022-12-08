@@ -8,7 +8,7 @@
 -cp test
 
 -main TestMain
--js artifacts/js_test.js
+-js artifacts/js_test.cjs
 
 ## CSharp
 --next

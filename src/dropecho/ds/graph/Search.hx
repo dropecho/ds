@@ -26,7 +26,7 @@ class SearchResult<T, U> {
 	}
 }
 
-@:expose("graph.Search")
+@:expose
 class Search {
 	/**
 	 * An implementation of dijkstra search over a graph.
