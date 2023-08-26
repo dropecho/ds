@@ -5,18 +5,18 @@
 -lib dropecho.interop
 -lib dropecho.testing
 -lib utest
+--each
 
+# JS
+--next
 -lib hxnodejs
 -js artifacts/js_test/js_test.cjs
 
-# --each
 
-# --next
-# -lib hxnodejs
-# -js artifacts/js_test/js_test.cjs
-#
-# --next
-# -cs artifacts/cs_test/
-#
+# CS
+--next
+-D net-ver=40
+-cs artifacts/cs_test/
+
 # --next
 # -neko artifacts/neko_test/test.n

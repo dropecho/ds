@@ -1,29 +1,62 @@
 package dropecho.ds;
 
+import dropecho.interop.AbstractFunc;
 #if cs
-// import cs.system.collections.generic.HashSet;
+import cs.system.collections.generic.IEqualityComparer_1;
+import cs.system.collections.generic.HashSet_1;
+class GenericEqualityComparer<T> implements IEqualityComparer_1<T> {
+	var hasher:Func_1<T, Int>;
+
+	public function new(hasher) {
+		this.hasher = hasher;
+	}
+
+	public function Equals(t1:T, t2:T) {
+		return GetHashCode(t1) == GetHashCode(t2);
+	}
+
+	public function GetHashCode(t1:T) {
+		return this.hasher(t1);
+	}
+}
 
 @:nativeGen
 @:expose("Set")
 class Set<T> {
-	//   var data:HashSet_1<T>;
-	//   var hasher:T->Int;
-	//
-	//   public function new(?hasher:T->Int) {};
-	//
-	//   public function add(item:T):Bool {}
-	//
-	//   inline public function exists(item:T):Bool {}
-	//
-	//   inline public function get(item:T):T {}
-	//
-	//   inline public function size():Int {}
-	//
-	//   inline public function array():Array<T> {}
+	var data:HashSet_1<T>;
+	var hasher:Func_1<T, Int>;
+
+	public function new(?hasher:Func_1<T, Int>) {
+		var comparer = new GenericEqualityComparer<T>(hasher);
+		data = new HashSet_1(comparer);
+	};
+
+	public function add(item:T):Bool {
+		return data.Add(item);
+	}
+
+	inline public function exists(item:T):Bool {
+		return data.Contains(item);
+	}
+
+	inline public function get(item:T):T {
+		return null;
+		//     var out:T;
+		//     var success = data.TryGetValue(item, out);
+		//     return success ? out : null;
+	}
+
+	inline public function size():Int {
+		return data.Count;
+	}
+
+	inline public function array():Array<T> {
+		return [];
+	}
 }
+
 #else
 import haxe.ds.IntMap;
-import dropecho.interop.AbstractFunc;
 
 /**
  * A Set implemenation.
