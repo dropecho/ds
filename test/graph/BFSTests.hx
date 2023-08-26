@@ -1,19 +1,18 @@
 package graph;
 
-import massive.munit.Assert;
+import utest.Assert;
+import utest.Test;
 import dropecho.ds.*;
 import dropecho.ds.graph.Traversal;
 
-class BFSTest {
+class BFSTests extends Test {
 	var graph:Graph<Int, Int>;
 
-	@Before
 	public function setup() {
 		graph = new Graph();
 	}
 
-	@Test
-	public function run() {
+	public function test_run() {
 		/*******************
 			GRAPH
 
@@ -63,7 +62,7 @@ class BFSTest {
 		Assert.isTrue(node6.id == visited[5]);
 	}
 
-	// @Test function traversal() {
+	//  function traversal() {
 	//   [>******************
 	//       GRAPH
 	//

@@ -1,26 +1,24 @@
 package algos;
 
-import massive.munit.Assert;
+import utest.Assert;
+import utest.Test;
 import dropecho.ds.*;
 import dropecho.ds.algos.*;
 
-class PreOrderTraversalTest {
+class PreOrderTraversalTests extends Test {
 	var tree:BSPTree<Int>;
 	var trav:PreOrderTraversal;
 
-	@Before
 	public function setup() {
 		tree = new BSPTree<Int>();
 		trav = new PreOrderTraversal();
 	}
 
-	@Test
-	public function canInstantiate() {
-		Assert.isNotNull(trav);
+	public function test_canInstantiate() {
+		Assert.notNull(trav);
 	}
 
-	@Test
-	public function run() {
+	public function test_run() {
 		/************************
 			GRAPH
 
@@ -40,10 +38,10 @@ class PreOrderTraversalTest {
 
 		var visited = trav.run(node1);
 
-		Assert.areEqual(node1.id, visited[0]);
-		Assert.areEqual(node2.id, visited[1]);
-		Assert.areEqual(node4.id, visited[2]);
-		Assert.areEqual(node5.id, visited[3]);
-		Assert.areEqual(node3.id, visited[4]);
+		Assert.equals(node1.id, visited[0]);
+		Assert.equals(node2.id, visited[1]);
+		Assert.equals(node4.id, visited[2]);
+		Assert.equals(node5.id, visited[3]);
+		Assert.equals(node3.id, visited[4]);
 	}
 }

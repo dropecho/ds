@@ -17,7 +17,7 @@ class BSPNode<TNodeData> extends GraphNode<TNodeData, String> {
 	 * @param value - The value to assign to the node.
 	 * @return The created node.
 	 */
-	public function createLeft(?value:TNodeData):BSPNode<TNodeData> {
+	inline public function createLeft(?value:TNodeData):BSPNode<TNodeData> {
 		return this.setLeft(new BSPNode(value));
 	}
 
@@ -27,7 +27,7 @@ class BSPNode<TNodeData> extends GraphNode<TNodeData, String> {
 	 * @param value - The value to assign to the created node.
 	 * @return The created node.
 	 */
-	public function createRight(?value:TNodeData):BSPNode<TNodeData> {
+	inline public function createRight(?value:TNodeData):BSPNode<TNodeData> {
 		return this.setRight(new BSPNode(value));
 	}
 
@@ -66,28 +66,28 @@ class BSPNode<TNodeData> extends GraphNode<TNodeData, String> {
 	/**
 	 * @return true if this node has no children.
 	 */
-	public function isLeaf():Bool {
+	inline public function isLeaf():Bool {
 		return this.right == null && this.left == null;
 	}
 
 	/**
 	 * @return true if this node has no parent.
 	 */
-	public function isRoot():Bool {
+	inline public function isRoot():Bool {
 		return this.parent == null;
 	}
 
 	/**
 	 * @return true if this node has a left child.
 	 */
-	public function hasLeft():Bool {
+	inline public function hasLeft():Bool {
 		return this.left != null;
 	}
 
 	/**
 	 * @return true if this node has a right child.
 	 */
-	public function hasRight():Bool {
+	inline public function hasRight():Bool {
 		return this.right != null;
 	}
 }

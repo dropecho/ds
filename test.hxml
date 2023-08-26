@@ -1,23 +1,22 @@
-## JavaScript NodeJS
--lib munit
--lib hamcrest
+-cp src
+--macro include('', true, null, ['src'])
+
+-cp test
+-lib dropecho.interop
+-lib dropecho.testing
+-lib utest
+
 -lib hxnodejs
--lib dropecho.interop
+-js artifacts/js_test/js_test.cjs
 
--cp src
--cp test
+# --each
 
--main TestMain
--js artifacts/js_test.cjs
-
-## CSharp
---next
--lib munit
--lib hamcrest
--lib dropecho.interop
-
--cp src
--cp test
-
--main TestMain
--cs artifacts/cs_test
+# --next
+# -lib hxnodejs
+# -js artifacts/js_test/js_test.cjs
+#
+# --next
+# -cs artifacts/cs_test/
+#
+# --next
+# -neko artifacts/neko_test/test.n

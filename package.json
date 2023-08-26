@@ -12,10 +12,11 @@
   },
   "license": "MIT",
   "scripts": {
+    "install": "lix download",
     "build": "npm run build:code",
     "build:code": "haxe build.hxml",
     "build:docs": "haxelib run dox -o docs/docs -i artifacts/docs.xml --toplevel-package dropecho.ds",
-    "test": "haxelib run munit t"
+    "test": "haxelib run dropecho.testing"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.2",

@@ -14,7 +14,7 @@ class BSPTree<T> extends Graph<T, String> {
 		this.addNode(root);
 	}
 
-	public function getParent(node):BSPNode<T> {
+	inline public function getParent(node):BSPNode<T> {
 		return cast(outNeighbors(node, (id, data) -> data == "parent")[0]);
 	}
 
@@ -22,7 +22,7 @@ class BSPTree<T> extends Graph<T, String> {
 	 * Get the direct children of a given node.
 	 * @param node - The node to get the children of.
 	 */
-	public function getChildren(node:BSPNode<T>):Array<BSPNode<T>> {
+	inline public function getChildren(node:BSPNode<T>):Array<BSPNode<T>> {
 		return cast(outNeighbors(node, (id, data) -> data == "left" || data == "right"));
 	}
 
@@ -30,7 +30,7 @@ class BSPTree<T> extends Graph<T, String> {
 	 * Get the root node of the bsp tree.
 	 * The root node is the "parent" most node of the tree, and has no parent itself.
 	 */
-	public function getRoot() {
+	inline public function getRoot() {
 		return root;
 	}
 

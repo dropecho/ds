@@ -1,32 +1,24 @@
 package graph;
 
-import dropecho.ds.graph.Grammar;
+import utest.Assert;
+import utest.Test;
 import dropecho.ds.Graph;
 import dropecho.ds.GraphNode;
-import massive.munit.Assert;
 
-class GrammarTest {
+class GrammarTests extends Test {
 	var graph:Graph<Int, Int>;
 
-	@Before
 	public function setup() {
 		graph = new Graph();
 	}
 
-	@Test
-	public function canInstantiate() {
-		Assert.isNotNull(graph);
-	}
-
-	@Test
-	public function createNode() {
+	public function test_createNode() {
 		var node = graph.createNode(4);
 
-		Assert.areEqual(4, node.value);
+		Assert.equals(4, node.value);
 		Assert.isTrue(graph.nodes.exists(node.id));
 	}
 
-	@Test
 	public function replace() {
 		var node = graph.addNode(new GraphNode(4, "node"));
 		var node2 = graph.addNode(new GraphNode(4, "node2"));
@@ -38,7 +30,7 @@ class GrammarTest {
 
 		// Grammar.replace(node, new GraphNode());
 
-		// Assert.areEqual(4, node.value);
+		// Assert.equals(4, node.value);
 		// Assert.isTrue(graph.nodes.exists(node.id));
 	}
 }

@@ -1,20 +1,18 @@
 package graph;
 
-import massive.munit.Assert;
+import utest.Assert;
+import utest.Test;
 import dropecho.ds.Graph;
-import dropecho.ds.GraphNode;
 import dropecho.ds.graph.*;
 
-class DijkstraTest {
+class DijkstraTests extends Test {
 	var graph:Graph<Int, Int>;
 
-	@Before
 	public function setup() {
 		graph = new Graph<Int, Int>();
 	}
 
-	@Test
-	public function run() {
+	public function test_run() {
 		/******************
 				GRAPH
 
@@ -45,15 +43,14 @@ class DijkstraTest {
 		var path = results.path;
 
 		Assert.isFalse(path.exists(node1));
-		Assert.areEqual(node1.id, path[node4]);
-		Assert.areEqual(node1.id, path[node2]);
-		Assert.areEqual(node4.id, path[node6]);
-		Assert.areEqual(node2.id, path[node3]);
-		Assert.areEqual(node2.id, path[node5]);
+		Assert.equals(node1.id, path[node4]);
+		Assert.equals(node1.id, path[node2]);
+		Assert.equals(node4.id, path[node6]);
+		Assert.equals(node2.id, path[node3]);
+		Assert.equals(node2.id, path[node5]);
 	}
 
-	@Test
-	function traversal() {
+	function test_traversal() {
 		/*
 		 *	  1-2-3
 		 *	  | | |
@@ -101,12 +98,12 @@ class DijkstraTest {
 		var results = Search.dijkstra(node1);
 		var dist = results.distances;
 
-		Assert.areEqual(0, dist[node1]);
-		Assert.areEqual(1, dist[node2]);
-		Assert.areEqual(2, dist[node3]);
-		Assert.areEqual(1, dist[node4]);
-		Assert.areEqual(2, dist[node5]);
-		Assert.areEqual(3, dist[node6]);
-		Assert.areEqual(2, dist[node7]);
+		Assert.equals(0, dist[node1]);
+		Assert.equals(1, dist[node2]);
+		Assert.equals(2, dist[node3]);
+		Assert.equals(1, dist[node4]);
+		Assert.equals(2, dist[node5]);
+		Assert.equals(3, dist[node6]);
+		Assert.equals(2, dist[node7]);
 	}
 }

@@ -1,4 +1,5 @@
 package dropecho.ds;
+
 /**
  * A heap implemenation.
  */
@@ -50,11 +51,11 @@ class Heap<T> {
 		return element;
 	}
 
-	public function peek():T {
+	inline public function peek():T {
 		return this.elements[0];
 	}
 
-	public function size() {
+	inline public function size() {
 		return this.elements.length;
 	}
 
@@ -86,7 +87,7 @@ class Heap<T> {
 	 * @param {Number} a The first element to swap.
 	 * @param {Number} b The second element to swap.
 	 */
-	private function _swap(a:Int, b:Int):Void {
+	inline private function _swap(a:Int, b:Int):Void {
 		var temp = this.elements[a];
 		this.elements[a] = this.elements[b];
 		this.elements[b] = temp;
@@ -99,7 +100,7 @@ class Heap<T> {
 	 * @param {Number} index The index to get the parent for.
 	 * @return {Number} The parent index.
 	 */
-	private function _getParent(index:Int):Int {
+	inline private function _getParent(index:Int):Int {
 		return Std.int((index - 1) / 2);
 	}
 
@@ -110,7 +111,7 @@ class Heap<T> {
 	 * @param {Number} index The index.
 	 * @return {Number} The left childs index.
 	 */
-	private function _getLeft(index:Int):Int {
+	inline private function _getLeft(index:Int):Int {
 		return (2 * index) + 1;
 	}
 
@@ -121,7 +122,7 @@ class Heap<T> {
 	 * @param {Number} index The index.
 	 * @return {Number} The right childs index.
 	 */
-	private function _getRight(index:Int):Int {
+	inline private function _getRight(index:Int):Int {
 		return (2 * index) + 2;
 	}
 }
