@@ -18,7 +18,16 @@
     "build:docs": "haxelib run dox -o docs/docs -i artifacts/docs.xml --toplevel-package dropecho.ds",
     "test": "haxelib run dropecho.testing"
   },
+  "type": "module",
+  "main": "./dist/js/cjs/index.cjs",
+  "exports": {
+    ".": {
+      "require": "./dist/js/cjs/index.cjs",
+      "import": "./dist/js/esm/index.js"
+    }
+  },
   "devDependencies": {
+    "lix": "^15.12.0",
     "@semantic-release/changelog": "^6.0.2",
     "@semantic-release/commit-analyzer": "^9.0.2",
     "@semantic-release/exec": "^6.0.3",
@@ -28,13 +37,5 @@
     "@semantic-release/release-notes-generator": "^10.0.3",
     "semantic-release": "^19.0.5",
     "semantic-release-haxelib": "^1.1.0"
-  },
-  "type": "module",
-  "main": "./dist/js/cjs/index.cjs",
-  "exports": {
-    ".": {
-      "require": "./dist/js/cjs/index.cjs",
-      "import": "./dist/js/esm/index.js"
-    }
   }
 }
