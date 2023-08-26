@@ -1,3 +1,15 @@
+# [1.5.0](https://github.com/dropecho/ds/compare/1.4.1...1.5.0) (2023-08-26)
+
+
+### Bug Fixes
+
+* Add lix to deps. ([490f28b](https://github.com/dropecho/ds/commit/490f28b7d155a8ee85d22001e4c86fe820280fe3))
+
+
+### Features
+
+* Setup lix libs, move to utest+dropecho.testing, cleanup. ([554e373](https://github.com/dropecho/ds/commit/554e3737d4882f046d1a9a3e9f19bf96c71ee5fa))
+
 ## [1.4.1](https://github.com/dropecho/ds/compare/1.4.0...1.4.1) (2022-12-08)
 
 
