@@ -15,7 +15,7 @@ class BSPTree<T> extends Graph<T, String> {
 	}
 
 	inline public function getParent(node):BSPNode<T> {
-		return cast(outNeighbors(node, (id, data) -> data == "parent")[0]);
+		return node.parent;
 	}
 
 	/**
@@ -23,7 +23,14 @@ class BSPTree<T> extends Graph<T, String> {
 	 * @param node - The node to get the children of.
 	 */
 	inline public function getChildren(node:BSPNode<T>):Array<BSPNode<T>> {
-		return cast(outNeighbors(node, (id, data) -> data == "left" || data == "right"));
+		var children = [];
+		if (node.hasLeft()) {
+			children.push(node.left);
+		}
+		if (node.hasRight()) {
+			children.push(node.right);
+		}
+		return children;
 	}
 
 	/**
@@ -41,7 +48,7 @@ class BSPTree<T> extends Graph<T, String> {
 	public function getLeafs() {
 		return [
 			for (node in nodes) {
-				getChildren(cast node).length == 0 ? node : continue;
+				(cast(node)).isLeaf() ? node : continue;
 			}
 		];
 	}
