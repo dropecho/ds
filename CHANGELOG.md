@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/dropecho/ds/compare/1.5.0...1.5.1) (2023-08-26)
+
+
+### Bug Fixes
+
+* Fix issue with .net version, make set mostly work for c#. ([beb3224](https://github.com/dropecho/ds/commit/beb3224ac943b3f2ffe38cdce50500423796648b))
+
 # [1.5.0](https://github.com/dropecho/ds/compare/1.4.1...1.5.0) (2023-08-26)
 
 
