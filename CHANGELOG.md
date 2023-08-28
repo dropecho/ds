@@ -1,3 +1,10 @@
+## [1.5.2](https://github.com/dropecho/ds/compare/1.5.1...1.5.2) (2023-08-28)
+
+
+### Bug Fixes
+
+* Clean up bst tree code around children. ([51d11a0](https://github.com/dropecho/ds/commit/51d11a014fa7dad972c59ed288817103316afea1))
+
 ## [1.5.1](https://github.com/dropecho/ds/compare/1.5.0...1.5.1) (2023-08-26)
 
 
