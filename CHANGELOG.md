@@ -1,3 +1,10 @@
+## [1.5.3](https://github.com/dropecho/ds/compare/1.5.2...1.5.3) (2023-08-28)
+
+
+### Bug Fixes
+
+* Fix issue with es6/genes conflict. ([565744a](https://github.com/dropecho/ds/commit/565744ab3e822c391420dfc19cef4f742029bff0))
+
 ## [1.5.2](https://github.com/dropecho/ds/compare/1.5.1...1.5.2) (2023-08-28)
 
 
