@@ -99,11 +99,7 @@ class Set<T> {
 	}
 
 	inline public function array():Array<T> {
-		var arr = [];
-		for (_ => value in this.data.keyValueIterator()) {
-			arr.push(value);
-		}
-		return arr;
+		return [for (_ => value in this.data.keyValueIterator()) value];
 	}
 }
 #end
