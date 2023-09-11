@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/dropecho/ds/compare/1.5.4...1.6.0) (2023-09-11)
+
+
+### Features
+
+* Lots of cleanup, more docs, switch to list for stack/queue. ([38d63f7](https://github.com/dropecho/ds/commit/38d63f71adacd3a0b96f7db55fa6e7235d9acfcd))
+
 ## [1.5.4](https://github.com/dropecho/ds/compare/1.5.3...1.5.4) (2023-09-08)
 
 
