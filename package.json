@@ -1,6 +1,6 @@
 {
   "name": "@dropecho/ds",
-  "version": "1.5.4",
+  "version": "1.6.0",
   "description": "A set of data structures for games.",
   "author": "vantreeseba <vantreeseba@gmail.com>",
   "repository": "github:dropecho/ds",
