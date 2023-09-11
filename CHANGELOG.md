@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/dropecho/ds/compare/1.6.0...1.7.0) (2023-09-11)
+
+
+### Features
+
+* Allow custom hashers again on set. ([3533e46](https://github.com/dropecho/ds/commit/3533e46011c4b0e5e40df47d8f89251cccf73992))
+
 # [1.6.0](https://github.com/dropecho/ds/compare/1.5.4...1.6.0) (2023-09-11)
 
 
