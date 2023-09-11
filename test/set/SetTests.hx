@@ -68,7 +68,7 @@ class SetTests extends Test {
 	}
 
 	public function test_custom_hasher_works() {
-		final customHasherSet = new Set<TestObj>();
+		final customHasherSet = new Set<TestObj>((item) -> item.x);
 
 		var obj = new TestObj();
 		obj.x = 1;
@@ -77,6 +77,7 @@ class SetTests extends Test {
 
 		customHasherSet.add(obj);
 		customHasherSet.add(obj2);
+		customHasherSet.add(obj);
 
 		Assert.equals(2, customHasherSet.size());
 	}
@@ -99,15 +100,14 @@ class SetTests extends Test {
 	//
 	//     Assert.equals(9_999_999, intSet.size());
 	//   }
-
-//   public function test_hash_collision_objects() {
-//     for (i in 1...1_000_000) {
-//       var obj = new TestObj();
-//       obj.x = i;
-//       objSet.add(obj);
-//     }
-//
-//     Assert.equals(999_999, objSet.size());
-//   }
+	//   public function test_hash_collision_objects() {
+	//     for (i in 1...1_000_000) {
+	//       var obj = new TestObj();
+	//       obj.x = i;
+	//       objSet.add(obj);
+	//     }
+	//
+	//     Assert.equals(999_999, objSet.size());
+	//   }
 }
 #end

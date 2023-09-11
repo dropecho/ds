@@ -10,10 +10,10 @@ import cs.system.collections.generic.HashSet_1;
 import cs.NativeArray;
 import cs.Lib;
 class SetEqualityComparer<T> implements IEqualityComparer_1<T> {
-	var hasher:Func_1<T, Int>;
+	var _hasher:Func_1<T, Int>;
 
-	public function new() {
-		this.hasher = (item:T) -> Crc32.make(Bytes.ofString(Std.string(item)));
+	public function new(?hasher:(item:T) -> Int) {
+		_hasher = hasher ?? (item:T) -> Crc32.make(Bytes.ofString(Std.string(item)));
 	}
 
 	public function Equals(t1:T, t2:T) {
@@ -21,7 +21,7 @@ class SetEqualityComparer<T> implements IEqualityComparer_1<T> {
 	}
 
 	public function GetHashCode(t1:T) {
-		return this.hasher(t1);
+		return _hasher(t1);
 	}
 }
 
@@ -30,8 +30,8 @@ class SetEqualityComparer<T> implements IEqualityComparer_1<T> {
 class Set<T> {
 	var _data:HashSet_1<T>;
 
-	public function new() {
-		var comparer = new SetEqualityComparer<T>();
+	public function new(?hasher:(item:T) -> Int) {
+		var comparer = new SetEqualityComparer<T>(hasher);
 		_data = new HashSet_1(comparer);
 	};
 
@@ -71,14 +71,13 @@ class Set<T> {
 	var _data:IntMap<T>;
 	var _hasher:Func_1<T, Int>;
 
-	public function new() {
+	public function new(?hasher:(item:T) -> Int) {
 		_data = new IntMap<T>();
-		_hasher = (item:T) -> Crc32.make(Bytes.ofString(Std.string(item)));
+		_hasher = hasher ?? (item:T) -> Crc32.make(Bytes.ofString(Std.string(item)));
 	};
 
 	public function add(item:T):Bool {
 		var key = _hasher(item);
-
 		if (!this._data.exists(key)) {
 			_data.set(key, item);
 			return true;
@@ -95,7 +94,6 @@ class Set<T> {
 		for (key in _data.keys()) {
 			count++;
 		}
-
 		return count;
 	}
 
