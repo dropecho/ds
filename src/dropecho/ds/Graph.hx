@@ -39,9 +39,8 @@ class Graph<T, U> {
 	 * @return The added graph node.
 	 */
 	public function addNode(node:GraphNode<T, U>):GraphNode<T, U> {
-		nodes.set(node.id, node);
 		node.graph = this;
-		return node;
+		return nodes.set(node.id, node);
 	}
 
 	/**

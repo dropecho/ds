@@ -14,7 +14,7 @@ class BSPNode<TNodeData> extends GraphNode<TNodeData, String> {
 	/**
 	 * Create a left child node with the given value.
 	 *
-	 * @param value - The value to assign to the node.
+	 * @param value - The value to assign to the created node.
 	 * @return The created node.
 	 */
 	inline public function createLeft(?value:TNodeData):BSPNode<TNodeData> {

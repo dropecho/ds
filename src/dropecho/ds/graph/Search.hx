@@ -66,9 +66,9 @@ class Search {
 			var existingIds = queue.elements.map(x -> x.node.id);
 			var filter = (id, data) -> existingIds.indexOf(id) >= 0;
 			var neighbors = graph.neighbors(minDistNode, filter);
+
 			for (neighbor in neighbors) {
-				// TODO: Make this use an actual cost.
-				// instead of +1, should be distance to neighbor.
+				// TODO: Make this use an actual cost, instead of +1, should be distance to neighbor.
 				var distanceToNeighbor = dist[minDistNode] + distCalc(minDistNode, neighbor);
 				if (distanceToNeighbor <= dist[neighbor]) {
 					dist[neighbor] = distanceToNeighbor;
@@ -76,7 +76,7 @@ class Search {
 
 					var existing = queue.elements.find(x -> x.node == neighbor);
 					// queue.set_value_obj(existing, {node: neighbor, dist: dist[neighbor]});
-					queue.set_value_obj(existing, new NodeDist(neighbor, dist[neighbor]));
+					queue.replace(existing, new NodeDist(neighbor, dist[neighbor]));
 				}
 			}
 		}

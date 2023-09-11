@@ -16,40 +16,35 @@ class HeapTests extends Test {
 		heap = new Heap<Null<Int>>();
 	}
 
-	public function test_canInstantiate() {
+	public function test_can_instantiate() {
 		Assert.notNull(heap);
 	}
 
-	public function test_simple_push_with_pop_default_compare() {
-		var heap2 = new Heap<Null<Int>>();
-		heap2.push(4);
-		var expected:Null<Int> = null;
-
-		Assert.equals(4, heap2.pop());
-		Assert.equals(expected, heap2.pop());
-	}
-
-	public function test_simple_push_with_pop() {
+	public function test_pop_should_return_the_correct_item_and_remove_it() {
 		heap.push(4);
-		var expected:Null<Int> = null;
 
+		Assert.equals(1, heap.size());
 		Assert.equals(4, heap.pop());
-		Assert.equals(expected, heap.pop());
+		Assert.equals(0, heap.size());
 	}
 
-	public function test_simple_push_with_peek() {
+	public function test_peek_should_return_the_correct_item_without_removing_it() {
 		heap.push(4);
 
 		Assert.equals(4, heap.peek());
 		Assert.equals(4, heap.peek());
 	}
 
-	public function test_peek_when_empty() {
+	public function test_pop_should_return_null_when_heap_is_empty() {
+		Assert.isTrue(null == heap.pop());
+	}
+
+	public function test_peek_should_return_null_when_heap_is_empty() {
 		Assert.isTrue(null == heap.peek());
 	}
 
 	public function test_push_heapifies_values_in_max_heap() {
-		heap.compare = (a, b) -> Reflect.compare(a, b) > 0;
+		heap = new Heap((a, b) -> Reflect.compare(a, b) > 0);
 		Assert.isTrue(heap.compare(4, 3));
 
 		heap.push(4);
@@ -68,7 +63,7 @@ class HeapTests extends Test {
 	}
 
 	public function test_push_heapifies_values_in_min_heap() {
-		heap.compare = (a, b) -> Reflect.compare(a, b) < 0;
+		heap = new Heap((a, b) -> Reflect.compare(a, b) < 0);
 
 		heap.push(3);
 		heap.push(1);
@@ -141,7 +136,7 @@ class HeapTests extends Test {
 
 		Assert.equals(0, heap2.pop().id);
 
-		heap2.set_value_obj(n4, {id: 3, d: 2});
+		heap2.replace(n4, {id: 3, d: 2});
 
 		Assert.equals(3, heap2.pop().id);
 		Assert.equals(1, heap2.pop().id);

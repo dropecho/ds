@@ -1,29 +1,45 @@
 package dropecho.ds;
 
+import haxe.iterators.ArrayIterator;
+
 @:nativeGen
 @:expose("Stack")
 class Stack<T> {
-	var data:Array<T>;
+	var _data:List<T>;
 
 	public var length(get, never):Int;
 
 	public function new() {
-		this.data = new Array<T>();
+		_data = new List<T>();
 	}
 
+	/** Push an item onto the stack. */
 	inline public function push(value:T) {
-		data.push(value);
+		_data.push(value);
 	}
 
-	public function pushMany(array:Array<T>) {
-		data = data.concat(array);
+	/** Push a collection of items onto the stack. */
+	inline public function pushMany(iter:Iterable<T>) {
+		for (item in iter) {
+			_data.push(item);
+		}
 	}
 
+	/** Get the next item from the stack, and remove it. */
 	inline public function pop():T {
-		return data.pop();
+		return _data.pop();
 	}
 
-	inline function get_length():Int {
-		return data.length;
+	/** Get the next item from the stack, leaving it in the stack. */
+	inline public function peek():T {
+		return _data.first();
+	}
+
+	inline public function get_length():Int {
+		return _data.length;
+	}
+
+	inline public function iterator() {
+		return _data.iterator();
 	}
 }
