@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/dropecho/ds/compare/1.7.0...1.8.0) (2023-09-16)
+
+
+### Features
+
+* Improve set performance with new hasher. ([c03ec08](https://github.com/dropecho/ds/commit/c03ec0824300d64cccfae68bd2c26db69afea121))
+
 # [1.7.0](https://github.com/dropecho/ds/compare/1.6.0...1.7.0) (2023-09-11)
 
 
