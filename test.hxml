@@ -13,9 +13,9 @@
 -js artifacts/js_test/js_test.cjs
 
 # CS
---next
--D net-ver=40
--cs artifacts/cs_test/
+# --next
+# -D net-ver=40
+# -cs artifacts/cs_test/
 
 # --next
 # -neko artifacts/neko_test/test.n

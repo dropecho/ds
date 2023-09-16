@@ -1,6 +1,9 @@
 package dropecho.ds;
 
-import haxe.crypto.Md5;
+import haxe.Int32;
+import haxe.crypto.Adler32;
+import haxe.Serializer;
+import haxe.Json;
 import haxe.io.Bytes;
 import haxe.crypto.Crc32;
 import dropecho.interop.AbstractFunc;
@@ -12,16 +15,18 @@ import cs.Lib;
 class SetEqualityComparer<T> implements IEqualityComparer_1<T> {
 	var _hasher:Func_1<T, Int>;
 
-	public function new(?hasher:(item:T) -> Int) {
-		_hasher = hasher ?? (item:T) -> Crc32.make(Bytes.ofString(Std.string(item)));
+	public function new(?hasher:Func_1<T, Int>) {
+		// TODO: This is slow, figure out a better way to do this.
+		// Probably similar to the way helder.set does it.
+		_hasher = hasher ?? (item:T) -> cs.Syntax.code('{0}.GetHashCode()', item);
 	}
 
 	public function Equals(t1:T, t2:T) {
 		return GetHashCode(t1) == GetHashCode(t2);
 	}
 
-	public function GetHashCode(t1:T) {
-		return _hasher(t1);
+	public function GetHashCode(obj:T) {
+		return _hasher(obj);
 	}
 }
 
@@ -30,7 +35,7 @@ class SetEqualityComparer<T> implements IEqualityComparer_1<T> {
 class Set<T> {
 	var _data:HashSet_1<T>;
 
-	public function new(?hasher:(item:T) -> Int) {
+	public function new(?hasher:Func_1<T, Int>) {
 		var comparer = new SetEqualityComparer<T>(hasher);
 		_data = new HashSet_1(comparer);
 	};
@@ -59,9 +64,29 @@ class Set<T> {
 		return arr.iterator();
 	}
 }
-
 #else
 import haxe.ds.IntMap;
+
+class StringHasher {
+	static inline private function stringify(item:Dynamic):String {
+		if (Std.isOfType(item, Int) || Std.isOfType(item, Float)) {
+			return item.toString();
+		} else {
+			return Json.stringify(item);
+		}
+	}
+
+	static inline public function hash(item:Dynamic):Int32 {
+		var str:String = stringify(item);
+		var h:Int32 = 0;
+
+		for (i in 0...str.length) {
+			h = 31 * h + str.charCodeAt(i);
+		}
+
+		return h;
+	}
+}
 
 /**
  * A Set implemenation.
@@ -71,10 +96,14 @@ class Set<T> {
 	var _data:IntMap<T>;
 	var _hasher:Func_1<T, Int>;
 
-	public function new(?hasher:(item:T) -> Int) {
+	public function new(?hasher:Func_1<T, Int>) {
 		_data = new IntMap<T>();
-		_hasher = hasher ?? (item:T) -> Crc32.make(Bytes.ofString(Std.string(item)));
-	};
+
+		// TODO: This is slow, figure out a better way to do this.
+		// Probably similar to the way helder.set does it.
+		//     _hasher = hasher ?? (item:T) -> Crc32.make(Bytes.ofString(Json.stringify(item)));
+		_hasher = hasher ?? (item:T) -> StringHasher.hash(item);
+	}
 
 	public function add(item:T):Bool {
 		var key = _hasher(item);
