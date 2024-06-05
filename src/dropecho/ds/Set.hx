@@ -98,10 +98,7 @@ class Set<T> {
 
 	public function new(?hasher:Func_1<T, Int>) {
 		_data = new IntMap<T>();
-
-		// TODO: This is slow, figure out a better way to do this.
-		// Probably similar to the way helder.set does it.
-		//     _hasher = hasher ?? (item:T) -> Crc32.make(Bytes.ofString(Json.stringify(item)));
+		// TODO: is this good? Probably similar to the way helder.set does it.
 		_hasher = hasher ?? (item:T) -> StringHasher.hash(item);
 	}
 

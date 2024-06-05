@@ -25,7 +25,7 @@ class Graph<T, U> {
 
 	/**
 	 * Creates a new node from a given value
-	 * @param value - The value to assign to the new node.
+	 * @param value The value to assign to the new node.
 	 * @return The new node.
 	 */
 	public function createNode(value:T, ?id:String):GraphNode<T, U> {
@@ -35,7 +35,7 @@ class Graph<T, U> {
 	/**
 	 * Add an existing node to this graph.
 	 * This will set the internal graph property on the node to this.
-	 * @param node - The Node to add.
+	 * @param node The Node to add.
 	 * @return The added graph node.
 	 */
 	public function addNode(node:GraphNode<T, U>):GraphNode<T, U> {
@@ -46,9 +46,9 @@ class Graph<T, U> {
 	/**
 	 * Add a unidirectional edge from node to another.
 	 *
-	 * @param nodeId - The start node of the edge.
-	 * @param otherId - The end node of the edge.
-	 * @param data - The data to assign to the edge.
+	 * @param nodeId  The start node of the edge.
+	 * @param otherId  The end node of the edge.
+	 * @param data  The data to assign to the edge.
 	 */
 	public function addUniEdge(fromId:String, toId:String, ?data:U):Void {
 		if (!edges.exists(fromId)) {
