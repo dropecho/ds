@@ -19,7 +19,7 @@ class BSPTreeTests extends Test {
 		var root = tree.root;
 
 		Assert.equals(4, root.value);
-		Assert.isTrue(tree.nodes.exists(root.id));
+		Assert.isTrue(tree.nodes.exists(root.label));
 	}
 
 	public function test_getParent() {

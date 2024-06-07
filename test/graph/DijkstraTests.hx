@@ -32,22 +32,22 @@ class DijkstraTests extends Test {
 		var node5 = graph.createNode(1);
 		var node6 = graph.createNode(1);
 
-		graph.addBiEdge(node1.id, node4.id);
-		graph.addBiEdge(node1.id, node2.id);
-		graph.addBiEdge(node2.id, node3.id);
-		graph.addBiEdge(node2.id, node5.id);
-		graph.addBiEdge(node4.id, node6.id);
-		graph.addBiEdge(node6.id, node5.id);
+		graph.addBiEdge(node1.label, node4.label);
+		graph.addBiEdge(node1.label, node2.label);
+		graph.addBiEdge(node2.label, node3.label);
+		graph.addBiEdge(node2.label, node5.label);
+		graph.addBiEdge(node4.label, node6.label);
+		graph.addBiEdge(node6.label, node5.label);
 
 		var results = Search.dijkstra(node1);
 		var path = results.path;
 
 		Assert.isFalse(path.exists(node1));
-		Assert.equals(node1.id, path[node4]);
-		Assert.equals(node1.id, path[node2]);
-		Assert.equals(node4.id, path[node6]);
-		Assert.equals(node2.id, path[node3]);
-		Assert.equals(node2.id, path[node5]);
+		Assert.equals(node1.label, path[node4]);
+		Assert.equals(node1.label, path[node2]);
+		Assert.equals(node4.label, path[node6]);
+		Assert.equals(node2.label, path[node3]);
+		Assert.equals(node2.label, path[node5]);
 	}
 
 	function test_traversal() {
@@ -67,33 +67,33 @@ class DijkstraTests extends Test {
 		var node7 = graph.createNode(1);
 		var node8 = graph.createNode(1);
 
-		graph.addBiEdge(node1.id, node2.id);
-		graph.addBiEdge(node1.id, node4.id);
+		graph.addBiEdge(node1.label, node2.label);
+		graph.addBiEdge(node1.label, node4.label);
 
-		graph.addBiEdge(node2.id, node1.id);
-		graph.addBiEdge(node2.id, node3.id);
-		graph.addBiEdge(node2.id, node5.id);
+		graph.addBiEdge(node2.label, node1.label);
+		graph.addBiEdge(node2.label, node3.label);
+		graph.addBiEdge(node2.label, node5.label);
 
-		graph.addBiEdge(node3.id, node2.id);
-		graph.addBiEdge(node3.id, node6.id);
+		graph.addBiEdge(node3.label, node2.label);
+		graph.addBiEdge(node3.label, node6.label);
 
-		graph.addBiEdge(node4.id, node1.id);
-		graph.addBiEdge(node4.id, node5.id);
-		graph.addBiEdge(node4.id, node7.id);
+		graph.addBiEdge(node4.label, node1.label);
+		graph.addBiEdge(node4.label, node5.label);
+		graph.addBiEdge(node4.label, node7.label);
 
-		graph.addBiEdge(node5.id, node2.id);
-		graph.addBiEdge(node5.id, node4.id);
-		graph.addBiEdge(node5.id, node6.id);
-		graph.addBiEdge(node5.id, node8.id);
+		graph.addBiEdge(node5.label, node2.label);
+		graph.addBiEdge(node5.label, node4.label);
+		graph.addBiEdge(node5.label, node6.label);
+		graph.addBiEdge(node5.label, node8.label);
 
-		graph.addBiEdge(node6.id, node3.id);
-		graph.addBiEdge(node6.id, node5.id);
+		graph.addBiEdge(node6.label, node3.label);
+		graph.addBiEdge(node6.label, node5.label);
 
-		graph.addBiEdge(node7.id, node4.id);
-		graph.addBiEdge(node7.id, node8.id);
+		graph.addBiEdge(node7.label, node4.label);
+		graph.addBiEdge(node7.label, node8.label);
 
-		graph.addBiEdge(node8.id, node7.id);
-		graph.addBiEdge(node8.id, node5.id);
+		graph.addBiEdge(node8.label, node7.label);
+		graph.addBiEdge(node8.label, node5.label);
 
 		var results = Search.dijkstra(node1);
 		var dist = results.distances;

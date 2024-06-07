@@ -19,12 +19,12 @@ class PostOrderTraversal {
 
 		if (visitor != null) {
 			if (visitor(node)) {
-				visited.push(node.id);
+				visited.push(node.label);
 			} else {
 				return visited;
 			}
 		} else {
-			visited.push(node.id);
+			visited.push(node.label);
 		}
 
 		return visited;

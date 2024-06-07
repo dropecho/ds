@@ -20,42 +20,42 @@ class GraphTests extends Test {
 		var node = graph.createNode(4);
 
 		Assert.equals(4, node.value);
-		Assert.isTrue(graph.nodes.exists(node.id));
+		Assert.isTrue(graph.nodes.exists(node.label));
 	}
 
 	public function test_addNode() {
 		var node = new GraphNode(4);
-		var inside = graph.addNode(node);
+		var inslabele = graph.addNode(node);
 
-		Assert.equals(node, inside);
-		Assert.isTrue(graph.nodes.exists(node.id));
+		Assert.equals(node, inslabele);
+		Assert.isTrue(graph.nodes.exists(node.label));
 	}
 
 	public function test_addUniEdge() {
 		var node1 = graph.createNode(4);
 		var node2 = graph.createNode(5);
 
-		graph.addUniEdge(node1.id, node2.id, 12);
+		graph.addUniEdge(node1.label, node2.label, 12);
 
-		Assert.isTrue(graph.edges.exists(node1.id));
+		Assert.isTrue(graph.edges.exists(node1.label));
 		Assert.equals(node2, graph.outNeighbors(node1)[0]);
-		Assert.isFalse(graph.edges.exists(node2.id));
-		Assert.equals(12, graph.edges.get(node1.id).get(node2.id));
+		Assert.isFalse(graph.edges.exists(node2.label));
+		Assert.equals(12, graph.edges.get(node1.label).get(node2.label));
 	}
 
 	public function test_addBiEdge() {
 		var node1 = graph.createNode(4);
 		var node2 = graph.createNode(5);
 
-		graph.addBiEdge(node1.id, node2.id, 12);
+		graph.addBiEdge(node1.label, node2.label, 12);
 
-		Assert.isTrue(graph.edges.exists(node1.id));
+		Assert.isTrue(graph.edges.exists(node1.label));
 		Assert.equals(node2, graph.outNeighbors(node1)[0]);
-		Assert.equals(12, graph.edges.get(node1.id).get(node2.id));
+		Assert.equals(12, graph.edges.get(node1.label).get(node2.label));
 
-		Assert.isTrue(graph.edges.exists(node2.id));
+		Assert.isTrue(graph.edges.exists(node2.label));
 		Assert.equals(node1, graph.outNeighbors(node2)[0]);
-		Assert.equals(12, graph.edges.get(node2.id).get(node1.id));
+		Assert.equals(12, graph.edges.get(node2.label).get(node1.label));
 	}
 
 	public function test_remove() {
@@ -64,14 +64,14 @@ class GraphTests extends Test {
 		var node3 = graph.createNode(0);
 		var node4 = graph.createNode(0);
 
-		graph.addUniEdge(node1.id, node2.id);
-		graph.addUniEdge(node3.id, node1.id);
-		graph.addBiEdge(node4.id, node1.id);
+		graph.addUniEdge(node1.label, node2.label);
+		graph.addUniEdge(node3.label, node1.label);
+		graph.addBiEdge(node4.label, node1.label);
 
-		graph.remove(node1.id);
+		graph.remove(node1.label);
 
-		Assert.isFalse(graph.nodes.exists(node1.id));
-		Assert.isFalse(graph.edges.exists(node1.id));
+		Assert.isFalse(graph.nodes.exists(node1.label));
+		Assert.isFalse(graph.edges.exists(node1.label));
 		Assert.isFalse(graph.neighbors(node2).contains(node1));
 		Assert.isFalse(graph.neighbors(node3).contains(node1));
 		Assert.isFalse(graph.neighbors(node4).contains(node1));
@@ -82,8 +82,8 @@ class GraphTests extends Test {
 		var node2 = graph.createNode(5);
 		var node3 = graph.createNode(5);
 
-		graph.addUniEdge(node1.id, node2.id, 12);
-		graph.addUniEdge(node1.id, node3.id, 14);
+		graph.addUniEdge(node1.label, node2.label, 12);
+		graph.addUniEdge(node1.label, node3.label, 14);
 
 		var outNeighbors = graph.outNeighbors(node1);
 
@@ -91,26 +91,26 @@ class GraphTests extends Test {
 		Assert.notEquals(-1, outNeighbors.indexOf(node3));
 	}
 
-	public function test_outNeighborIds() {
+	public function test_outNeighborLabels() {
 		var node1 = graph.createNode(4);
 		var node2 = graph.createNode(5);
 		var node3 = graph.createNode(6);
 
-		graph.addUniEdge(node1.id, node2.id, 12);
-		graph.addUniEdge(node1.id, node3.id, 14);
+		graph.addUniEdge(node1.label, node2.label, 12);
+		graph.addUniEdge(node1.label, node3.label, 14);
 
-		var outNeighborIds = graph.outNeighborIds(node1);
+		var outNeighborLabels = graph.outNeighborLabels(node1);
 
-		Assert.notEquals(-1, outNeighborIds.indexOf(node2.id));
-		Assert.notEquals(-1, outNeighborIds.indexOf(node3.id));
+		Assert.notEquals(-1, outNeighborLabels.indexOf(node2.label));
+		Assert.notEquals(-1, outNeighborLabels.indexOf(node3.label));
 	}
 
-	public function test_outNeighborIds_when_empty() {
+	public function test_outNeighborLabels_when_empty() {
 		var node1 = graph.createNode(4);
 
-		var outNeighborIds = graph.outNeighborIds(node1);
+		var outNeighborLabels = graph.outNeighborLabels(node1);
 
-		Assert.equals(0, outNeighborIds.length);
+		Assert.equals(0, outNeighborLabels.length);
 	}
 
 	public function test_edgeData() {
@@ -118,11 +118,11 @@ class GraphTests extends Test {
 		var node2 = graph.createNode(5, "edge_data_test_node_2");
 		var node3 = graph.createNode(6, "edge_data_test_node_3");
 
-		graph.addUniEdge(node1.id, node2.id, 12);
-		graph.addUniEdge(node1.id, node3.id, 14);
+		graph.addUniEdge(node1.label, node2.label, 12);
+		graph.addUniEdge(node1.label, node3.label, 14);
 
-		var node1_to_node2_data = graph.edgeData(node1.id, node2.id);
-		var node1_to_node3_data = graph.edgeData(node1.id, node3.id);
+		var node1_to_node2_data = graph.edgeData(node1.label, node2.label);
+		var node1_to_node3_data = graph.edgeData(node1.label, node3.label);
 
 		Assert.equals(12, node1_to_node2_data);
 		Assert.equals(14, node1_to_node3_data);
@@ -132,7 +132,7 @@ class GraphTests extends Test {
 		var node1 = graph.createNode(4);
 		var node2 = graph.createNode(5);
 
-		var node1_to_node2_data = graph.edgeData(node1.id, node2.id);
+		var node1_to_node2_data = graph.edgeData(node1.label, node2.label);
 		var nul:Null<Int> = null;
 
 		Assert.equals(nul, node1_to_node2_data);
@@ -144,7 +144,7 @@ class GraphTests extends Test {
 		var node1 = graph.createNode(4, "a");
 		var node2 = graph.createNode(5, "b");
 
-		graph.addUniEdge(node1.id, node2.id);
+		graph.addUniEdge(node1.label, node2.label);
 
 		Assert.equals(expected, graph.toDot());
 	}

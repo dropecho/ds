@@ -9,7 +9,7 @@ class BSPNodeTests extends Test {
 
 	public function setup() {
 		node = new BSPNode();
-		node.id = "TEST_BSP_NODE";
+		node.label = "TEST_BSP_NODE";
 
 		var tree = new BSPTree<Int>();
 		tree.addNode(node);

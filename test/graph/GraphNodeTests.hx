@@ -16,13 +16,13 @@ class GraphNodeTests extends Test {
 		Assert.equals(value, node.value);
 	}
 
-	public function test_id_is_unique() {
+	public function test_label_is_unique() {
 		var nodes = [for (_ in 0...10) new GraphNode(3)];
 
 		for (node in nodes) {
 			for (other in nodes) {
 				if (node != other) {
-					Assert.notEquals(node.id, other.id);
+					Assert.notEquals(node.label, other.label);
 				}
 			}
 		}

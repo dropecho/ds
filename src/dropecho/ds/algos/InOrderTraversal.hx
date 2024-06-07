@@ -16,12 +16,12 @@ class InOrderTraversal {
 
 		if (visitor != null) {
 			if (visitor(node)) {
-				visited.push(node.id);
+				visited.push(node.label);
 			} else {
 				return visited;
 			}
 		} else {
-			visited.push(node.id);
+			visited.push(node.label);
 		}
 
 		if (node.right != null) {

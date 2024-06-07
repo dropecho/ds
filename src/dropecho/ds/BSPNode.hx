@@ -41,8 +41,8 @@ class BSPNode<TNodeData> extends GraphNode<TNodeData, String> {
 		this.left = node;
 		node.parent = this;
 		graph.addNode(node);
-		graph.addUniEdge(this.id, node.id, "left");
-		graph.addUniEdge(node.id, this.id, "parent");
+		graph.addUniEdge(this.label, node.label, "left");
+		graph.addUniEdge(node.label, this.label, "parent");
 
 		return node;
 	}
@@ -57,8 +57,8 @@ class BSPNode<TNodeData> extends GraphNode<TNodeData, String> {
 		this.right = node;
 		node.parent = this;
 		graph.addNode(node);
-		graph.addUniEdge(this.id, node.id, "right");
-		graph.addUniEdge(node.id, this.id, "parent");
+		graph.addUniEdge(this.label, node.label, "right");
+		graph.addUniEdge(node.label, this.label, "parent");
 
 		return node;
 	}

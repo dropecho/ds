@@ -6,7 +6,7 @@ using Lambda;
 
 @:struct
 class NodeDist<T, U> {
-	public var node:GraphNode<T, U>;
+	public var node:IGraphNode<T, U>;
 	public var dist:Float;
 
 	public function new(node, dist) {
@@ -17,8 +17,8 @@ class NodeDist<T, U> {
 
 @:struct
 class SearchResult<T, U> {
-	public var path:AbstractMap<GraphNode<T, U>, String>;
-	public var distances:AbstractMap<GraphNode<T, U>, Float>;
+	public var path:AbstractMap<IGraphNode<T, U>, String>;
+	public var distances:AbstractMap<IGraphNode<T, U>, Float>;
 
 	public function new(path, distances) {
 		this.path = path;
@@ -36,11 +36,11 @@ class Search {
 	 * @param [distCalc] - A distance calculation function. (optional)
 	 * @return An object with the path and distances to every node.
 	 */
-	public static function dijkstra<T, U>(node:GraphNode<T, U>, ?distCalc:(a:GraphNode<T, U>, b:GraphNode<T, U>) -> Float):SearchResult<T, U> {
+	public static function dijkstra<T, U>(node:IGraphNode<T, U>, ?distCalc:(a:IGraphNode<T, U>, b:IGraphNode<T, U>) -> Float):SearchResult<T, U> {
 		var compare = (a, b) -> (Reflect.compare(a.dist, b.dist) < 0);
 		var queue = new Heap<NodeDist<T, U>>(compare);
-		var dist = new AbstractMap<GraphNode<T, U>, Float>();
-		var prev = new AbstractMap<GraphNode<T, U>, String>();
+		var dist = new AbstractMap<IGraphNode<T, U>, Float>();
+		var prev = new AbstractMap<IGraphNode<T, U>, String>();
 
 		var graph = node.graph;
 
@@ -63,8 +63,8 @@ class Search {
 
 		while (queue.size() > 0) {
 			var minDistNode = queue.pop().node;
-			var existingIds = queue.elements.map(x -> x.node.id);
-			var filter = (id, data) -> existingIds.indexOf(id) >= 0;
+			var existingLabels = queue.elements.map(x -> x.node.label);
+			var filter = (label, data) -> existingLabels.indexOf(label) >= 0;
 			var neighbors = graph.neighbors(minDistNode, filter);
 
 			for (neighbor in neighbors) {
@@ -72,7 +72,7 @@ class Search {
 				var distanceToNeighbor = dist[minDistNode] + distCalc(minDistNode, neighbor);
 				if (distanceToNeighbor <= dist[neighbor]) {
 					dist[neighbor] = distanceToNeighbor;
-					prev[neighbor] = minDistNode.id;
+					prev[neighbor] = minDistNode.label;
 
 					var existing = queue.elements.find(x -> x.node == neighbor);
 					// queue.set_value_obj(existing, {node: neighbor, dist: dist[neighbor]});

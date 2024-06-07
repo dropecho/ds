@@ -12,12 +12,12 @@ class PreOrderTraversal {
 	public function run<T>(node:BSPNode<T>, ?visitor:BSPNode<T>->Bool) {
 		if (visitor != null) {
 			if (visitor(node)) {
-				visited.push(node.id);
+				visited.push(node.label);
 			} else {
 				return visited;
 			}
 		} else {
-			visited.push(node.id);
+			visited.push(node.label);
 		}
 
 		if (node.left != null) {

@@ -52,6 +52,14 @@ class Queue<T> {
 		_data = new haxe.ds.List<T>();
 	}
 
+	inline public function push(value:T) {
+		_data.add(value);
+	}
+
+	inline public function pop() {
+		return _data.pop();
+	}
+
 	inline public function enqueue(value:T) {
 		_data.add(value);
 	}

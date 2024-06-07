@@ -38,10 +38,10 @@ class PreOrderTraversalTests extends Test {
 
 		var visited = trav.run(node1);
 
-		Assert.equals(node1.id, visited[0]);
-		Assert.equals(node2.id, visited[1]);
-		Assert.equals(node4.id, visited[2]);
-		Assert.equals(node5.id, visited[3]);
-		Assert.equals(node3.id, visited[4]);
+		Assert.equals(node1.label, visited[0]);
+		Assert.equals(node2.label, visited[1]);
+		Assert.equals(node4.label, visited[2]);
+		Assert.equals(node5.label, visited[3]);
+		Assert.equals(node3.label, visited[4]);
 	}
 }
