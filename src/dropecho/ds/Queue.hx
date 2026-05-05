@@ -29,10 +29,12 @@ class Queue<T> {
 		return _data.Dequeue();
 	}
 
+	/** Alias for enqueue(). Adds to the back of the queue (FIFO, not LIFO). */
 	inline public function push(value:T) {
 		_data.Enqueue(value);
 	}
 
+	/** Alias for dequeue(). Removes from the front of the queue (FIFO, not LIFO). */
 	inline public function pop() {
 		return _data.Dequeue();
 	}
@@ -60,10 +62,12 @@ class Queue<T> {
 		_data = new haxe.ds.List<T>();
 	}
 
+	/** Alias for enqueue(). Adds to the back of the queue (FIFO, not LIFO). */
 	inline public function push(value:T) {
 		_data.add(value);
 	}
 
+	/** Alias for dequeue(). Removes from the front of the queue (FIFO, not LIFO). */
 	inline public function pop() {
 		return _data.pop();
 	}
