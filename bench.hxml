@@ -1,0 +1,6 @@
+-cp src
+-cp bench
+-lib dropecho.interop
+-lib hxnodejs
+-main set.SetBenchmark
+-js artifacts/bench.cjs

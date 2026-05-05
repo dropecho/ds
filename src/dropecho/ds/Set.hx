@@ -66,31 +66,32 @@ class Set<T> {
 #else
 import haxe.ds.IntMap;
 import haxe.Int32;
-import haxe.Json;
 
-class StringHasher {
-	static inline private function stringify(item:Dynamic):String {
-		if (Std.isOfType(item, Int) || Std.isOfType(item, Float)) {
-			return item.toString();
-		} else {
-			return Json.stringify(item);
+class IdentityHasher {
+	static var _nextId:Int = 0;
+
+	static public function hash(item:Dynamic):Int32 {
+		if (item == null) return 0;
+		if (Std.isOfType(item, Int)) return cast(item, Int);
+		if (Std.isOfType(item, Float)) return Std.int(cast(item, Float));
+		if (Std.isOfType(item, String)) {
+			var str:String = item;
+			var h:Int32 = 0;
+			for (i in 0...str.length)
+				h = 31 * h + str.charCodeAt(i);
+			return h;
 		}
-	}
-
-	static inline public function hash(item:Dynamic):Int32 {
-		var str:String = stringify(item);
-		var h:Int32 = 0;
-
-		for (i in 0...str.length) {
-			h = 31 * h + str.charCodeAt(i);
+		// Objects: lazily assign a stable identity id.
+		if (!Reflect.hasField(item, '__dsId')) {
+			Reflect.setField(item, '__dsId', ++_nextId);
 		}
-
-		return h;
+		return Reflect.field(item, '__dsId');
 	}
 }
 
 /**
- * A Set implemenation.
+ * A Set implementation. Default equality is identity-based for objects
+ * (same reference = same item). Pass a custom hasher for structural equality.
  */
 @:expose("Set")
 class Set<T> {
@@ -99,8 +100,7 @@ class Set<T> {
 
 	public function new(?hasher:Func_1<T, Int>) {
 		_data = new IntMap<T>();
-		// TODO: is this good? Probably similar to the way helder.set does it.
-		_hasher = hasher ?? (item:T) -> StringHasher.hash(item);
+		_hasher = hasher ?? (item:T) -> IdentityHasher.hash(item);
 	}
 
 	public function add(item:T):Bool {
