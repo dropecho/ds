@@ -113,7 +113,7 @@ interface IGraph<T, U> {
 	 * @param toLabel   The end node of the edge.
 	 * @return          The edge data.
 	 */
-	public function edgeData(fromLabel:String, toLabeloId:String):Null<U>;
+	public function edgeData(fromLabel:String, toLabelId:String):Null<U>;
 
 	/**
 	 * Outputs the graph as a string, represented by an adjacency list.

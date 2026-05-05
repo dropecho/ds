@@ -46,6 +46,29 @@ class Heap<T> {
 	}
 
 	/**
+	 * Remove a specific element from the heap.
+	 * This may cause the heap to partially rebuild.
+	 * @param item The element to remove.
+	 */
+	public function remove(item:T) {
+		var index = elements.indexOf(item);
+		if (index == -1) {
+			return;
+		}
+		var last = elements.length - 1;
+		elements[index] = elements[last];
+		elements.pop();
+		if (index < elements.length) {
+			var parentIndex = _getParentIndex(index);
+			if (index != 0 && compare(elements[index], elements[parentIndex])) {
+				_replaceAt(index, elements[index]);
+			} else {
+				_rebuild(index);
+			}
+		}
+	}
+
+	/**
 	 * Remove and return the (min/max)imum element in the heap.
 	 * @return The (min/max)imum element on the heap.
 	 */

@@ -158,6 +158,21 @@ class GraphTests extends Test {
 		Assert.equals(nul, node1_to_node2_data);
 	}
 
+	public function test_inNeighborLabels_with_filter() {
+		var nodeA = graph.createNode(1, "A");
+		var nodeB = graph.createNode(2, "B");
+		var nodeC = graph.createNode(3, "C");
+
+		graph.addUniEdge(nodeA.label, nodeC.label, 10);
+		graph.addUniEdge(nodeB.label, nodeC.label, 20);
+
+		// Filter keeps only edges whose data equals 10 (i.e. from A)
+		var labels = graph.inNeighborLabels(nodeC, (label, data) -> data == 10);
+
+		Assert.equals(1, labels.length);
+		Assert.equals("A", labels[0]);
+	}
+
 	public function test_dotOutput() {
 		var expected = "digraph {\n\ta\n\tb\n\ta -> b\n}";
 

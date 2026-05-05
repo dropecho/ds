@@ -63,13 +63,11 @@ class Graph<T, U> implements IGraph<T, U> {
 		// Get all edges as id, nodeEdges pairs
 		for (label => nodeEdges in edges) {
 			// If an edge exists from some other node to this node, add it to list.
-			if (nodeEdges.exists(node.label)) {
+			if (nodeEdges.exists(node.label) && (filter == null || filter(label, nodeEdges.get(node.label)))) {
 				labels.push(label);
 			}
 		}
 
-		// TODO: Add back in filter.
-		// if (edges.exists(node.id) && (filter == null || filter(id, edge.get(node.id)))) {
 		return labels;
 	}
 

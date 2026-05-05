@@ -121,6 +121,101 @@ class HeapTests extends Test {
 		Assert.equals(null, heap2.pop());
 	}
 
+	public function test_remove_leaf_item_and_maintains_heap_property_in_min_heap() {
+		heap = new Heap((a, b) -> Reflect.compare(a, b) < 0);
+
+		heap.push(1);
+		heap.push(3);
+		heap.push(5);
+		heap.push(7);
+		heap.push(9);
+
+		// Remove a leaf node — no sift needed
+		heap.remove(9);
+
+		Assert.equals(4, heap.size());
+		Assert.equals(1, heap.pop());
+		Assert.equals(3, heap.pop());
+		Assert.equals(5, heap.pop());
+		Assert.equals(7, heap.pop());
+	}
+
+	public function test_remove_non_root_item_and_maintains_heap_property_in_min_heap() {
+		heap = new Heap((a, b) -> Reflect.compare(a, b) < 0);
+
+		heap.push(1);
+		heap.push(5);
+		heap.push(3);
+		heap.push(7);
+		heap.push(9);
+		heap.push(4);
+
+		// Remove a non-root, non-leaf node
+		heap.remove(3);
+
+		Assert.equals(5, heap.size());
+		Assert.equals(1, heap.pop());
+		Assert.equals(4, heap.pop());
+		Assert.equals(5, heap.pop());
+		Assert.equals(7, heap.pop());
+		Assert.equals(9, heap.pop());
+	}
+
+	public function test_remove_item_and_maintains_heap_property_in_max_heap() {
+		heap = new Heap((a, b) -> Reflect.compare(a, b) > 0);
+
+		heap.push(4);
+		heap.push(5);
+		heap.push(6);
+		heap.push(2);
+		heap.push(1);
+
+		// Remove the smallest leaf — replaced element stays in place (heap already valid)
+		heap.remove(1);
+
+		Assert.equals(4, heap.size());
+		Assert.equals(6, heap.pop());
+		Assert.equals(5, heap.pop());
+		Assert.equals(4, heap.pop());
+		Assert.equals(2, heap.pop());
+	}
+
+	public function test_replace_updates_value_and_maintains_heap_property_in_min_heap() {
+		heap = new Heap((a, b) -> Reflect.compare(a, b) < 0);
+
+		heap.push(3);
+		heap.push(5);
+		heap.push(7);
+		heap.push(9);
+
+		// Replace leaf 9 with 1, which should bubble up to root
+		heap.replace(9, 1);
+
+		Assert.equals(4, heap.size());
+		Assert.equals(1, heap.pop());
+		Assert.equals(3, heap.pop());
+		Assert.equals(5, heap.pop());
+		Assert.equals(7, heap.pop());
+	}
+
+	public function test_replace_updates_value_and_maintains_heap_property_in_max_heap() {
+		heap = new Heap((a, b) -> Reflect.compare(a, b) > 0);
+
+		heap.push(4);
+		heap.push(5);
+		heap.push(6);
+		heap.push(2);
+
+		// Replace leaf 2 with 10, which should bubble up to root
+		heap.replace(2, 10);
+
+		Assert.equals(4, heap.size());
+		Assert.equals(10, heap.pop());
+		Assert.equals(6, heap.pop());
+		Assert.equals(5, heap.pop());
+		Assert.equals(4, heap.pop());
+	}
+
 	public function test_push_heapifies_values_in_min_heap_with_equal_vals_after_set_value() {
 		var heap2 = new Heap<Foo>((a:Foo, b:Foo) -> a.d < b.d);
 

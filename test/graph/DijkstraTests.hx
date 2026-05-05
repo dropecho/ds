@@ -50,6 +50,45 @@ class DijkstraTests extends Test {
 		Assert.equals(node2.label, path[node5]);
 	}
 
+	function test_weighted_edges() {
+		/*
+		 * Graph with weights:
+		 *
+		 *   A --10-- B
+		 *   |        |
+		 *   2        2
+		 *   |        |
+		 *   C --2--- D
+		 *
+		 * Shortest path A->B should be A->C->D->B (cost 6), not the direct A->B (cost 10).
+		 */
+		var nodeA = graph.createNode(1);
+		var nodeB = graph.createNode(1);
+		var nodeC = graph.createNode(1);
+		var nodeD = graph.createNode(1);
+
+		graph.addBiEdge(nodeA.label, nodeB.label, 10);
+		graph.addBiEdge(nodeA.label, nodeC.label, 2);
+		graph.addBiEdge(nodeC.label, nodeD.label, 2);
+		graph.addBiEdge(nodeD.label, nodeB.label, 2);
+
+		var results = Search.dijkstra(nodeA, (a, b) -> {
+			var data = a.graph.edgeData(a.label, b.label);
+			data != null ? (data : Float) : 1.0;
+		});
+		var dist = results.distances;
+		var path = results.path;
+
+		Assert.equals(0.0, dist[nodeA]);
+		Assert.equals(2.0, dist[nodeC]);
+		Assert.equals(4.0, dist[nodeD]);
+		// B is cheaper via C->D->B (cost 6) than directly (cost 10).
+		Assert.equals(6.0, dist[nodeB]);
+
+		// Verify the actual path taken to B goes through D, not directly from A.
+		Assert.equals(nodeD.label, path[nodeB]);
+	}
+
 	function test_traversal() {
 		/*
 		 *	  1-2-3

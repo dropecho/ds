@@ -45,7 +45,7 @@ class Search {
 
 		var graph = node.graph;
 
-		distCalc = distCalc != null ? distCalc : (a, b) -> 1;
+		distCalc = distCalc != null ? distCalc : (a, b) -> 1.0;
 
 		dist[node] = 0.0;
 
@@ -69,7 +69,6 @@ class Search {
 			var neighbors = graph.neighbors(minDistNode, filter);
 
 			for (neighbor in neighbors) {
-				// TODO: Make this use an actual cost, instead of +1, should be distance to neighbor.
 				var distanceToNeighbor = dist[minDistNode] + distCalc(minDistNode, neighbor);
 				if (distanceToNeighbor <= dist[neighbor]) {
 					dist[neighbor] = distanceToNeighbor;

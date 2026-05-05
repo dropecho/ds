@@ -14,7 +14,7 @@ class DFIterator<T, U> {
 		toVisit.push(node);
 	}
 
-	public function hasNext():Bool {
+	inline public function hasNext():Bool {
 		return toVisit.length > 0;
 	}
 
