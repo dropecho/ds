@@ -1,7 +1,5 @@
 package dropecho.ds;
 
-import haxe.iterators.ArrayIterator;
-
 @:nativeGen
 @:expose("Stack")
 class Stack<T> {

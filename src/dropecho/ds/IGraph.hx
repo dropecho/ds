@@ -9,6 +9,7 @@ import dropecho.interop.AbstractMap;
  * @param T   The node data type (stored within nodes).
  * @param U   The edge data type (stored within edges).
  */
+@:nativeGen
 interface IGraph<T, U> {
 	/** The nodes or vertices of the graph. */
 	public var nodes:AbstractMap<String, IGraphNode<T, U>>;

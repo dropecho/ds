@@ -29,6 +29,14 @@ class Queue<T> {
 		return _data.Dequeue();
 	}
 
+	inline public function push(value:T) {
+		_data.Enqueue(value);
+	}
+
+	inline public function pop() {
+		return _data.Dequeue();
+	}
+
 	inline public function peek():T {
 		return _data.Peek();
 	}

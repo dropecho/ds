@@ -1,11 +1,5 @@
 package dropecho.ds;
 
-import haxe.Int32;
-import haxe.crypto.Adler32;
-import haxe.Serializer;
-import haxe.Json;
-import haxe.io.Bytes;
-import haxe.crypto.Crc32;
 import dropecho.interop.AbstractFunc;
 #if cs
 import cs.system.collections.generic.IEqualityComparer_1;
@@ -36,7 +30,12 @@ class Set<T> {
 	var _data:HashSet_1<T>;
 
 	public function new(?hasher:Func_1<T, Int>) {
-		var comparer = new SetEqualityComparer<T>(hasher);
+		var comparer:IEqualityComparer_1<T>;
+		if (hasher == null) {
+			comparer = cs.Syntax.code('System.Collections.Generic.EqualityComparer<T>.Default');
+		} else {
+			comparer = new SetEqualityComparer<T>(hasher);
+		}
 		_data = new HashSet_1(comparer);
 	};
 
@@ -66,6 +65,8 @@ class Set<T> {
 }
 #else
 import haxe.ds.IntMap;
+import haxe.Int32;
+import haxe.Json;
 
 class StringHasher {
 	static inline private function stringify(item:Dynamic):String {

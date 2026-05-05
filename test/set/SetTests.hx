@@ -90,20 +90,20 @@ class SetTests extends Test {
 	}
 
 	public function test_check_hash_chance_ints() {
-		for (i in 1...1_000_000) {
+		for (i in 0...1_000_000) {
 			intSet.add(i);
 		}
 
-		Assert.equals(999_999, intSet.size());
+		Assert.equals(1_000_000, intSet.size());
 	}
 
 	public function test_hash_collision_objects() {
-		for (i in 1...1_000_000) {
+		for (i in 0...1_000_000) {
 			var obj = new TestObj();
 			obj.x = i;
 			objSet.add(obj);
 		}
 
-		Assert.equals(999_999, objSet.size());
+		Assert.equals(1_000_000, objSet.size());
 	}
 }

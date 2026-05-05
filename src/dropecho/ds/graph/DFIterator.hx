@@ -2,6 +2,7 @@ package dropecho.ds.graph;
 
 import dropecho.ds.IGraphNode;
 
+@:nativeGen
 class DFIterator<T, U> {
 	var graph:IGraph<T, U>;
 	var first:IGraphNode<T, U>;

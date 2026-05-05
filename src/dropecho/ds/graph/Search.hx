@@ -27,6 +27,7 @@ class SearchResult<T, U> {
 }
 
 @:expose
+@:nativeGen
 class Search {
 	/**
 	 * An implementation of dijkstra search over a graph.

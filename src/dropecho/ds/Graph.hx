@@ -3,14 +3,13 @@ package dropecho.ds;
 import dropecho.ds.IGraph;
 import dropecho.interop.AbstractMap;
 
-@:nativeGen
 @:expose("Graph")
 @:inheritDoc(IGraph)
 class Graph<T, U> implements IGraph<T, U> {
-	/** The nodes or vertices of the graph. */
+	@:inheritDoc(IGraph.nodes)
 	public var nodes:AbstractMap<String, IGraphNode<T, U>>;
 
-	/** The edges of the graph. */
+	@:inheritDoc(IGraph.edges)
 	public var edges:AbstractMap<String, AbstractMap<String, U>>;
 
 	public function new() {

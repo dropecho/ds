@@ -128,6 +128,26 @@ class GraphTests extends Test {
 		Assert.equals(14, node1_to_node3_data);
 	}
 
+	public function test_node_addUniEdge_passes_data() {
+		var node1 = graph.createNode(4);
+		var node2 = graph.createNode(5);
+
+		node1.addUniEdge(node2, 99);
+
+		Assert.equals(99, graph.edgeData(node1.label, node2.label));
+		Assert.isNull(graph.edgeData(node2.label, node1.label));
+	}
+
+	public function test_node_addBiEdge_passes_data() {
+		var node1 = graph.createNode(4);
+		var node2 = graph.createNode(5);
+
+		node1.addBiEdge(node2, 42);
+
+		Assert.equals(42, graph.edgeData(node1.label, node2.label));
+		Assert.equals(42, graph.edgeData(node2.label, node1.label));
+	}
+
 	public function test_edgeData_when_empty() {
 		var node1 = graph.createNode(4);
 		var node2 = graph.createNode(5);
