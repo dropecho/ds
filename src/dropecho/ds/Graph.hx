@@ -82,13 +82,12 @@ class Graph<T, U> implements IGraph<T, U> {
 			return [];
 		}
 
-		var labels = [
-			for (label => data in edges.get(node.label)) {
-				if (filter == null || filter(label, data)) {
-					label;
-				}
+		var labels = [];
+		for (label => data in edges.get(node.label)) {
+			if (filter == null || filter(label, data)) {
+				labels.push(label);
 			}
-		];
+		}
 
 		haxe.ds.ArraySort.sort(labels, Reflect.compare);
 		return labels;
