@@ -95,60 +95,60 @@ class Traversal {
 }
 
 class TarjanState<T, U> {
-	var graph:IGraph<T, U>;
-	var disc:AbstractMap<String, Int>;
-	var low:AbstractMap<String, Int>;
-	var onStack:AbstractMap<String, Bool>;
-	var stack:Array<String>;
-	var components:Array<Array<IGraphNode<T, U>>>;
-	var timer:Int;
+	var _graph:IGraph<T, U>;
+	var _disc:AbstractMap<String, Int>;
+	var _low:AbstractMap<String, Int>;
+	var _onStack:AbstractMap<String, Bool>;
+	var _stack:Array<String>;
+	var _components:Array<Array<IGraphNode<T, U>>>;
+	var _timer:Int;
 
 	public function new(graph:IGraph<T, U>) {
-		this.graph = graph;
-		disc = new AbstractMap<String, Int>();
-		low = new AbstractMap<String, Int>();
-		onStack = new AbstractMap<String, Bool>();
-		stack = [];
-		components = [];
-		timer = 0;
+		_graph = graph;
+		_disc = new AbstractMap<String, Int>();
+		_low = new AbstractMap<String, Int>();
+		_onStack = new AbstractMap<String, Bool>();
+		_stack = [];
+		_components = [];
+		_timer = 0;
 	}
 
 	public function run():Array<Array<IGraphNode<T, U>>> {
-		for (node in graph.nodes) {
-			if (!disc.exists(node.label)) dfs(node);
+		for (node in _graph.nodes) {
+			if (!_disc.exists(node.label)) dfs(node);
 		}
-		return components;
+		return _components;
 	}
 
 	function dfs(node:IGraphNode<T, U>):Void {
-		disc.set(node.label, timer);
-		low.set(node.label, timer);
-		timer++;
-		stack.push(node.label);
-		onStack.set(node.label, true);
+		_disc.set(node.label, _timer);
+		_low.set(node.label, _timer);
+		_timer++;
+		_stack.push(node.label);
+		_onStack.set(node.label, true);
 
-		for (neighbor in graph.outNeighbors(node)) {
-			if (!disc.exists(neighbor.label)) {
+		for (neighbor in _graph.outNeighbors(node)) {
+			if (!_disc.exists(neighbor.label)) {
 				dfs(neighbor);
-				var neighborLow = low.get(neighbor.label);
-				var nodeLow = low.get(node.label);
-				if (neighborLow < nodeLow) low.set(node.label, neighborLow);
-			} else if (onStack.exists(neighbor.label) && onStack.get(neighbor.label)) {
-				var neighborDisc = disc.get(neighbor.label);
-				var nodeLow = low.get(node.label);
-				if (neighborDisc < nodeLow) low.set(node.label, neighborDisc);
+				var neighborLow = _low.get(neighbor.label);
+				var nodeLow = _low.get(node.label);
+				if (neighborLow < nodeLow) _low.set(node.label, neighborLow);
+			} else if (_onStack.exists(neighbor.label) && _onStack.get(neighbor.label)) {
+				var neighborDisc = _disc.get(neighbor.label);
+				var nodeLow = _low.get(node.label);
+				if (neighborDisc < nodeLow) _low.set(node.label, neighborDisc);
 			}
 		}
 
-		if (low.get(node.label) == disc.get(node.label)) {
+		if (_low.get(node.label) == _disc.get(node.label)) {
 			var scc:Array<IGraphNode<T, U>> = [];
 			while (true) {
-				var label = stack.pop();
-				onStack.set(label, false);
-				scc.push(graph.nodes.get(label));
+				var label = _stack.pop();
+				_onStack.set(label, false);
+				scc.push(_graph.nodes.get(label));
 				if (label == node.label) break;
 			}
-			components.push(scc);
+			_components.push(scc);
 		}
 	}
 }
