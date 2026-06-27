@@ -42,12 +42,12 @@ class DijkstraTests extends Test {
 		var results = Search.dijkstra(node1);
 		var path = results.path;
 
-		Assert.isFalse(path.exists(node1.label));
-		Assert.equals(node1.label, path[node4.label]);
-		Assert.equals(node1.label, path[node2.label]);
-		Assert.equals(node4.label, path[node6.label]);
-		Assert.equals(node2.label, path[node3.label]);
-		Assert.equals(node2.label, path[node5.label]);
+		Assert.isFalse(path.exists(node1));
+		Assert.equals(node1.label, path[node4]);
+		Assert.equals(node1.label, path[node2]);
+		Assert.equals(node4.label, path[node6]);
+		Assert.equals(node2.label, path[node3]);
+		Assert.equals(node2.label, path[node5]);
 	}
 
 	function test_weighted_edges() {
@@ -79,14 +79,14 @@ class DijkstraTests extends Test {
 		var dist = results.distances;
 		var path = results.path;
 
-		Assert.equals(0.0, dist[nodeA.label]);
-		Assert.equals(2.0, dist[nodeC.label]);
-		Assert.equals(4.0, dist[nodeD.label]);
+		Assert.equals(0.0, dist[nodeA]);
+		Assert.equals(2.0, dist[nodeC]);
+		Assert.equals(4.0, dist[nodeD]);
 		// B is cheaper via C->D->B (cost 6) than directly (cost 10).
-		Assert.equals(6.0, dist[nodeB.label]);
+		Assert.equals(6.0, dist[nodeB]);
 
 		// Verify the actual path taken to B goes through D, not directly from A.
-		Assert.equals(nodeD.label, path[nodeB.label]);
+		Assert.equals(nodeD.label, path[nodeB]);
 	}
 
 	function test_traversal() {
@@ -137,12 +137,12 @@ class DijkstraTests extends Test {
 		var results = Search.dijkstra(node1);
 		var dist = results.distances;
 
-		Assert.equals(0, dist[node1.label]);
-		Assert.equals(1, dist[node2.label]);
-		Assert.equals(2, dist[node3.label]);
-		Assert.equals(1, dist[node4.label]);
-		Assert.equals(2, dist[node5.label]);
-		Assert.equals(3, dist[node6.label]);
-		Assert.equals(2, dist[node7.label]);
+		Assert.equals(0, dist[node1]);
+		Assert.equals(1, dist[node2]);
+		Assert.equals(2, dist[node3]);
+		Assert.equals(1, dist[node4]);
+		Assert.equals(2, dist[node5]);
+		Assert.equals(3, dist[node6]);
+		Assert.equals(2, dist[node7]);
 	}
 }

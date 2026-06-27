@@ -16,11 +16,9 @@ class NodeDist<T, U> {
 }
 
 @:struct
-class SearchResult {
-	/** Node label -> previous node label on the shortest path (null for the source). */
-	public var path:AbstractMap<String, String>;
-	/** Node label -> shortest distance from the source. */
-	public var distances:AbstractMap<String, Float>;
+class SearchResult<T, U> {
+	public var path:AbstractMap<IGraphNode<T, U>, String>;
+	public var distances:AbstractMap<IGraphNode<T, U>, Float>;
 
 	public function new(path, distances) {
 		this.path = path;
@@ -48,29 +46,24 @@ class Search {
 	 * @param node      The source node.
 	 * @param distCalc  Optional edge-weight function; defaults to 1.0 per hop.
 	 */
-	public static function dijkstra<T, U>(node:IGraphNode<T, U>, ?distCalc:(a:IGraphNode<T, U>, b:IGraphNode<T, U>) -> Float):SearchResult {
+	public static function dijkstra<T, U>(node:IGraphNode<T, U>, ?distCalc:(a:IGraphNode<T, U>, b:IGraphNode<T, U>) -> Float):SearchResult<T, U> {
 		var compare = (a, b) -> (Reflect.compare(a.dist, b.dist) < 0);
 		var queue = new Heap<NodeDist<T, U>>(compare);
-		// Keyed by node label, not the node object: an object-keyed AbstractMap is a
-		// @:multiType abstract that only reliably resolves to an ObjectMap in some
-		// builds — under coverage instrumentation it degrades to Std.string(node)
-		// string keys, which collide and corrupt the search. Labels are unique and
-		// always resolve to a StringMap.
-		var dist = new AbstractMap<String, Float>();
-		var prev = new AbstractMap<String, String>();
+		var dist = new AbstractMap<IGraphNode<T, U>, Float>();
+		var prev = new AbstractMap<IGraphNode<T, U>, String>();
 
 		var graph = node.graph;
 
 		distCalc = distCalc != null ? distCalc : (a, b) -> 1.0;
 
-		dist[node.label] = 0.0;
+		dist[node] = 0.0;
 
 		for (n in graph.nodes) {
 			if (n != node) {
-				dist[n.label] = Math.POSITIVE_INFINITY;
-				prev[n.label] = null;
+				dist[n] = Math.POSITIVE_INFINITY;
+				prev[n] = null;
 			}
-			queue.push(new NodeDist(n, dist[n.label]));
+			queue.push(new NodeDist(n, dist[n]));
 		}
 
 		while (queue.size() > 0) {
@@ -80,12 +73,12 @@ class Search {
 			var neighbors = graph.neighbors(minDistNode, filter);
 
 			for (neighbor in neighbors) {
-				var distanceToNeighbor = dist[minDistNode.label] + distCalc(minDistNode, neighbor);
-				if (distanceToNeighbor <= dist[neighbor.label]) {
-					dist[neighbor.label] = distanceToNeighbor;
-					prev[neighbor.label] = minDistNode.label;
+				var distanceToNeighbor = dist[minDistNode] + distCalc(minDistNode, neighbor);
+				if (distanceToNeighbor <= dist[neighbor]) {
+					dist[neighbor] = distanceToNeighbor;
+					prev[neighbor] = minDistNode.label;
 					var existing = queue.elements.find(x -> x.node == neighbor);
-					queue.replace(existing, new NodeDist(neighbor, dist[neighbor.label]));
+					queue.replace(existing, new NodeDist(neighbor, dist[neighbor]));
 				}
 			}
 		}
