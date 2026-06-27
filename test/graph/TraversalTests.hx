@@ -12,8 +12,6 @@ class TraversalTests extends Test {
 		graph = new Graph<Int, Int>();
 	}
 
-	// ── Topological Sort ──────────────────────────────────────────────────────
-
 	public function test_topological_sort_on_dag() {
 		// A -> B -> C, A -> C
 		var a = graph.createNode(1, "A");
@@ -67,8 +65,6 @@ class TraversalTests extends Test {
 		Assert.equals(a, sorted[0]);
 	}
 
-	// ── Cycle Detection ───────────────────────────────────────────────────────
-
 	public function test_hasCycle_false_on_dag() {
 		var a = graph.createNode(1, "A");
 		var b = graph.createNode(2, "B");
@@ -88,8 +84,6 @@ class TraversalTests extends Test {
 		graph.createNode(1, "A");
 		Assert.isFalse(Traversal.hasCycle(graph));
 	}
-
-	// ── Connected Components ──────────────────────────────────────────────────
 
 	public function test_connected_components_single_component() {
 		var a = graph.createNode(1, "A");
@@ -127,8 +121,6 @@ class TraversalTests extends Test {
 		var comps = Traversal.connectedComponents(graph);
 		Assert.equals(3, comps.length);
 	}
-
-	// ── Strongly Connected Components ─────────────────────────────────────────
 
 	public function test_scc_dag_each_node_is_own_scc() {
 		var a = graph.createNode(1, "A");
