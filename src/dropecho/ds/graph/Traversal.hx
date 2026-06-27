@@ -11,7 +11,11 @@ class Traversal {
 	 */
 	public static function topologicalSort<T, U>(graph:IGraph<T, U>):Array<IGraphNode<T, U>> {
 		var inDegree = new AbstractMap<String, Int>();
-		for (node in graph.nodes) inDegree.set(node.label, 0);
+		var nodeCount = 0;
+		for (node in graph.nodes) {
+			inDegree.set(node.label, 0);
+			nodeCount++;
+		}
 
 		for (fromLabel => nodeEdges in graph.edges) {
 			for (toLabel => _ in nodeEdges) {
@@ -39,8 +43,6 @@ class Traversal {
 			}
 		}
 
-		var nodeCount = 0;
-		for (_ in graph.nodes) nodeCount++;
 		return sorted.length == nodeCount ? sorted : null;
 	}
 
