@@ -89,7 +89,10 @@ class Search {
 	 * A* shortest path from start to end.
 	 * @param start      The source node.
 	 * @param end        The target node.
-	 * @param heuristic  Estimated cost from a node to end. Must be admissible (never overestimates).
+	 * @param heuristic  Estimated cost from a node to end. Must be admissible (never
+	 *                   overestimates). Inconsistent (non-monotone) admissible heuristics
+	 *                   are still optimal here because closed nodes are reopened when a
+	 *                   cheaper path is found.
 	 * @param distCalc   Optional edge-weight function; defaults to 1.0 per hop.
 	 * @return AStarResult with the ordered path array and a found flag.
 	 */
@@ -138,12 +141,15 @@ class Search {
 			}
 
 			for (neighbor in graph.outNeighbors(current)) {
-				if (closed.exists(neighbor.label)) continue;
 				var tentativeG = gScore[current] + distCalc(current, neighbor);
 				var neighborG = gScore[neighbor];
 				if (tentativeG < neighborG) {
 					gScore[neighbor] = tentativeG;
 					prev[neighbor] = current.label;
+					// A cheaper path to neighbor was found. If it was already closed,
+					// reopen it so the improvement can propagate — this keeps A* optimal
+					// even when the heuristic is admissible but not consistent.
+					if (closed.exists(neighbor.label)) closed.remove(neighbor.label);
 					openSet.push(new NodeDist(neighbor, tentativeG + heuristic(neighbor, end)));
 				}
 			}
