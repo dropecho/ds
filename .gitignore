@@ -5,3 +5,7 @@ report
 .temp
 coverage
 dist
+.nyc_output
+lcov.info
+*.swp
+.vim/
