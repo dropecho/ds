@@ -10,6 +10,7 @@ class SpatialHash<T> {
 	public var cellSize(default, null):Float;
 
 	public function new(cellSize:Float) {
+		if (cellSize <= 0) throw "SpatialHash cellSize must be > 0";
 		this.cellSize = cellSize;
 		_cells = new AbstractMap<String, Array<T>>();
 	}

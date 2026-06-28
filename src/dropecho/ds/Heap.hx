@@ -73,11 +73,16 @@ class Heap<T> {
 	 * @return The (min/max)imum element on the heap.
 	 */
 	public function pop():T {
-		var element = elements.shift();
-		if (elements.length > 1) {
+		if (elements.length == 0) {
+			return null;
+		}
+		var top = elements[0];
+		var last = elements.pop();
+		if (elements.length > 0) {
+			elements[0] = last;
 			_rebuild(0);
 		}
-		return element;
+		return top;
 	}
 
 	/**
@@ -109,10 +114,10 @@ class Heap<T> {
 		var right = _getRightIndex(index);
 		var top = index;
 
-		if (left < length && compare(els[left], els[index])) {
+		if (left < length && compare(els[left], els[top])) {
 			top = left;
 		}
-		if (right < length && compare(els[right], els[index])) {
+		if (right < length && compare(els[right], els[top])) {
 			top = right;
 		}
 

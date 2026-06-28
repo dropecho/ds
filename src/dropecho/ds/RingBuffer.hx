@@ -13,6 +13,7 @@ class RingBuffer<T> {
 	public var length(get, never):Int;
 
 	public function new(capacity:Int, overwrite:Bool = true) {
+		if (capacity < 1) throw "RingBuffer capacity must be >= 1";
 		this.capacity = capacity;
 		_overwrite = overwrite;
 		_data = [];

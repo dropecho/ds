@@ -12,11 +12,12 @@
   },
   "license": "MIT",
   "scripts": {
-    "install": "lix download",
+    "prepare": "lix download",
     "build": "npm run build:code",
     "build:code": "haxe build.hxml",
     "build:docs": "haxelib run dox -o docs/docs -i artifacts/docs.xml --toplevel-package dropecho.ds",
-    "test": "haxelib run dropecho.testing"
+    "test": "lix dropecho.testing",
+    "clean": "rm -rf dist artifacts"
   },
   "type": "module",
   "main": "./dist/js/cjs/index.cjs",
