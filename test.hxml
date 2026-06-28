@@ -15,7 +15,7 @@
 # CS
 --next
 -D net-ver=40
--cs artifacts/cs_test/
+-cs artifacts/cs_test
 
 # --next
 # -neko artifacts/neko_test/test.n
