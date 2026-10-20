@@ -3,6 +3,7 @@ package graph;
 import utest.Assert;
 import utest.Test;
 import dropecho.ds.Graph;
+import dropecho.ds.IGraphNode;
 import dropecho.ds.graph.Search;
 
 typedef Pos = {x:Float, y:Float};
@@ -95,5 +96,46 @@ class AStarTests extends Test {
 		var result = Search.astar(nodes[0], nodes[4], euclidean);
 		Assert.isTrue(result.found);
 		Assert.equals(5, result.path.length);
+	}
+
+	public function test_nodes_with_identical_values_find_correct_path() {
+		/*
+		 * Every node sits at the same position, so the heuristic is 0 everywhere
+		 * and only the label tells nodes apart. A colliding node key would mix up
+		 * g-scores and predecessors.
+		 *
+		 *   A -1- B -1- C -1- D
+		 *   |                 |
+		 *   +-------10--------+
+		 *   E -1- F (disconnected)
+		 */
+		var origin = {x: 0.0, y: 0.0};
+		var a = graph.createNode(origin, "A");
+		var b = graph.createNode(origin, "B");
+		var c = graph.createNode(origin, "C");
+		var d = graph.createNode(origin, "D");
+		var e = graph.createNode(origin, "E");
+		var f = graph.createNode(origin, "F");
+
+		graph.addBiEdge(a.label, b.label, 1.0);
+		graph.addBiEdge(b.label, c.label, 1.0);
+		graph.addBiEdge(c.label, d.label, 1.0);
+		graph.addBiEdge(a.label, d.label, 10.0);
+		graph.addBiEdge(e.label, f.label, 1.0);
+
+		var weight = (n1:IGraphNode<Pos, Float>, n2:IGraphNode<Pos, Float>) -> {
+			var data:Null<Float> = n1.graph.edgeData(n1.label, n2.label);
+			data != null ? (data : Float) : 1.0;
+		};
+
+		var result = Search.astar(a, d, euclidean, weight);
+		Assert.isTrue(result.found);
+		Assert.same(["A", "B", "C", "D"], [for (n in result.path) n.label]);
+
+		var back = Search.astar(d, a, euclidean, weight);
+		Assert.isTrue(back.found);
+		Assert.same(["D", "C", "B", "A"], [for (n in back.path) n.label]);
+
+		Assert.isFalse(Search.astar(a, f, euclidean, weight).found);
 	}
 }

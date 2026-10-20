@@ -34,4 +34,14 @@ class GraphNode<T, U> implements IGraphNode<T, U> {
 	public function neighbors() {
 		return graph.neighbors(this);
 	}
+
+	/**
+	 * The node's label. Labels are unique within a graph, so this also serves as
+	 * the key when a node is used in an AbstractMap: on JS that map is a plain
+	 * object keyed by `Std.string(node)`, which would otherwise dump every field.
+	 * @return  The node's label.
+	 */
+	public function toString():String {
+		return label;
+	}
 }
