@@ -78,7 +78,7 @@ class Queue<T> {
 
 	inline public function enqueueMany(iter:Iterable<T>) {
 		for (item in iter) {
-			_data.push(item);
+			_data.add(item);
 		}
 	}
 
