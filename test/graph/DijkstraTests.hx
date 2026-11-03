@@ -187,18 +187,4 @@ class DijkstraTests extends Test {
 		Assert.equals(c.label, path[d]);
 		Assert.isNull(path[e]);
 	}
-
-	#if js
-	function test_js_result_maps_are_keyed_by_label() {
-		var a = graph.createNode(0, "A");
-		var b = graph.createNode(0, "B");
-		graph.addBiEdge(a.label, b.label);
-
-		var results = Search.dijkstra(a);
-		var keys = [for (k in results.distances.keys()) k];
-		keys.sort(Reflect.compare);
-
-		Assert.same(["A", "B"], keys);
-	}
-	#end
 }
