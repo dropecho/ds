@@ -1,3 +1,16 @@
+# [2.1.0](https://github.com/dropecho/ds/compare/2.0.0...2.1.0) (2026-11-03)
+
+
+### Bug Fixes
+
+* give GraphNode a toString that returns its label ([d888e5a](https://github.com/dropecho/ds/commit/d888e5a9a9b7c2fbf4748a98240745d8d5cb234c))
+* preserve insertion order in Queue.enqueueMany on non-C# targets ([117fccf](https://github.com/dropecho/ds/commit/117fccfdadac73313fd5ffd260b8641acd971e6d))
+
+
+### Features
+
+* accept AbstractIterable in Queue.enqueueMany and Stack.pushMany ([8ee56c4](https://github.com/dropecho/ds/commit/8ee56c4d181dd01c3c92556c75bb1b0187aeee00))
+
 # [2.0.0](https://github.com/dropecho/ds/compare/1.8.0...2.0.0) (2026-06-30)
 
 
