@@ -1,6 +1,7 @@
 package dropecho.ds;
 
 import haxe.iterators.ArrayIterator;
+import dropecho.interop.AbstractIterable;
 #if cs
 import cs.system.collections.generic.Queue_1;
 
@@ -19,9 +20,9 @@ class Queue<T> {
 		_data.Enqueue(value);
 	}
 
-	inline public function enqueueMany(array:Array<T>) {
-		for (x in array) {
-			_data.Enqueue(x);
+	inline public function enqueueMany(iter:AbstractIterable<T>) {
+		for (item in iter) {
+			_data.Enqueue(item);
 		}
 	}
 
@@ -76,7 +77,7 @@ class Queue<T> {
 		_data.add(value);
 	}
 
-	inline public function enqueueMany(iter:Iterable<T>) {
+	inline public function enqueueMany(iter:AbstractIterable<T>) {
 		for (item in iter) {
 			_data.add(item);
 		}

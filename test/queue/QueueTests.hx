@@ -102,4 +102,13 @@ class QueueTests extends Test {
 		Assert.same([1, 2, 3, 4, 5, 6], [for (_ in 0...6) intQueue.dequeue()]);
 		Assert.equals(0, intQueue.length);
 	}
+
+	public function test_enqueueMany_should_accept_any_iterable() {
+		var items = new haxe.ds.List<Int>();
+		items.add(1);
+		items.add(2);
+		intQueue.enqueueMany(items);
+
+		Assert.same([1, 2], [for (_ in 0...2) intQueue.dequeue()]);
+	}
 }
