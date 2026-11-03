@@ -145,4 +145,46 @@ class DijkstraTests extends Test {
 		Assert.equals(3, dist[node6]);
 		Assert.equals(2, dist[node7]);
 	}
+
+	function test_nodes_with_identical_values_keep_separate_entries() {
+		/*
+		 * Every node holds the same value, so only the label tells them apart.
+		 * If nodes were keyed by anything other than identity or label, entries
+		 * would collide and the distances below would be overwritten.
+		 *
+		 *   A -1- B -1- C -1- D
+		 *   |                 |
+		 *   +-------10--------+
+		 *   E (unreachable)
+		 */
+		var a = graph.createNode(0, "A");
+		var b = graph.createNode(0, "B");
+		var c = graph.createNode(0, "C");
+		var d = graph.createNode(0, "D");
+		var e = graph.createNode(0, "E");
+
+		graph.addBiEdge(a.label, b.label, 1);
+		graph.addBiEdge(b.label, c.label, 1);
+		graph.addBiEdge(c.label, d.label, 1);
+		graph.addBiEdge(a.label, d.label, 10);
+
+		var results = Search.dijkstra(a, (n1, n2) -> {
+			var data = n1.graph.edgeData(n1.label, n2.label);
+			data != null ? (data : Float) : 1.0;
+		});
+		var dist = results.distances;
+		var path = results.path;
+
+		Assert.equals(5, [for (k in dist.keys()) k].length);
+		Assert.equals(0.0, dist[a]);
+		Assert.equals(1.0, dist[b]);
+		Assert.equals(2.0, dist[c]);
+		Assert.equals(3.0, dist[d]);
+		Assert.equals(Math.POSITIVE_INFINITY, dist[e]);
+
+		Assert.equals(a.label, path[b]);
+		Assert.equals(b.label, path[c]);
+		Assert.equals(c.label, path[d]);
+		Assert.isNull(path[e]);
+	}
 }

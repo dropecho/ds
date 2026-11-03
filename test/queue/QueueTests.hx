@@ -84,4 +84,31 @@ class QueueTests extends Test {
 			num += 1;
 		}
 	}
+
+	public function test_enqueueMany_should_preserve_order() {
+		intQueue.enqueueMany([1, 2, 3]);
+
+		Assert.equals(3, intQueue.length);
+		Assert.equals(1, intQueue.peek());
+		Assert.same([1, 2, 3], [for (_ in 0...3) intQueue.dequeue()]);
+	}
+
+	public function test_enqueueMany_should_append_after_existing_items() {
+		intQueue.enqueue(1);
+		intQueue.enqueueMany([2, 3]);
+		intQueue.enqueue(4);
+		intQueue.enqueueMany([5, 6]);
+
+		Assert.same([1, 2, 3, 4, 5, 6], [for (_ in 0...6) intQueue.dequeue()]);
+		Assert.equals(0, intQueue.length);
+	}
+
+	public function test_enqueueMany_should_accept_any_iterable() {
+		var items = new haxe.ds.List<Int>();
+		items.add(1);
+		items.add(2);
+		intQueue.enqueueMany(items);
+
+		Assert.same([1, 2], [for (_ in 0...2) intQueue.dequeue()]);
+	}
 }

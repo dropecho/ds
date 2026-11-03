@@ -34,4 +34,9 @@ class GraphNode<T, U> implements IGraphNode<T, U> {
 	public function neighbors() {
 		return graph.neighbors(this);
 	}
+
+	@:inheritDoc(IGraphNode.toString)
+	public function toString():String {
+		return label;
+	}
 }

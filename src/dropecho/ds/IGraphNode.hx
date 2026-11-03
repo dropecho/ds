@@ -40,4 +40,10 @@ interface IGraphNode<T, U> {
 	 * @return  The list of neighbor nodes.
 	 */
 	public function neighbors():Array<IGraphNode<T, U>>;
+
+	/**
+	 * Get the node's label, which is unique within its graph and keeps node map keys short.
+	 * @return  The node's label.
+	 */
+	public function toString():String;
 }

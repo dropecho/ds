@@ -1,5 +1,7 @@
 package dropecho.ds;
 
+import dropecho.interop.AbstractIterable;
+
 @:nativeGen
 @:expose("Stack")
 class Stack<T> {
@@ -17,7 +19,7 @@ class Stack<T> {
 	}
 
 	/** Push a collection of items onto the stack. */
-	inline public function pushMany(iter:Iterable<T>) {
+	inline public function pushMany(iter:AbstractIterable<T>) {
 		for (item in iter) {
 			_data.push(item);
 		}

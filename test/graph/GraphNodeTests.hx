@@ -27,4 +27,20 @@ class GraphNodeTests extends Test {
 			}
 		}
 	}
+
+	public function test_toString_returns_label() {
+		var node = new GraphNode<Int, Int>(3, "A");
+		Assert.equals("A", node.toString());
+		Assert.equals("A", Std.string(node));
+	}
+
+	public function test_toString_ignores_value_and_graph() {
+		var graph = new Graph<Int, Int>();
+		var a = graph.createNode(7, "A");
+		var b = graph.createNode(7, "B");
+		a.addBiEdge(b);
+
+		Assert.equals("A", Std.string(a));
+		Assert.equals("B", Std.string(b));
+	}
 }

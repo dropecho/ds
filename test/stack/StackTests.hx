@@ -86,4 +86,13 @@ class StackTests extends Test {
 			num -= 1;
 		}
 	}
+
+	public function test_pushMany_should_accept_any_iterable() {
+		var items = new haxe.ds.List<Int>();
+		items.add(1);
+		items.add(2);
+		intStack.pushMany(items);
+
+		Assert.same([2, 1], [for (_ in 0...2) intStack.pop()]);
+	}
 }
